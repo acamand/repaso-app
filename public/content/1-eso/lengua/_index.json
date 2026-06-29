@@ -1,0 +1,12 @@
+{
+  "nivel": "1-eso",
+  "materia": "lengua",
+  "unidades": [
+    {
+      "id": "categorias",
+      "titulo": "Categorías gramaticales",
+      "saberes": ["LCL.1.D.5", "categorias-gramaticales"],
+      "archivo": "categorias-gramaticales.json"
+    }
+  ]
+}

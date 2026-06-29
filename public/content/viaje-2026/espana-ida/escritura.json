@@ -1,0 +1,38 @@
+[
+  {
+    "id": "viaje-esp-esc-001",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 25,
+    "tiempo_estimado_s": 600,
+    "enunciado": "📓 Diario de viaje — Día 1\n\nEs el primer día del viaje. Vais saliendo de Córdoba con la autocaravana cargada. En tu cuaderno, escribe la primera entrada de tu diario de viaje (entre 8 y 12 líneas) contando:\n\n• Cómo estaba la casa antes de salir (¿qué se quedó?, ¿qué se llevó?).\n• Cómo te sentías al cerrar la puerta.\n• Una cosa graciosa, rara o inesperada que pasó en el primer tramo del viaje.\n• Qué esperas del viaje.\n\nUsa al menos tres adjetivos distintos y dos conectores (después, además, sin embargo, en cambio, por fin…).",
+    "pistas": [
+      "Empieza la entrada con la fecha y el lugar. Ejemplo: «7 de julio, kilómetro 80 de la autovía».",
+      "Si te bloqueas, escribe primero solo cinco palabras que te vinieron a la cabeza al salir de casa. Luego conviértelas en frases.",
+      "Para hacerlo más vivo, mete una frase entre comillas con algo que dijo alguien de la familia."
+    ],
+    "solucion": "No hay una solución única — cada diario será distinto. Para autoevaluarte, marca:\n\n☐ ¿He puesto fecha y lugar?\n☐ ¿He contado al menos dos cosas concretas (no solo «fue divertido»)?\n☐ ¿He usado tres adjetivos diferentes?\n☐ ¿He usado dos conectores distintos?\n☐ ¿Se entiende lo que sentía al empezar el viaje?\n\nSi has marcado cuatro o cinco, ¡estupendo! Si has marcado dos o tres, lee lo que has escrito y añade lo que falta."
+  },
+  {
+    "id": "viaje-esp-esc-002",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-descriptiva",
+    "dificultad": 2,
+    "xp": 30,
+    "tiempo_estimado_s": 900,
+    "enunciado": "📓 Mirando por la ventana — Castilla pasa al otro lado del cristal\n\nDurante el viaje por España, tendrás horas mirando por la ventana. Elige un momento del trayecto del primer día (un atardecer, un campo de girasoles, una gasolinera vacía, un pueblo en una colina, el cielo enorme de la meseta…) y escribe en tu cuaderno una descripción literaria de unas 15 líneas.\n\nReglas del juego:\n\n• No puedes nombrar lo que describes directamente hasta la última línea. Es decir: si describes un atardecer, no escribas «el sol» hasta el final.\n• Usa al menos una metáfora, una comparación y una personificación.\n• Incluye los cinco sentidos (vista, oído, olfato, gusto y tacto), aunque algunos sean imaginarios.\n• Mezcla frases largas y cortas para crear ritmo.",
+    "pistas": [
+      "Metáfora: «el campo era una alfombra dorada». Comparación: «el campo era como una alfombra dorada». Personificación: «el campo dormía bajo el sol».",
+      "Para meter el tacto en algo que no se puede tocar, usa la imaginación: «si lo tocara, ardería en los dedos».",
+      "Empieza por el sentido menos obvio (el oído, el olfato). Termina por la vista. Eso retrasa la revelación."
+    ],
+    "solucion": "Cada descripción será diferente. Autoevaluación:\n\n☐ ¿He retrasado el nombre del objeto hasta el final?\n☐ ¿Hay una metáfora identificable?\n☐ ¿Hay una comparación identificable («como», «parecía»…)?\n☐ ¿Hay una personificación (algo no humano haciendo algo humano)?\n☐ ¿Aparecen los cinco sentidos?\n☐ ¿Mezclo frases de distinta longitud?\n\nSi has marcado cinco o seis: nivel literario alto, enhorabuena. Si has marcado tres o cuatro: relee y añade lo que falte. Menos de tres: vuelve a empezar leyendo primero un poema corto que te guste, para coger el tono."
+  }
+]

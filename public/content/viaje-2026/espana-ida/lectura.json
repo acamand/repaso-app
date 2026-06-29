@@ -1,0 +1,74 @@
+[
+  {
+    "id": "viaje-esp-lec-001",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "comprension-lectora",
+    "dificultad": 1,
+    "xp": 12,
+    "tiempo_estimado_s": 120,
+    "enunciado": "Lee este texto y contesta:\n\n«La autocaravana de la familia es como una casa con ruedas. Dentro tiene una cama para los padres, dos literas para los niños, una cocina pequeña con una nevera, una mesa que también sirve de escritorio y un baño diminuto. Cuando viajan, todo tiene que estar bien guardado para que nada se caiga con los frenazos. Por eso cada cosa tiene su sitio: la vajilla en un armario con cerrojo, los libros en una estantería con un listón delante, y la ropa en cajones que se abren tirando hacia arriba.»\n\n¿Por qué la vajilla está en un armario con cerrojo?",
+    "opciones": [
+      "Porque los niños no la pueden coger.",
+      "Porque hay poco espacio.",
+      "Para que no se caiga ni se rompa con los frenazos.",
+      "Porque es muy valiosa."
+    ],
+    "correcta": 2,
+    "explicacion": "El texto dice que «todo tiene que estar bien guardado para que nada se caiga con los frenazos», y por eso la vajilla está protegida."
+  },
+  {
+    "id": "viaje-esp-lec-002",
+    "type": "fill_blank",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "comprension-lectora",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 120,
+    "enunciado": "Recordando el texto anterior, completa.",
+    "texto": "La autocaravana es como una {0} con ruedas. La mesa también sirve como {1}. La ropa va en {2} que se abren tirando hacia arriba.",
+    "respuestas": [["casa"], ["escritorio"], ["cajones"]],
+    "flexible": true,
+    "explicacion": "Cuando leas, intenta retener tres o cuatro detalles concretos del texto: te ayudará a responder este tipo de preguntas."
+  },
+  {
+    "id": "viaje-esp-lec-003",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "comprension-lectora-inferencial",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 180,
+    "enunciado": "Lee este texto y contesta:\n\n«La península ibérica es un puente entre dos continentes y dos mares. Por el sur, apenas catorce kilómetros la separan de África a través del estrecho de Gibraltar. Por el norte, los Pirineos la unen al resto de Europa. Esta posición ha hecho que, a lo largo de la historia, fenicios, romanos, visigodos, árabes y muchos otros pueblos hayan dejado su huella en lo que hoy conocemos como España y Portugal. Cuando cruzamos los Pirineos en autocaravana, en cierto modo desandamos el camino por el que llegaron muchas de las palabras, costumbres y construcciones que hoy nos parecen ‘de toda la vida’.»\n\n¿Cuál es la idea central del texto?",
+    "opciones": [
+      "Los Pirineos son una frontera difícil de cruzar.",
+      "España y Portugal fueron invadidas a lo largo de la historia.",
+      "La ubicación de la península explica por qué su cultura mezcla influencias de muchos pueblos.",
+      "El estrecho de Gibraltar mide solo catorce kilómetros."
+    ],
+    "correcta": 2,
+    "explicacion": "Los datos del estrecho, los Pirineos y los pueblos históricos son ejemplos que sostienen la idea principal: la posición geográfica como causa de la mezcla cultural."
+  },
+  {
+    "id": "viaje-esp-lec-004",
+    "type": "fill_blank",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "vocabulario-contextual",
+    "dificultad": 2,
+    "xp": 12,
+    "tiempo_estimado_s": 120,
+    "enunciado": "En la frase «desandamos el camino por el que llegaron muchas palabras», el verbo «desandar» significa…",
+    "texto": "Significa: {0} hacia atrás el mismo camino que ya se ha recorrido.",
+    "respuestas": [["volver", "ir", "regresar", "andar"]],
+    "flexible": true,
+    "explicacion": "El prefijo «des-» indica acción contraria. «Andar» + «des-» = recorrer un camino al revés."
+  }
+]

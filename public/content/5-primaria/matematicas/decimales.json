@@ -1,0 +1,54 @@
+[
+  {
+    "id": "5pri-mates-dec-001",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "lectura-escritura-decimales",
+    "dificultad": 1,
+    "xp": 10,
+    "tiempo_estimado_s": 60,
+    "enunciado": "¿Cómo se lee el número 3,07?",
+    "opciones": [
+      "Tres con siete",
+      "Tres unidades y siete centésimas",
+      "Tres con setenta décimas",
+      "Treinta y siete centésimas"
+    ],
+    "correcta": 1,
+    "explicacion": "Detrás de la coma, la primera cifra son décimas y la segunda, centésimas. Aquí hay 0 décimas y 7 centésimas."
+  },
+  {
+    "id": "5pri-mates-dec-002",
+    "type": "number_input",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "porcentajes",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 120,
+    "enunciado": "En una clase de 25 alumnos, el 60% son chicas. ¿Cuántas chicas hay?",
+    "respuesta": 15,
+    "unidad": "chicas",
+    "explicacion": "60% de 25 = 25 × 60 / 100 = 15."
+  },
+  {
+    "id": "5pri-mates-dec-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "porcentajes",
+    "dificultad": 2,
+    "xp": 25,
+    "tiempo_estimado_s": 360,
+    "enunciado": "En una encuesta a 125 personas, el 68% prefiere ver gimnasia y el 32% prefiere ver atletismo.\n\na) ¿Cuántas personas eligieron cada deporte?\nb) El año pasado contestaron a la misma encuesta un 12% menos de personas. ¿Cuántas personas contestaron el año pasado?",
+    "pistas": [
+      "Para hallar un porcentaje, multiplica por el porcentaje y divide entre 100.",
+      "Para el apartado b, calcula primero el 12% de 125 y réstaselo a 125."
+    ],
+    "solucion": "a) Gimnasia: 125 × 68 ÷ 100 = 85 personas. Atletismo: 125 × 32 ÷ 100 = 40 personas.\nb) 12% de 125 = 125 × 12 ÷ 100 = 15. El año pasado contestaron 125 − 15 = 110 personas."
+  }
+]

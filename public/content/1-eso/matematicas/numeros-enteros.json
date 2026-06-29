@@ -1,0 +1,48 @@
+[
+  {
+    "id": "1eso-mates-ent-001",
+    "type": "number_input",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "operaciones-enteros",
+    "dificultad": 1,
+    "xp": 10,
+    "tiempo_estimado_s": 45,
+    "enunciado": "Calcula: (−7) + (+12) − (−3)",
+    "respuesta": 8,
+    "explicacion": "(−7) + 12 = 5. Y 5 − (−3) = 5 + 3 = 8."
+  },
+  {
+    "id": "1eso-mates-ent-002",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "operaciones-enteros",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 90,
+    "enunciado": "¿Cuál es el resultado de (−4) × (−5) + (−6) ÷ 2 ?",
+    "opciones": ["17", "23", "−23", "−17"],
+    "correcta": 0,
+    "explicacion": "Primero multiplicación y división: (−4)×(−5) = 20, y (−6)÷2 = −3. Después: 20 + (−3) = 17."
+  },
+  {
+    "id": "1eso-mates-ent-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "MAT.1.A.2.1",
+    "dificultad": 2,
+    "xp": 25,
+    "tiempo_estimado_s": 360,
+    "enunciado": "Un submarino se encuentra a 320 m bajo el nivel del mar. Asciende 175 m, vuelve a descender 60 m y, finalmente, sube 90 m.\n\na) ¿A qué profundidad se encuentra al final?\nb) ¿Cuántos metros tendría que ascender aún para llegar a la superficie?\n\nResuelve usando números enteros y representando la situación en una recta numérica.",
+    "pistas": [
+      "Bajo el nivel del mar → números negativos. Ascender → sumar. Descender → restar.",
+      "Posición final: −320 + 175 − 60 + 90."
+    ],
+    "solucion": "Posición inicial: −320 m.\n−320 + 175 = −145\n−145 − 60 = −205\n−205 + 90 = −115\n\na) Está a 115 m bajo el nivel del mar.\nb) Tendría que subir 115 m más para llegar a la superficie."
+  }
+]

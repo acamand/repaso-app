@@ -1,0 +1,18 @@
+{
+  "nivel": "5-primaria",
+  "materia": "matematicas",
+  "unidades": [
+    {
+      "id": "decimales",
+      "titulo": "Números decimales",
+      "saberes": ["lectura-escritura-decimales", "comparacion-decimales", "porcentajes"],
+      "archivo": "decimales.json"
+    },
+    {
+      "id": "fracciones",
+      "titulo": "Fracciones",
+      "saberes": ["fracciones-equivalentes", "operaciones-fracciones"],
+      "archivo": "fracciones.json"
+    }
+  ]
+}

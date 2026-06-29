@@ -1,0 +1,12 @@
+{
+  "nivel": "1-eso",
+  "materia": "matematicas",
+  "unidades": [
+    {
+      "id": "numeros-enteros",
+      "titulo": "Números enteros",
+      "saberes": ["MAT.1.A.2.1", "operaciones-enteros"],
+      "archivo": "numeros-enteros.json"
+    }
+  ]
+}

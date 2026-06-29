@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#2E5C7E"/>
+  <!-- Marcapáginas / brújula -->
+  <g transform="translate(256 256)">
+    <circle r="150" fill="#F5F2EC"/>
+    <circle r="150" fill="none" stroke="#1F3F58" stroke-width="6"/>
+    <!-- Aguja -->
+    <polygon points="0,-110 22,0 0,110 -22,0" fill="#B85C38"/>
+    <polygon points="0,-110 22,0 0,0" fill="#8A4429"/>
+    <circle r="14" fill="#1F3F58"/>
+    <!-- Marcadores N E S O -->
+    <text x="0" y="-125" text-anchor="middle" font-family="Georgia, serif" font-size="32" font-weight="700" fill="#1F3F58">N</text>
+  </g>
+</svg>

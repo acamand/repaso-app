@@ -1,0 +1,50 @@
+[
+  {
+    "id": "5pri-lengua-verb-001",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "numero-persona-tiempo",
+    "dificultad": 1,
+    "xp": 10,
+    "tiempo_estimado_s": 60,
+    "enunciado": "¿En qué tiempo está el verbo de la oración: «Ayer maulló el gato»?",
+    "opciones": ["Presente", "Pasado", "Futuro", "Condicional"],
+    "correcta": 1,
+    "explicacion": "«Ayer» nos da la pista: la acción ya ocurrió, así que es pasado."
+  },
+  {
+    "id": "5pri-lengua-verb-002",
+    "type": "fill_blank",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "conjugacion",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 90,
+    "enunciado": "Completa con la forma del verbo «correr».",
+    "texto": "El año pasado yo {0} la maratón. Cada día {1} dos kilómetros. Mañana {2} en el polideportivo.",
+    "respuestas": [["corrí"], ["corro"], ["correré"]],
+    "flexible": true,
+    "explicacion": "Pasado: corrí. Presente: corro. Futuro: correré."
+  },
+  {
+    "id": "5pri-lengua-verb-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "conjugacion",
+    "dificultad": 2,
+    "xp": 20,
+    "tiempo_estimado_s": 300,
+    "enunciado": "Escribe una oración con cada una de estas formas verbales. Después indica su número, persona y tiempo.\n\na) cantaremos\nb) leías\nc) habéis venido",
+    "pistas": [
+      "Recuerda: número (singular/plural), persona (1ª, 2ª o 3ª) y tiempo (presente, pasado o futuro).",
+      "Ejemplo: «Yo como una manzana» — 1ª persona del singular, presente."
+    ],
+    "solucion": "Respuestas válidas (las oraciones son libres):\na) cantaremos → 1ª persona del plural, futuro.\nb) leías → 2ª persona del singular, pasado.\nc) habéis venido → 2ª persona del plural, pasado."
+  }
+]

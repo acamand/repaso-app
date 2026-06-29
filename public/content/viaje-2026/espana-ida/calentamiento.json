@@ -1,0 +1,63 @@
+[
+  {
+    "id": "viaje-esp-cm-001",
+    "type": "number_input",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "calculo-mental",
+    "dificultad": 1,
+    "xp": 8,
+    "tiempo_estimado_s": 30,
+    "enunciado": "Hoy tenéis que conducir 480 km y vais a hacer dos paradas iguales. ¿Cuántos kilómetros entre parada y parada?",
+    "respuesta": 160,
+    "unidad": "km",
+    "explicacion": "Dos paradas dividen el viaje en tres tramos: 480 ÷ 3 = 160 km."
+  },
+  {
+    "id": "viaje-esp-cm-002",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "calculo-mental",
+    "dificultad": 1,
+    "xp": 8,
+    "tiempo_estimado_s": 30,
+    "enunciado": "Si la autocaravana va a 90 km/h, ¿cuánto tarda en hacer 270 km?",
+    "opciones": ["2 horas", "2 horas y media", "3 horas", "3 horas y media"],
+    "correcta": 2,
+    "explicacion": "270 ÷ 90 = 3 horas. Una pista útil: 90 × 3 = 270."
+  },
+  {
+    "id": "viaje-esp-cm-003",
+    "type": "number_input",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "calculo-mental",
+    "dificultad": 1,
+    "xp": 10,
+    "tiempo_estimado_s": 45,
+    "enunciado": "La autocaravana consume 12 L cada 100 km. Hoy haréis 350 km. ¿Cuántos litros consumirá, aproximadamente?",
+    "respuesta": 42,
+    "tolerancia": 0.5,
+    "unidad": "L",
+    "explicacion": "12 L × 3,5 = 42 L. Truco: por cada 100 km, 12 L. Multiplica por los cientos."
+  },
+  {
+    "id": "viaje-esp-cm-004",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "porcentajes-cm",
+    "dificultad": 2,
+    "xp": 12,
+    "tiempo_estimado_s": 60,
+    "enunciado": "El depósito tiene 80 L y está al 25%. ¿Cuántos litros quedan?",
+    "opciones": ["10 L", "20 L", "25 L", "40 L"],
+    "correcta": 1,
+    "explicacion": "25% es la cuarta parte. 80 ÷ 4 = 20 L."
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "1eso-lengua-cat-001",
+    "type": "multiple_choice",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "categorias-gramaticales",
+    "dificultad": 1,
+    "xp": 10,
+    "tiempo_estimado_s": 45,
+    "enunciado": "¿Qué categoría gramatical es la palabra subrayada?\n\n«El **rápido** corredor cruzó la meta.»",
+    "opciones": ["Sustantivo", "Adjetivo", "Adverbio", "Verbo"],
+    "correcta": 1,
+    "explicacion": "«Rápido» acompaña al sustantivo «corredor» indicando una cualidad: es un adjetivo."
+  },
+  {
+    "id": "1eso-lengua-cat-002",
+    "type": "fill_blank",
+    "formato": "digital",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "categorias-gramaticales",
+    "dificultad": 2,
+    "xp": 15,
+    "tiempo_estimado_s": 120,
+    "enunciado": "Identifica la categoría de cada palabra. Escribe: sustantivo, verbo, adjetivo o adverbio.",
+    "texto": "«gato» es un {0}, «correr» es un {1}, «azul» es un {2}, «ayer» es un {3}.",
+    "respuestas": [["sustantivo"], ["verbo"], ["adjetivo"], ["adverbio"]],
+    "flexible": true,
+    "explicacion": "Sustantivos nombran. Verbos expresan acción o estado. Adjetivos describen al sustantivo. Adverbios modifican al verbo, al adjetivo o a otro adverbio."
+  },
+  {
+    "id": "1eso-lengua-cat-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "LCL.1.D.5",
+    "dificultad": 2,
+    "xp": 25,
+    "tiempo_estimado_s": 360,
+    "enunciado": "Lee la siguiente oración y haz lo que se pide:\n\n«El pequeño gato negro persigue ratones rápidamente por el jardín.»\n\na) Subraya cada palabra y escribe encima su categoría gramatical.\nb) Indica el género y número de los sustantivos y adjetivos.\nc) Cambia la oración al plural y escríbela en tu cuaderno.",
+    "pistas": [
+      "Determinantes: el, la, los, las, un, mi, este…",
+      "Adjetivos suelen acompañar al sustantivo y concordar con él en género y número.",
+      "Adverbios terminados en -mente modifican al verbo."
+    ],
+    "solucion": "a) El (determinante) pequeño (adjetivo) gato (sustantivo) negro (adjetivo) persigue (verbo) ratones (sustantivo) rápidamente (adverbio) por (preposición) el (determinante) jardín (sustantivo).\n\nb) gato → masculino singular; pequeño, negro → masculino singular. ratones → masculino plural. jardín → masculino singular.\n\nc) «Los pequeños gatos negros persiguen ratones rápidamente por los jardines.»"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "etapa_id": "espana-ida",
+  "pais": "España",
+  "titulo": "Salida desde Córdoba",
+  "descripcion": "Travesía de la península, despedida de casa. Mates ligeras de viaje y trabajo con el español: ortografía, expresión y comprensión.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — kilómetros y horas", "archivo": "calentamiento.json" },
+    { "id": "problemas",     "titulo": "Problemas — gasolina, repostajes, etapas", "archivo": "problemas.json" },
+    { "id": "lectura",       "titulo": "Comprensión lectora — la ruta por España", "archivo": "lectura.json" },
+    { "id": "escritura",     "titulo": "Escritura creativa — diario de viaje, día 1", "archivo": "escritura.json" }
+  ]
+}
