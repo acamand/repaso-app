@@ -1,0 +1,5 @@
+[
+  {"id":"1eso-mates-fra-001","type":"multiple_choice","formato":"digital","nivel":"1-eso","materia":"matematicas","saber_basico":"operaciones-fracciones-eso","dificultad":1,"xp":10,"tiempo_estimado_s":60,"enunciado":"¿Cuánto es 2/3 + 1/3?","opciones":["3/6","2/3","1","3/3 y queda igual"],"correcta":2,"explicacion":"Mismo denominador: 2/3 + 1/3 = 3/3 = 1."},
+  {"id":"1eso-mates-fra-002","type":"number_input","formato":"digital","nivel":"1-eso","materia":"matematicas","saber_basico":"decimales-eso","dificultad":1,"xp":10,"tiempo_estimado_s":60,"enunciado":"Expresa 3/4 en forma decimal.","respuesta":0.75,"tolerancia":0.001,"explicacion":"3 ÷ 4 = 0,75."},
+  {"id":"1eso-mates-fra-003","type":"fill_blank","formato":"digital","nivel":"1-eso","materia":"matematicas","saber_basico":"operaciones-fracciones-eso","dificultad":2,"xp":15,"tiempo_estimado_s":120,"enunciado":"Simplifica al máximo las fracciones.","texto":"12/18 = {0}/{1}. 25/35 = {2}/{3}.","respuestas":[["2"],["3"],["5"],["7"]],"flexible":true,"explicacion":"12/18 ÷ 6 = 2/3. 25/35 ÷ 5 = 5/7."}
+]

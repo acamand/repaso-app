@@ -2,11 +2,9 @@
   "nivel": "5-primaria",
   "materia": "lengua",
   "unidades": [
-    {
-      "id": "verbos",
-      "titulo": "El verbo",
-      "saberes": ["numero-persona-tiempo", "conjugacion"],
-      "archivo": "verbos.json"
-    }
+    { "id": "verbos",     "titulo": "El verbo",            "saberes": ["numero-persona-tiempo", "conjugacion"], "archivo": "verbos.json" },
+    { "id": "ortografia", "titulo": "Ortografía",          "saberes": ["tildes", "uso-b-v", "uso-h"], "archivo": "ortografia.json" },
+    { "id": "lectura",    "titulo": "Comprensión lectora", "saberes": ["comprension-lectora"], "archivo": "lectura.json" },
+    { "id": "vocabulario","titulo": "Vocabulario",         "saberes": ["sinonimos-antonimos", "familias-palabras"], "archivo": "vocabulario.json" }
   ]
 }
