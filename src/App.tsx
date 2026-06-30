@@ -12,9 +12,14 @@ import {
 import { ProfileSelect } from '@/screens/ProfileSelect';
 import { Home } from '@/screens/Home';
 import { SessionRunner } from '@/screens/SessionRunner';
+import { Pasaporte } from '@/screens/Pasaporte';
 import type { ActivityResult } from '@/activities/types';
 
-type View = { tag: 'select' } | { tag: 'home' } | { tag: 'session'; session: DailySession };
+type View =
+  | { tag: 'select' }
+  | { tag: 'home' }
+  | { tag: 'session'; session: DailySession }
+  | { tag: 'pasaporte' };
 
 export default function App() {
   const [state, setState] = useState<ProgressState>(() => loadProgress());
@@ -67,8 +72,13 @@ export default function App() {
         progress={progress}
         onStartSession={(session) => setView({ tag: 'session', session })}
         onSwitchProfile={() => setView({ tag: 'select' })}
+        onShowPasaporte={() => setView({ tag: 'pasaporte' })}
       />
     );
+  }
+
+  if (view.tag === 'pasaporte') {
+    return <Pasaporte progress={progress} onBack={() => setView({ tag: 'home' })} />;
   }
 
   return (

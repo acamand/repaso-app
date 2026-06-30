@@ -10,9 +10,16 @@ interface Props {
   progress: PerPerfilProgress;
   onStartSession: (session: DailySession) => void;
   onSwitchProfile: () => void;
+  onShowPasaporte: () => void;
 }
 
-export function Home({ profile, progress, onStartSession, onSwitchProfile }: Props) {
+export function Home({
+  profile,
+  progress,
+  onStartSession,
+  onSwitchProfile,
+  onShowPasaporte,
+}: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,6 +51,13 @@ export function Home({ profile, progress, onStartSession, onSwitchProfile }: Pro
               {profile.nivel === '5-primaria' ? '5º Primaria' : '1º ESO'}
             </div>
           </div>
+          <button
+            onClick={onShowPasaporte}
+            className="text-xs text-paper-700 hover:text-ink"
+            title="Ver pasaporte"
+          >
+            Pasaporte
+          </button>
           <button onClick={onSwitchProfile} className="text-xs text-paper-700 hover:text-ink">
             Cambiar perfil
           </button>
