@@ -1,24 +1,26 @@
 import type { Activity, DailySession, Nivel, PerPerfilProgress } from '@/types';
 import { loadAllActivities } from './content';
-import { loadAllViajeActivities } from './ruta';
+import { loadEtapaActivitiesByNivel } from './ruta';
 
 const LIMITE_DIARIO_S = 60 * 60;
 const OBJETIVO_NORMAL_S = 25 * 60;
 const COOLDOWN_DIAS = 3;
 const SESION_OBJETIVO = 5;
+/** Cuántas actividades de la etapa actual intentar meter por sesión (tras el calentamiento). */
+const SLOTS_ETAPA = 2;
 
 export async function buildDailySession(
   nivel: Nivel,
   progress: PerPerfilProgress,
 ): Promise<DailySession> {
-  const [mates, lengua, viaje] = await Promise.all([
+  const etapaActualId = progress.viaje.etapaActualId;
+  const [mates, lengua, viajeEtapa] = await Promise.all([
     loadAllActivities(nivel, 'matematicas').catch(() => []),
     loadAllActivities(nivel, 'lengua').catch(() => []),
-    loadAllViajeActivities().catch(() => []),
+    loadEtapaActivitiesByNivel(etapaActualId, nivel).catch(() => []),
   ]);
 
-  const viajeNivel = viaje.filter((a) => a.nivel === nivel);
-  const todas = [...mates, ...lengua, ...viajeNivel];
+  const todas = [...mates, ...lengua, ...viajeEtapa];
 
   const hoy = new Date().toISOString().slice(0, 10);
   const limiteCooldown = isoMinusDays(hoy, COOLDOWN_DIAS);
@@ -31,21 +33,36 @@ export async function buildDailySession(
 
   const pool = eligible.length > 0 ? eligible : todas;
 
-  const seed = hashStr(hoy + ':' + nivel);
+  const seed = hashStr(hoy + ':' + nivel + ':' + etapaActualId);
   const sample = shuffle(pool, seed);
 
   const presupuestoTotal = Math.max(0, OBJETIVO_NORMAL_S - progress.tiempoHoyS);
   const seleccion: Activity[] = [];
   let presupuesto = presupuestoTotal;
 
+  // 1. Calentamiento (cualquier materia o etapa).
   const calentamiento = sample.find((a) => a.dificultad === 1 && a.formato === 'digital');
   if (calentamiento && calentamiento.tiempo_estimado_s <= presupuesto) {
     seleccion.push(calentamiento);
     presupuesto -= calentamiento.tiempo_estimado_s;
   }
 
+  // 2. Hasta SLOTS_ETAPA actividades de la etapa actual, justo después.
+  const etapaIds = new Set(viajeEtapa.map((a) => a.id));
+  let viajeSlots = 0;
+  for (const a of sample) {
+    if (viajeSlots >= SLOTS_ETAPA) break;
+    if (seleccion.includes(a)) continue;
+    if (!etapaIds.has(a.id)) continue;
+    if (a.tiempo_estimado_s > presupuesto) continue;
+    seleccion.push(a);
+    presupuesto -= a.tiempo_estimado_s;
+    viajeSlots++;
+  }
+
+  // 3. Resto, alternando materias.
   const restantes = sample.filter((a) => !seleccion.includes(a));
-  let ultimaMateria: string | null = seleccion[0]?.materia ?? null;
+  let ultimaMateria: string | null = seleccion[seleccion.length - 1]?.materia ?? null;
 
   while (seleccion.length < SESION_OBJETIVO && presupuesto > 0 && restantes.length > 0) {
     let idx = restantes.findIndex(
