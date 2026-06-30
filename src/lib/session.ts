@@ -1,77 +1,68 @@
 import type { Activity, DailySession, Nivel, PerPerfilProgress } from '@/types';
 import { loadAllActivities } from './content';
+import { loadAllViajeActivities } from './ruta';
 
-const LIMITE_DIARIO_S = 60 * 60; // 1 hora absoluta
-const OBJETIVO_NORMAL_S = 25 * 60; // sesión normal apuntada a ~25 min
+const LIMITE_DIARIO_S = 60 * 60;
+const OBJETIVO_NORMAL_S = 25 * 60;
+const COOLDOWN_DIAS = 3;
+const SESION_OBJETIVO = 5;
 
-/**
- * Construye la sesión del día:
- *  1. Calentamiento — 1 actividad corta (dificultad 1)
- *  2. Actividad del día — 1 actividad nueva o de la unidad actual
- *  3. Repaso — 2-3 actividades de saberes ya tocados (mezcla digital y cuaderno)
- *  4. Bonus opcional — 1 actividad extra si aún queda tiempo
- *
- *  Nunca propone más actividades cuando el alumno ya ha invertido `LIMITE_DIARIO_S` hoy.
- */
 export async function buildDailySession(
   nivel: Nivel,
   progress: PerPerfilProgress,
 ): Promise<DailySession> {
-  const mates = await loadAllActivities(nivel, 'matematicas').catch(() => []);
-  const lengua = await loadAllActivities(nivel, 'lengua').catch(() => []);
-  const todas = [...mates, ...lengua];
+  const [mates, lengua, viaje] = await Promise.all([
+    loadAllActivities(nivel, 'matematicas').catch(() => []),
+    loadAllActivities(nivel, 'lengua').catch(() => []),
+    loadAllViajeActivities().catch(() => []),
+  ]);
 
-  const completadas = new Set(Object.keys(progress.actividadesCompletadas));
-  const tiempoYaInvertidoHoy = progress.tiempoHoyS;
-  const presupuesto = Math.max(0, OBJETIVO_NORMAL_S - tiempoYaInvertidoHoy);
+  const viajeNivel = viaje.filter((a) => a.nivel === nivel);
+  const todas = [...mates, ...lengua, ...viajeNivel];
 
-  const nuevas = todas.filter((a) => !completadas.has(a.id));
-  const yaHechas = todas.filter((a) => completadas.has(a.id));
+  const hoy = new Date().toISOString().slice(0, 10);
+  const limiteCooldown = isoMinusDays(hoy, COOLDOWN_DIAS);
 
-  // Semilla determinista por fecha + perfil para que la sesión sea estable durante el día.
-  const seed = hash(new Date().toISOString().slice(0, 10));
-  const sample = pickN(nuevas, seed);
-  const repaso = pickN(yaHechas, seed + 1);
+  const eligible = todas.filter((a) => {
+    const reg = progress.actividadesCompletadas[a.id];
+    if (!reg) return true;
+    return reg.fecha < limiteCooldown;
+  });
 
+  const pool = eligible.length > 0 ? eligible : todas;
+
+  const seed = hashStr(hoy + ':' + nivel);
+  const sample = shuffle(pool, seed);
+
+  const presupuestoTotal = Math.max(0, OBJETIVO_NORMAL_S - progress.tiempoHoyS);
   const seleccion: Activity[] = [];
-  let presupuestoRestante = presupuesto;
+  let presupuesto = presupuestoTotal;
 
-  // 1. Calentamiento
   const calentamiento = sample.find((a) => a.dificultad === 1 && a.formato === 'digital');
-  if (calentamiento) {
+  if (calentamiento && calentamiento.tiempo_estimado_s <= presupuesto) {
     seleccion.push(calentamiento);
-    presupuestoRestante -= calentamiento.tiempo_estimado_s;
+    presupuesto -= calentamiento.tiempo_estimado_s;
   }
 
-  // 2. Actividad del día
-  const delDia = sample.find((a) => !seleccion.includes(a));
-  if (delDia && presupuestoRestante >= delDia.tiempo_estimado_s) {
-    seleccion.push(delDia);
-    presupuestoRestante -= delDia.tiempo_estimado_s;
-  }
+  const restantes = sample.filter((a) => !seleccion.includes(a));
+  let ultimaMateria: string | null = seleccion[0]?.materia ?? null;
 
-  // 3. Repaso (2-3)
-  for (const a of repaso) {
-    if (seleccion.length >= 5) break;
-    if (presupuestoRestante < a.tiempo_estimado_s) break;
-    if (seleccion.includes(a)) continue;
-    seleccion.push(a);
-    presupuestoRestante -= a.tiempo_estimado_s;
-  }
-
-  // Si no hay repaso suficiente (alumno nuevo), rellenar con más actividades nuevas.
-  if (seleccion.length < 4) {
-    for (const a of sample) {
-      if (seleccion.length >= 5) break;
-      if (presupuestoRestante < a.tiempo_estimado_s) break;
-      if (seleccion.includes(a)) continue;
-      seleccion.push(a);
-      presupuestoRestante -= a.tiempo_estimado_s;
+  while (seleccion.length < SESION_OBJETIVO && presupuesto > 0 && restantes.length > 0) {
+    let idx = restantes.findIndex(
+      (a) => a.materia !== ultimaMateria && a.tiempo_estimado_s <= presupuesto,
+    );
+    if (idx === -1) {
+      idx = restantes.findIndex((a) => a.tiempo_estimado_s <= presupuesto);
     }
+    if (idx === -1) break;
+    const elegida = restantes.splice(idx, 1)[0];
+    seleccion.push(elegida);
+    presupuesto -= elegida.tiempo_estimado_s;
+    ultimaMateria = elegida.materia;
   }
 
   const duracionEstimadaS = seleccion.reduce((acc, a) => acc + a.tiempo_estimado_s, 0);
-  return { fecha: new Date().toISOString().slice(0, 10), actividades: seleccion, duracionEstimadaS };
+  return { fecha: hoy, actividades: seleccion, duracionEstimadaS };
 }
 
 export function tiempoRestanteHoyS(progress: PerPerfilProgress): number {
@@ -82,21 +73,25 @@ export function alcanzadoLimiteDiario(progress: PerPerfilProgress): boolean {
   return progress.tiempoHoyS >= LIMITE_DIARIO_S;
 }
 
-// ----- Utilidades -----
-
-function hash(s: string): number {
+function hashStr(s: string): number {
   let h = 0;
   for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
   return h;
 }
 
-function pickN<T>(arr: T[], seed: number): T[] {
-  // Barajado pseudo-aleatorio determinista.
+function shuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
+  let s = seed;
   for (let i = a.length - 1; i > 0; i--) {
-    seed = (seed * 1103515245 + 12345) >>> 0;
-    const j = seed % (i + 1);
+    s = (s * 1103515245 + 12345) >>> 0;
+    const j = s % (i + 1);
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+function isoMinusDays(iso: string, days: number): string {
+  const d = new Date(iso + 'T00:00:00');
+  d.setDate(d.getDate() - days);
+  return d.toISOString().slice(0, 10);
 }

@@ -2,17 +2,10 @@
   "nivel": "5-primaria",
   "materia": "matematicas",
   "unidades": [
-    {
-      "id": "decimales",
-      "titulo": "Números decimales",
-      "saberes": ["lectura-escritura-decimales", "comparacion-decimales", "porcentajes"],
-      "archivo": "decimales.json"
-    },
-    {
-      "id": "fracciones",
-      "titulo": "Fracciones",
-      "saberes": ["fracciones-equivalentes", "operaciones-fracciones"],
-      "archivo": "fracciones.json"
-    }
+    { "id": "decimales",   "titulo": "Números decimales", "saberes": ["lectura-escritura-decimales", "comparacion-decimales", "porcentajes"], "archivo": "decimales.json" },
+    { "id": "fracciones",  "titulo": "Fracciones",        "saberes": ["fracciones-equivalentes", "operaciones-fracciones"], "archivo": "fracciones.json" },
+    { "id": "geometria",   "titulo": "Geometría",         "saberes": ["area-perimetro", "poligonos"], "archivo": "geometria.json" },
+    { "id": "medida",      "titulo": "Medidas",           "saberes": ["unidades-longitud", "unidades-masa", "unidades-tiempo"], "archivo": "medida.json" },
+    { "id": "calculo",     "titulo": "Cálculo y operaciones", "saberes": ["operaciones-combinadas", "calculo-mental"], "archivo": "calculo.json" }
   ]
 }

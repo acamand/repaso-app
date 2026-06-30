@@ -1,0 +1,21 @@
+{
+  "etapa_id": "francia-ida",
+  "pais": "Francia",
+  "intro": "Cruzáis los Pirineos y entráis en Francia: el país más visitado del mundo, con más de 90 millones de turistas al año. Os esperan cuatro o cinco días atravesándola de sur a norte: campos de lavanda, ciudades medievales y autopistas rectas entre llanuras enormes.",
+  "datos_curiosos": [
+    "En Francia hay más de 400 variedades de queso distintas. Se dice que podrías comer un queso diferente cada día del año y no repetir.",
+    "Aunque todo el mundo cree que el croissant es francés, en realidad se inventó en Austria. Los franceses lo adoptaron y lo hicieron famoso.",
+    "Francia tiene 12 zonas horarias diferentes, más que ningún otro país del mundo, gracias a sus territorios de ultramar repartidos por todos los océanos."
+  ],
+  "frases_idioma": [
+    { "original": "Bonjour!", "traduccion": "¡Buenos días! (Se usa siempre al entrar en una tienda o hablar con alguien. No decirlo se considera mala educación.)" },
+    { "original": "Merci beaucoup!", "traduccion": "¡Muchas gracias!" },
+    { "original": "Où est le camping, s'il vous plaît?", "traduccion": "¿Dónde está el camping, por favor?" }
+  ],
+  "sello": {
+    "descripcion": "Torre Eiffel con baguette cruzada.",
+    "color_fondo": "#2E5C7E",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 5 }
+}

@@ -4,10 +4,20 @@ import type {
   PerPerfilProgress,
   Profile,
   ProgressState,
+  ViajeProgress,
 } from '@/types';
 import { readState, writeState } from './storage';
+import { PRIMERA_ETAPA_ID } from './ruta';
 
 const FECHA_HOY = () => new Date().toISOString().slice(0, 10);
+
+function defaultViajeProgress(): ViajeProgress {
+  return {
+    etapaActualId: PRIMERA_ETAPA_ID,
+    capitulosVistos: [],
+    sellos: {},
+  };
+}
 
 function emptyPerfilProgress(): PerPerfilProgress {
   return {
@@ -19,7 +29,14 @@ function emptyPerfilProgress(): PerPerfilProgress {
     logrosDesbloqueados: [],
     tiempoHoyS: 0,
     fechaHoy: null,
+    viaje: defaultViajeProgress(),
   };
+}
+
+// Migración suave: perfiles guardados antes de añadir `viaje` lo reciben con valores por defecto.
+function hydratePerfilProgress(p: PerPerfilProgress): PerPerfilProgress {
+  if ((p as Partial<PerPerfilProgress>).viaje) return p;
+  return { ...p, viaje: defaultViajeProgress() };
 }
 
 function emptyState(): ProgressState {
@@ -27,7 +44,12 @@ function emptyState(): ProgressState {
 }
 
 export function loadProgress(): ProgressState {
-  return readState<ProgressState>(emptyState());
+  const raw = readState<ProgressState>(emptyState());
+  const porPerfil: Record<string, PerPerfilProgress> = {};
+  for (const [id, p] of Object.entries(raw.porPerfil)) {
+    porPerfil[id] = hydratePerfilProgress(p);
+  }
+  return { ...raw, porPerfil };
 }
 
 export function saveProgress(state: ProgressState): void {

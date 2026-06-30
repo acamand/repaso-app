@@ -2,11 +2,9 @@
   "nivel": "1-eso",
   "materia": "matematicas",
   "unidades": [
-    {
-      "id": "numeros-enteros",
-      "titulo": "Números enteros",
-      "saberes": ["MAT.1.A.2.1", "operaciones-enteros"],
-      "archivo": "numeros-enteros.json"
-    }
+    { "id": "numeros-enteros", "titulo": "Números enteros", "saberes": ["MAT.1.A.2.1", "operaciones-enteros"], "archivo": "numeros-enteros.json" },
+    { "id": "fracciones", "titulo": "Fracciones y decimales", "saberes": ["operaciones-fracciones-eso", "decimales-eso"], "archivo": "fracciones.json" },
+    { "id": "proporcionalidad", "titulo": "Proporcionalidad y porcentajes", "saberes": ["proporcionalidad", "porcentajes-eso"], "archivo": "proporcionalidad.json" },
+    { "id": "algebra", "titulo": "Iniciación al álgebra", "saberes": ["lenguaje-algebraico", "ecuaciones-primer-grado"], "archivo": "algebra.json" }
   ]
 }

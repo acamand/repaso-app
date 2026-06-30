@@ -1,0 +1,19 @@
+{
+  "etapa_id": "espana-ida",
+  "pais": "España",
+  "intro": "¡Arrancamos! La autocaravana sale de Córdoba rumbo al norte. Tres días atravesando la península, cruzando la meseta castellana hasta los Pirineos. Es la despedida de casa… y el primer capítulo de la aventura.",
+  "datos_curiosos": [
+    "España tiene 47 lugares declarados Patrimonio de la Humanidad por la UNESCO, el tercero del mundo tras Italia y China.",
+    "La meseta castellana que vais a cruzar tiene una altitud media de 600-700 metros, una de las más altas de Europa. Por eso en verano hace tanto calor de día y refresca de noche.",
+    "El sistema métrico decimal, que usáis en el cole, se empezó a usar en España en 1849. Antes cada región tenía sus propias medidas: varas, fanegas, arrobas…"
+  ],
+  "frases_idioma": [
+    { "original": "¡Buen viaje!", "traduccion": "(Ya la sabéis, pero es la frase del día. En francés será «Bon voyage!»)" }
+  ],
+  "sello": {
+    "descripcion": "Mezquita-Catedral de Córdoba sobre fondo de arcos bicolores.",
+    "color_fondo": "#C44545",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

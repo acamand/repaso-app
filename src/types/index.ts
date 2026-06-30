@@ -83,6 +83,88 @@ export interface MateriaIndex {
   }>;
 }
 
+// ---------- Viaje ----------
+
+export interface DatosPais {
+  /** ISO alpha-2 (ES, FR, DE, …) o "BAL" para travesías marítimas. */
+  codigo: string;
+  moneda: string;
+  simbolo: string;
+  idioma: string;
+  capital: string;
+}
+
+export interface Etapa {
+  id: string;
+  pais: string;
+  dias_aprox: number;
+  tema: string;
+  opcional?: boolean;
+  /** "travesia" marca ferries / tramos sin parada terrestre. */
+  tipo?: 'travesia';
+}
+
+export interface Fase {
+  id: string;
+  nombre: string;
+  duracion_dias_aprox: number;
+  etapas: Etapa[];
+}
+
+export interface Ruta {
+  nombre: string;
+  descripcion: string;
+  inicio_estimado: string;
+  duracion_total_dias_aprox: number;
+  fases: Fase[];
+  datos_paises: Record<string, DatosPais>;
+}
+
+export interface FraseIdioma {
+  original: string;
+  traduccion: string;
+}
+
+/** Cuándo se considera el capítulo terminado y se otorga el sello. */
+export type CompletadoCriterio =
+  /** Cuando el alumno ha completado `valor` actividades de la etapa. */
+  | { tipo: 'actividades_etapa_min'; valor: number }
+  /** Se otorga al ver la llegada (útil para etapas sin actividades, p.ej. ferries). */
+  | { tipo: 'siempre' };
+
+/** Diseño visual del sello (vive en capitulo.json). Distinto del `Sello` ganado. */
+export interface DisenoSello {
+  descripcion: string;
+  color_fondo: string;
+  color_texto: string;
+}
+
+export interface Capitulo {
+  etapa_id: string;
+  pais: string;
+  /** 2-3 frases narrativas de bienvenida a la etapa. */
+  intro: string;
+  /** 2-3 datos curiosos del país. */
+  datos_curiosos: string[];
+  /** 1-2 frases típicas en el idioma local con su traducción. */
+  frases_idioma: FraseIdioma[];
+  sello: DisenoSello;
+  completado_criterio: CompletadoCriterio;
+}
+
+export interface Sello {
+  /** Fecha en que se ganó, ISO yyyy-mm-dd. */
+  fecha: string;
+}
+
+export interface ViajeProgress {
+  etapaActualId: string;
+  /** Etapa ids cuyo capítulo (pantalla de LlegadaPais) ya se ha mostrado. */
+  capitulosVistos: string[];
+  /** Sellos conseguidos por etapa. */
+  sellos: Record<string, Sello>;
+}
+
 // ---------- Perfil y progreso ----------
 
 export interface Profile {
@@ -117,6 +199,7 @@ export interface PerPerfilProgress {
   /** Tiempo invertido hoy (en segundos), se resetea al cambiar de día. */
   tiempoHoyS: number;
   fechaHoy: string | null;
+  viaje: ViajeProgress;
 }
 
 export interface CompletedActivity {

@@ -22,7 +22,6 @@ export async function loadUnidad(
   return res.json();
 }
 
-/** Carga todas las actividades de un nivel y materia. */
 export async function loadAllActivities(nivel: Nivel, materia: Materia): Promise<Activity[]> {
   const indice = await loadMateriaIndex(nivel, materia);
   const arrays = await Promise.all(
