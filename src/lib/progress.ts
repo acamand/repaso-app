@@ -110,7 +110,9 @@ export function recordActivity(
   const actual = rolloverDay(state.porPerfil[perfilId] ?? emptyPerfilProgress());
 
   const hoy = FECHA_HOY();
-  const xpGanado = acierto ? activity.xp : Math.floor(activity.xp / 2);
+  // Solo el acierto otorga XP. Los fallos no penalizan pero tampoco premian:
+  // la actividad sigue disponible para repetir sin cuarentena (ver session.ts).
+  const xpGanado = acierto ? activity.xp : 0;
 
   const yaCompletada = actual.actividadesCompletadas[activity.id];
   const completada: CompletedActivity = {

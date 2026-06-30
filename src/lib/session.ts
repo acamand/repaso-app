@@ -28,6 +28,9 @@ export async function buildDailySession(
   const eligible = todas.filter((a) => {
     const reg = progress.actividadesCompletadas[a.id];
     if (!reg) return true;
+    // Las actividades falladas vuelven al pool sin esperar; solo las acertadas
+    // entran en la cuarentena de COOLDOWN_DIAS para evitar memorización.
+    if (!reg.acierto) return true;
     return reg.fecha < limiteCooldown;
   });
 
