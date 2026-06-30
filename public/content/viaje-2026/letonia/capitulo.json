@@ -1,0 +1,21 @@
+{
+  "etapa_id": "letonia",
+  "pais": "Letonia",
+  "intro": "¡Sveiki! Cruzáis a Letonia, el segundo país báltico. Un país de bosques densos, playas de arena blanca en el Báltico y una capital, Riga, llena de edificios art nouveau. Letonia recuperó su independencia en 1991 tras décadas dentro de la Unión Soviética.",
+  "datos_curiosos": [
+    "Más de la mitad del territorio de Letonia está cubierto de bosques. Los letones tienen una relación especial con la naturaleza: el solsticio de verano (Jāņi) es su fiesta más importante, más incluso que la Navidad.",
+    "Riga tiene la mayor colección de edificios art nouveau de Europa: más de 800 fachadas decoradas con esculturas, flores y rostros. Todo un museo al aire libre.",
+    "Letonia es uno de los países con mayor velocidad de internet del mundo. Curiosamente, también es uno de los menos poblados de la UE: solo 1,8 millones de habitantes."
+  ],
+  "frases_idioma": [
+    { "original": "Sveiki!", "traduccion": "¡Hola! (Se pronuncia 'sveiki', con la 'ei' como en 'reina')" },
+    { "original": "Paldies!", "traduccion": "¡Gracias! (Se pronuncia 'paldies')" },
+    { "original": "Cik tas maksā?", "traduccion": "¿Cuánto cuesta esto?" }
+  ],
+  "sello": {
+    "descripcion": "Fachada art nouveau de Riga con gato negro en el tejado.",
+    "color_fondo": "#8B2332",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

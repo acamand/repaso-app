@@ -1,0 +1,21 @@
+{
+  "etapa_id": "estonia",
+  "pais": "Estonia",
+  "intro": "¡Tere! Llegáis a Estonia, el más pequeño y septentrional de los tres países bálticos. Es uno de los países más digitalizados del mundo: aquí se inventó Skype, se vota por internet y hasta los bosques tienen wifi. Tallinn, su capital, tiene un casco antiguo medieval que parece sacado de un cuento.",
+  "datos_curiosos": [
+    "Estonia fue el primer país del mundo en ofrecer voto electrónico por internet en unas elecciones generales (2005). Hoy casi todo se puede hacer online: crear una empresa, firmar contratos, ir al médico…",
+    "Skype, la aplicación de videollamadas, fue creada por programadores estonios en 2003. Estonia se ha ganado el apodo de 'e-Stonia' por su obsesión con la tecnología.",
+    "Estonia tiene más de 2.200 islas, aunque la mayoría son diminutas y deshabitadas. También tiene más de 1.200 lagos. Para un país tan pequeño (del tamaño de Extremadura), es impresionante."
+  ],
+  "frases_idioma": [
+    { "original": "Tere!", "traduccion": "¡Hola! (Se pronuncia 'tere', simple y directo)" },
+    { "original": "Tänan!", "traduccion": "¡Gracias! (Se pronuncia 'tanan')" },
+    { "original": "Kus on campingplats?", "traduccion": "¿Dónde está el camping?" }
+  ],
+  "sello": {
+    "descripcion": "Torres medievales de Tallinn con símbolo de wifi.",
+    "color_fondo": "#0072CE",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

@@ -1,0 +1,21 @@
+{
+  "etapa_id": "finlandia",
+  "pais": "Finlandia",
+  "intro": "¡Moi! Habéis cruzado el Báltico en ferry desde Tallinn y desembarcáis en Helsinki. Finlandia es el país de los mil lagos (en realidad tiene 188.000), las saunas y los bosques infinitos. También es famosa por tener uno de los mejores sistemas educativos del mundo.",
+  "datos_curiosos": [
+    "Finlandia tiene 188.000 lagos y 179.000 islas. Es el país con más lagos por kilómetro cuadrado del mundo. En verano, muchos finlandeses pasan semanas en cabañas junto a un lago, con sauna incluida.",
+    "Hay más saunas que coches en Finlandia: unos 3,3 millones de saunas para 5,5 millones de habitantes. La sauna es casi sagrada para los finlandeses.",
+    "El sistema educativo finlandés es considerado uno de los mejores del mundo. Los niños no empiezan el colegio hasta los 7 años, apenas tienen deberes y no hacen exámenes estandarizados hasta los 16."
+  ],
+  "frases_idioma": [
+    { "original": "Moi!", "traduccion": "¡Hola! (Informal. Se pronuncia tal cual: 'moi')" },
+    { "original": "Kiitos!", "traduccion": "¡Gracias! (Se pronuncia 'kiitos', alargando la 'i')" },
+    { "original": "Missä on leirintäalue?", "traduccion": "¿Dónde está el camping? (El finés es complicado, ¡pero intentadlo!)" }
+  ],
+  "sello": {
+    "descripcion": "Lago finlandés con sauna de madera y bosque de abedules.",
+    "color_fondo": "#003580",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 4 }
+}
