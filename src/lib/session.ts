@@ -1,5 +1,6 @@
 import type { Activity, DailySession, Nivel, PerPerfilProgress } from '@/types';
-import { loadAllActivities, loadAllViajeActivities } from './content';
+import { loadAllActivities } from './content';
+import { loadAllViajeActivities } from './ruta';
 
 const LIMITE_DIARIO_S = 60 * 60;
 const OBJETIVO_NORMAL_S = 25 * 60;
