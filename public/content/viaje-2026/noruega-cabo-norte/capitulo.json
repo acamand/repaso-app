@@ -1,0 +1,21 @@
+{
+  "etapa_id": "noruega-cabo-norte",
+  "pais": "Noruega",
+  "intro": "¡Hei! Estáis en Noruega, el último tramo antes de Cabo Norte. El paisaje cambia radicalmente: fiordos profundos, montañas que caen al mar, y si tenéis suerte... ¡sol de medianoche! A esta latitud, en julio, el sol no se pone en toda la noche.",
+  "datos_curiosos": [
+    "En Cabo Norte (Nordkapp), a 71° de latitud norte, el sol no se pone entre mediados de mayo y finales de julio. Se llama 'sol de medianoche'. Podréis jugar a las cartas a las 2 de la madrugada con luz natural.",
+    "Los fiordos noruegos se formaron por glaciares que excavaron valles enormes durante las glaciaciones. Algunos tienen más de 1.300 metros de profundidad, más hondos que muchos puntos del mar Mediterráneo.",
+    "Noruega no usa el euro sino la corona noruega (NOK). Es uno de los países más caros del mundo: un café puede costar más de 5 euros. ¡Controla los gastos!"
+  ],
+  "frases_idioma": [
+    { "original": "Hei!", "traduccion": "¡Hola! (Se pronuncia como 'jei', corto y simple)" },
+    { "original": "Takk!", "traduccion": "¡Gracias! (Se pronuncia 'tak')" },
+    { "original": "Hvor er campingplassen?", "traduccion": "¿Dónde está el camping?" }
+  ],
+  "sello": {
+    "descripcion": "Globo terráqueo de Cabo Norte con sol de medianoche.",
+    "color_fondo": "#BA0C2F",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

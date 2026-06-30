@@ -1,0 +1,21 @@
+{
+  "etapa_id": "suecia",
+  "pais": "Suecia",
+  "intro": "¡Hej! Empezáis el camino de vuelta atravesando Suecia de norte a sur. Es el país más largo de Escandinavia: unos 1.600 km de punta a punta. Bosques interminables de pinos y abetos, alces cruzando la carretera, y ciudades limpias y ordenadas os acompañarán durante varios días.",
+  "datos_curiosos": [
+    "Suecia tiene el derecho de acceso a la naturaleza ('Allemansrätten'): cualquier persona puede caminar, acampar y recoger frutos silvestres en cualquier terreno, incluso si es propiedad privada, siempre que no moleste ni dañe nada.",
+    "IKEA, la tienda de muebles que seguramente conocéis, nació en Suecia. Su fundador, Ingvar Kamprad, empezó vendiendo cerillas de puerta en puerta cuando tenía solo 5 años.",
+    "En Suecia hay más de 300.000 alces. Son enormes (pueden medir 2 metros de alto) y a veces cruzan las carreteras. Las señales de 'cuidado, alce' son un clásico de las carreteras suecas."
+  ],
+  "frases_idioma": [
+    { "original": "Hej!", "traduccion": "¡Hola! (Se pronuncia 'jei', igual que en noruego)" },
+    { "original": "Tack!", "traduccion": "¡Gracias! (Se pronuncia 'tak', casi igual que en noruego)" },
+    { "original": "Var är campingplatsen?", "traduccion": "¿Dónde está el camping?" }
+  ],
+  "sello": {
+    "descripcion": "Alce sueco con bosque de pinos y bandera azul y amarilla.",
+    "color_fondo": "#006AA7",
+    "color_texto": "#FECC00"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 5 }
+}
