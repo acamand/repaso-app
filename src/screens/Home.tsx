@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import type { DailySession, PerPerfilProgress, Profile } from '@/types';
+import type { Capitulo, DailySession, PerPerfilProgress, Profile, Ruta } from '@/types';
 import { buildDailySession, alcanzadoLimiteDiario } from '@/lib/session';
+import { getEtapa, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { Avatar } from '@/components/Avatar';
 import { XPBar } from '@/components/XPBar';
 import { SessionTimer } from '@/components/SessionTimer';
+import { Flag } from '@/components/Flag';
+import type { LlegadaInfo } from '@/screens/LlegadaPais';
 
 interface Props {
   profile: Profile;
   progress: PerPerfilProgress;
-  onStartSession: (session: DailySession) => void;
+  onStartSession: (session: DailySession, llegada?: LlegadaInfo) => void;
+  onChangeEtapaActual: (etapaId: string) => void;
   onSwitchProfile: () => void;
   onShowPasaporte: () => void;
 }
@@ -17,12 +21,29 @@ export function Home({
   profile,
   progress,
   onStartSession,
+  onChangeEtapaActual,
   onSwitchProfile,
   onShowPasaporte,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [ruta, setRuta] = useState<Ruta | null>(null);
+  const [capituloActual, setCapituloActual] = useState<Capitulo | null>(null);
+
+  const etapaActualId = progress.viaje.etapaActualId;
+
+  useEffect(() => {
+    loadRuta()
+      .then(setRuta)
+      .catch(() => setRuta(null));
+  }, []);
+
+  useEffect(() => {
+    loadCapitulo(etapaActualId)
+      .then(setCapituloActual)
+      .catch(() => setCapituloActual(null));
+  }, [etapaActualId]);
 
   useEffect(() => {
     setCargando(true);
@@ -35,10 +56,22 @@ export function Home({
         setError(String(e));
         setCargando(false);
       });
-  }, [profile.nivel, progress.tiempoHoyS]);
+  }, [profile.nivel, progress.tiempoHoyS, etapaActualId]);
 
   const tope = alcanzadoLimiteDiario(progress);
   const minutos = session ? Math.round(session.duracionEstimadaS / 60) : 0;
+  const etapaActual = ruta ? getEtapa(ruta, etapaActualId) : null;
+  const datosPais = ruta && etapaActual ? ruta.datos_paises[etapaActual.pais] : null;
+  const capituloVisto = progress.viaje.capitulosVistos.includes(etapaActualId);
+
+  const handleStart = () => {
+    if (!session) return;
+    if (ruta && etapaActual && capituloActual && !capituloVisto) {
+      onStartSession(session, { ruta, etapa: etapaActual, capitulo: capituloActual });
+    } else {
+      onStartSession(session);
+    }
+  };
 
   return (
     <div className="min-h-dvh">
@@ -94,8 +127,14 @@ export function Home({
               <p className="text-paper-700 mb-4">
                 Sesión de hoy: <strong>{session.actividades.length} actividades</strong> · unos{' '}
                 <strong>{minutos} min</strong>.
+                {capituloActual && !capituloVisto && (
+                  <>
+                    {' '}
+                    Empezarás con la llegada a <strong>{etapaActual?.pais}</strong>.
+                  </>
+                )}
               </p>
-              <button onClick={() => onStartSession(session)} className="btn-primary w-full">
+              <button onClick={handleStart} className="btn-primary w-full">
                 Empezar sesión
               </button>
             </>
@@ -103,8 +142,7 @@ export function Home({
 
           {!cargando && session && session.actividades.length === 0 && !tope && (
             <p className="text-paper-700">
-              No hay actividades disponibles todavía. Pídele a un adulto que añada contenido al
-              banco.
+              No hay actividades disponibles todavía. Pídele a un adulto que añada contenido al banco.
             </p>
           )}
 
@@ -117,6 +155,43 @@ export function Home({
             </div>
           )}
         </section>
+
+        {ruta && etapaActual && (
+          <section className="card p-4">
+            <div className="flex items-center gap-3">
+              <Flag
+                codigo={datosPais?.codigo ?? '??'}
+                className="w-14 h-9 rounded-sm shadow-sm shrink-0 border border-paper-300/40"
+              />
+              <div className="flex-1 min-w-0">
+                <label htmlFor="etapa-select" className="text-xs text-paper-700 block mb-1">
+                  Etapa actual del viaje
+                </label>
+                <select
+                  id="etapa-select"
+                  value={etapaActualId}
+                  onChange={(e) => onChangeEtapaActual(e.target.value)}
+                  className="w-full p-2 border border-paper-500 rounded-soft bg-white text-sm
+                             focus:outline-none focus:border-slate focus:ring-2 focus:ring-slate/30"
+                >
+                  {ruta.fases.map((fase) => (
+                    <optgroup key={fase.id} label={fase.nombre}>
+                      {fase.etapas.map((etapa) => (
+                        <option key={etapa.id} value={etapa.id}>
+                          {etapa.pais}
+                          {etapa.opcional ? ' (opcional)' : ''}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </div>
+            </div>
+            {etapaActual.tema && (
+              <p className="text-xs text-paper-700 mt-3 italic">{etapaActual.tema}</p>
+            )}
+          </section>
+        )}
 
         <section className="grid grid-cols-3 gap-3 text-center">
           <Stat label="XP total" valor={progress.xpTotal} />

@@ -69,6 +69,22 @@ export function setActiveProfile(state: ProgressState, profileId: string): Progr
   return { ...state, perfilActivo: profileId };
 }
 
+/** Cambia la etapa actual del perfil activo. */
+export function setEtapaActual(state: ProgressState, etapaId: string): ProgressState {
+  const perfilId = state.perfilActivo;
+  if (!perfilId) return state;
+  const actual = state.porPerfil[perfilId];
+  if (!actual) return state;
+  if (actual.viaje.etapaActualId === etapaId) return state;
+  return {
+    ...state,
+    porPerfil: {
+      ...state.porPerfil,
+      [perfilId]: { ...actual, viaje: { ...actual.viaje, etapaActualId: etapaId } },
+    },
+  };
+}
+
 /** Devuelve el progreso del perfil activo (o uno vacío si no hay perfil). */
 export function getActiveProgress(state: ProgressState): PerPerfilProgress {
   if (!state.perfilActivo) return emptyPerfilProgress();
@@ -94,7 +110,9 @@ export function recordActivity(
   const actual = rolloverDay(state.porPerfil[perfilId] ?? emptyPerfilProgress());
 
   const hoy = FECHA_HOY();
-  const xpGanado = acierto ? activity.xp : Math.floor(activity.xp / 2);
+  // Solo el acierto otorga XP. Los fallos no penalizan pero tampoco premian:
+  // la actividad sigue disponible para repetir sin cuarentena (ver session.ts).
+  const xpGanado = acierto ? activity.xp : 0;
 
   const yaCompletada = actual.actividadesCompletadas[activity.id];
   const completada: CompletedActivity = {
