@@ -1,0 +1,21 @@
+{
+  "etapa_id": "lituania",
+  "pais": "Lituania",
+  "intro": "¡Labas! Habéis cruzado el corredor de Suwałki y estáis en Lituania, el primero de los tres países bálticos. Un país pequeño, verde, lleno de lagos y con una historia fascinante: fue el último país de Europa en convertirse al cristianismo (¡en el siglo XIV!) y durante un tiempo fue uno de los estados más grandes del continente.",
+  "datos_curiosos": [
+    "Lituania es el centro geográfico de Europa (o al menos uno de los candidatos). Hay un monumento que lo marca cerca de Vilna, su capital, y puedes visitarlo.",
+    "El baloncesto es casi una religión en Lituania. Su selección ha ganado medallas olímpicas y es uno de los mejores equipos del mundo, a pesar de que el país solo tiene 2,8 millones de habitantes.",
+    "La lengua lituana es una de las más antiguas de Europa. Los lingüistas dicen que conserva rasgos del sánscrito (la lengua antigua de la India) que otros idiomas europeos perdieron hace siglos."
+  ],
+  "frases_idioma": [
+    { "original": "Labas!", "traduccion": "¡Hola! (Se pronuncia tal cual: 'labas')" },
+    { "original": "Ačiū!", "traduccion": "¡Gracias! (Se pronuncia 'achiú', casi como un estornudo)" },
+    { "original": "Kur yra kemperių aikštelė?", "traduccion": "¿Dónde está el área de autocaravanas?" }
+  ],
+  "sello": {
+    "descripcion": "Torre de Gediminas de Vilna con balón de baloncesto.",
+    "color_fondo": "#B85C38",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

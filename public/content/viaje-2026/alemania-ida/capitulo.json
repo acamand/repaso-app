@@ -1,0 +1,21 @@
+{
+  "etapa_id": "alemania-ida",
+  "pais": "Alemania",
+  "intro": "¡Willkommen! Entráis en Alemania, el corazón industrial de Europa. De camino a Polonia, cruzaréis un país donde las autopistas no tienen límite de velocidad (las famosas Autobahn) y donde la ingeniería y la puntualidad son casi una religión.",
+  "datos_curiosos": [
+    "Alemania tiene más de 1.500 tipos de cerveza y más de 300 variedades de pan. Los alemanes se toman muy en serio la panadería: su cultura del pan fue declarada Patrimonio Inmaterial por la UNESCO.",
+    "Las autopistas alemanas (Autobahn) son famosas porque en muchos tramos no tienen límite de velocidad. Pero ojo: en las autocaravanas sí hay límite, normalmente 100 km/h.",
+    "Alemania es el país europeo que más recicla: más del 65% de sus residuos se reciclan, con un sistema de devolución de envases (Pfand) que da dinero por devolver las botellas vacías."
+  ],
+  "frases_idioma": [
+    { "original": "Guten Tag!", "traduccion": "¡Buenos días! (Literalmente: ¡buen día!)" },
+    { "original": "Danke schön!", "traduccion": "¡Muchas gracias!" },
+    { "original": "Wo ist der Campingplatz?", "traduccion": "¿Dónde está el camping?" }
+  ],
+  "sello": {
+    "descripcion": "Puerta de Brandeburgo con engranaje industrial.",
+    "color_fondo": "#1F3F58",
+    "color_texto": "#F2C14E"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}

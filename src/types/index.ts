@@ -132,6 +132,13 @@ export type CompletadoCriterio =
   /** Se otorga al ver la llegada (útil para etapas sin actividades, p.ej. ferries). */
   | { tipo: 'siempre' };
 
+/** Diseño visual del sello (vive en capitulo.json). Distinto del `Sello` ganado. */
+export interface DisenoSello {
+  descripcion: string;
+  color_fondo: string;
+  color_texto: string;
+}
+
 export interface Capitulo {
   etapa_id: string;
   pais: string;
@@ -141,8 +148,7 @@ export interface Capitulo {
   datos_curiosos: string[];
   /** 1-2 frases típicas en el idioma local con su traducción. */
   frases_idioma: FraseIdioma[];
-  /** Texto que describe el sello del pasaporte. */
-  sello_descripcion: string;
+  sello: DisenoSello;
   completado_criterio: CompletadoCriterio;
 }
 

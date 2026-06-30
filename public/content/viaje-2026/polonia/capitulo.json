@@ -1,0 +1,21 @@
+{
+  "etapa_id": "polonia",
+  "pais": "Polonia",
+  "intro": "¡Dzień dobry! Entráis en Polonia, un país que ha renacido varias veces de sus cenizas. Aquí vais a notar un cambio: los precios bajan (Polonia usa el złoty, no el euro), los bosques se hacen más densos y las cigüeñas anidan en los tejados de las casas. Al final de esta etapa os espera el famoso corredor de Suwałki, la estrecha franja de tierra que conecta Polonia con Lituania.",
+  "datos_curiosos": [
+    "Polonia tiene uno de los bosques más antiguos de Europa: el bosque de Białowieża, hogar de los últimos bisontes europeos salvajes. Algunos de estos bisontes pesan más de 900 kg.",
+    "El corredor de Suwałki, por donde vais a pasar, tiene solo unos 100 km de ancho. Es la única conexión terrestre entre los países bálticos y el resto de la Unión Europea, encajada entre Bielorrusia y el enclave ruso de Kaliningrado.",
+    "Marie Curie, la primera persona en ganar dos premios Nobel, nació en Varsovia (su nombre polaco era Maria Skłodowska). Tuvo que irse a París porque en aquella época las universidades polacas no aceptaban mujeres."
+  ],
+  "frases_idioma": [
+    { "original": "Dzień dobry!", "traduccion": "¡Buenos días! (Se pronuncia algo así como 'dsien dóbri')" },
+    { "original": "Dziękuję!", "traduccion": "¡Gracias! (Se pronuncia 'dsienkúye')" },
+    { "original": "Ile to kosztuje?", "traduccion": "¿Cuánto cuesta esto? (Útil porque aquí se paga en złoty, no en euros)" }
+  ],
+  "sello": {
+    "descripcion": "Bisonte europeo con bosque de fondo.",
+    "color_fondo": "#6B9080",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 4 }
+}
