@@ -1,0 +1,19 @@
+{
+  "etapa_id": "espana-vuelta",
+  "pais": "España",
+  "intro": "¡Estamos de vuelta! Cruzáis los Pirineos y el aire cambia: huele a tomillo, a tierra seca, a casa. Tres días atravesando la meseta hasta Córdoba. El viaje termina donde empezó, pero vosotros ya no sois los mismos. Habéis recorrido más de 10.000 km y visitado más de 10 países.",
+  "datos_curiosos": [
+    "Habéis recorrido aproximadamente 10.700 km en este viaje. Eso es más de una cuarta parte de la circunferencia de la Tierra (40.075 km).",
+    "Habéis cruzado al menos 6 zonas horarias diferentes durante el viaje (contando las de Noruega y Finlandia en verano).",
+    "Córdoba fue la ciudad más grande y avanzada de Europa occidental en el siglo X, cuando era la capital del Califato. Tenía más de 300.000 habitantes, bibliotecas, baños públicos y alumbrado en las calles — cosas que el resto de Europa no tendría hasta siglos después."
+  ],
+  "frases_idioma": [
+    { "original": "¡Hogar, dulce hogar!", "traduccion": "(En todos los idiomas del viaje: Hem, ljuva hem! / Hjem, kjære hjem! / Koti, rakas koti! / Kodu, kallis kodu! / Mājas, mīļās mājas! / Namai, mieli namai! / Dom, kochany dom! / Zuhause, süßes Zuhause! / Chez soi! )" }
+  ],
+  "sello": {
+    "descripcion": "Mezquita-Catedral de Córdoba con autocaravana llegando y bandera de meta.",
+    "color_fondo": "#C44545",
+    "color_texto": "#F2C14E"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 5 }
+}

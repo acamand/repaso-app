@@ -1,0 +1,20 @@
+{
+  "etapa_id": "francia-vuelta",
+  "pais": "Francia",
+  "intro": "Rebonjour! Entráis en Francia por el norte, de vuelta. Esta vez la cruzáis con ojos diferentes: ya habéis visto fiordos, sol de medianoche y bisontes. Francia os parece casi familiar. Cuatro o cinco días bajando hacia los Pirineos y España.",
+  "datos_curiosos": [
+    "Francia produce más de 1.200 millones de botellas de vino al año. Si las pusieras en fila, darían casi tres vueltas a la Tierra.",
+    "El Tour de Francia de ciclismo recorre unos 3.500 km cada julio. Más o menos la distancia de Córdoba a Cabo Norte en línea recta.",
+    "La baguette francesa fue declarada Patrimonio Inmaterial de la UNESCO en 2022. Un francés medio come 120 baguettes al año."
+  ],
+  "frases_idioma": [
+    { "original": "Au revoir!", "traduccion": "¡Hasta luego!" },
+    { "original": "C'était magnifique!", "traduccion": "¡Ha sido magnífico! (Para despedirse de Francia con estilo)" }
+  ],
+  "sello": {
+    "descripcion": "Ciclista del Tour con baguette bajo el brazo.",
+    "color_fondo": "#2E5C7E",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 4 }
+}

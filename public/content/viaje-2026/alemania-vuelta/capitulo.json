@@ -1,0 +1,20 @@
+{
+  "etapa_id": "alemania-vuelta",
+  "pais": "Alemania",
+  "intro": "¡Willkommen zurück! Volvéis a Alemania, esta vez desde Suecia por ferry. El paisaje ya os resulta familiar: Autobahn, pueblos ordenados y buenos pretzels. Pero esta vez venís cargados de recuerdos del norte. Toca cruzar el país hacia el sur.",
+  "datos_curiosos": [
+    "Alemania tiene más de 25.000 castillos y palacios. El más famoso, Neuschwanstein, inspiró el castillo de La Bella Durmiente de Disney.",
+    "Los alemanes inventaron la imprenta (Gutenberg, hacia 1440), el motor de combustión (Otto/Benz/Daimler), la aspirina (Bayer) y los ositos de gominola (Haribo, 1922).",
+    "La palabra más larga en alemán que se ha usado oficialmente tenía 80 letras: Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz. Era una ley sobre el etiquetado de la carne de vacuno. Fue derogada en 2013."
+  ],
+  "frases_idioma": [
+    { "original": "Auf Wiedersehen!", "traduccion": "¡Hasta la vista! (Para cuando os vayáis de Alemania por última vez)" },
+    { "original": "Die Rechnung, bitte", "traduccion": "La cuenta, por favor (útil en restaurantes)" }
+  ],
+  "sello": {
+    "descripcion": "Castillo de Neuschwanstein con pretzel.",
+    "color_fondo": "#D4A017",
+    "color_texto": "#1F3F58"
+  },
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 3 }
+}
