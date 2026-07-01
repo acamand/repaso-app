@@ -1,0 +1,21 @@
+{
+  "etapa_id": "belgica-vuelta",
+  "pais": "Bélgica",
+  "intro": "De vuelta hacia el sur, otra posible parada en Bélgica. Esta vez, con miles de kilómetros y un montón de países ya en el pasaporte, quizás os fijéis en cosas que a la ida se os pasaron: los campanarios medievales, los canales de Brujas o el olor a gofre recién hecho.",
+  "datos_curiosos": [
+    "Brujas, al noroeste de Bélgica, se conoce como la 'Venecia del norte' por su red de canales medievales. Su casco histórico es Patrimonio de la Humanidad por la UNESCO desde el año 2000.",
+    "El Atomium, en Bruselas, es un edificio-monumento que representa un átomo de hierro ampliado 165.000 millones de veces. Se construyó para la Exposición Universal de 1958 y mide 102 metros.",
+    "Bélgica produce más de 220.000 toneladas de chocolate al año y tiene más de 2.000 chocolaterías. También es uno de los mayores productores de cerveza del mundo, con más de 1.500 variedades distintas."
+  ],
+  "frases_idioma": [
+    { "original": "Tot ziens!", "traduccion": "¡Hasta luego! en neerlandés" },
+    { "original": "Bon voyage!", "traduccion": "¡Buen viaje! en francés (para el resto de la vuelta)" },
+    { "original": "Een wafel, alstublieft.", "traduccion": "Un gofre, por favor, en neerlandés" }
+  ],
+  "sello": {
+    "descripcion": "Gofre belga con canal de Brujas de fondo.",
+    "color_fondo": "#ED2939",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}

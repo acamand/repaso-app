@@ -1,0 +1,21 @@
+{
+  "etapa_id": "cabo-norte",
+  "pais": "Noruega",
+  "intro": "¡Lo habéis conseguido! Cabo Norte (Nordkapp), el punto más septentrional al que se puede llegar en coche en Europa. Un acantilado de 307 metros que cae directo al océano Ártico. Desde Córdoba hasta aquí hay más de 5.000 km por carretera: el punto más alto de todo el viaje, en todos los sentidos.",
+  "datos_curiosos": [
+    "Cabo Norte está a 71°10'21\" de latitud norte, muy por encima del Círculo Polar Ártico. En julio, el sol no se pone nunca: a medianoche sigue brillando sobre el mar de Barents.",
+    "El monumento del globo terráqueo de acero en el borde del acantilado es el símbolo más fotografiado de Noruega. Desde ahí, en un día despejado, se ve el océano Ártico hasta el horizonte, sin nada más al norte hasta el Polo.",
+    "En realidad, el punto continental más al norte de Europa es Knivskjellodden, un poco más al oeste, pero Cabo Norte es más accesible y por eso se ha convertido en el destino simbólico de este 'fin del mundo' europeo."
+  ],
+  "frases_idioma": [
+    { "original": "Vi klarte det!", "traduccion": "¡Lo logramos! en noruego" },
+    { "original": "Midnattssol", "traduccion": "Sol de medianoche, en noruego" },
+    { "original": "Verdens ende", "traduccion": "El fin del mundo, en noruego" }
+  ],
+  "sello": {
+    "descripcion": "El globo terráqueo de acero de Cabo Norte sobre el océano Ártico.",
+    "color_fondo": "#002868",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}
