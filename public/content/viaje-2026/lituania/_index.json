@@ -1,0 +1,10 @@
+{
+  "etapa_id": "lituania",
+  "pais": "Lituania",
+  "titulo": "Primer país báltico",
+  "descripcion": "Baloncesto, ámbar y lagos. Mates con estadísticas deportivas, lengua con textos sobre los bálticos.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — baloncesto y datos", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Lituania y los bálticos", "archivo": "lectura.json" }
+  ]
+}
