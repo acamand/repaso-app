@@ -1,0 +1,11 @@
+{
+  "etapa_id": "alemania-ida",
+  "pais": "Alemania",
+  "titulo": "Cruzando Alemania",
+  "descripcion": "Autopistas sin límite, reciclaje y conversiones. Mates con velocidad y tiempo, lengua con textos sobre ingeniería y cultura alemana.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — velocidad y tiempo", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — Autobahn y reciclaje", "archivo": "problemas.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Alemania", "archivo": "lectura.json" }
+  ]
+}
