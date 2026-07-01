@@ -1,0 +1,12 @@
+{
+  "etapa_id": "francia-ida",
+  "pais": "Francia",
+  "titulo": "Atravesando Francia",
+  "descripcion": "De los Pirineos al norte: mates de viaje con euros, peajes y distancias, y lengua con textos sobre cultura francesa.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — peajes y euros", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — distancias y consumo", "archivo": "problemas.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Francia", "archivo": "lectura.json" },
+    { "id": "escritura", "titulo": "Escritura creativa — impresiones de Francia", "archivo": "escritura.json" }
+  ]
+}

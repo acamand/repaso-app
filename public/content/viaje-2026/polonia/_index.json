@@ -1,0 +1,11 @@
+{
+  "etapa_id": "polonia",
+  "pais": "Polonia",
+  "titulo": "Travesía por Polonia",
+  "descripcion": "Bisontes, złotys y el corredor de Suwałki. Mates con cambio de moneda, lengua con textos sobre historia y naturaleza polaca.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — złotys y euros", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — cambio de moneda y distancias", "archivo": "problemas.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Polonia", "archivo": "lectura.json" }
+  ]
+}
