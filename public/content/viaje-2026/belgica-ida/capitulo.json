@@ -1,0 +1,21 @@
+{
+  "etapa_id": "belgica-ida",
+  "pais": "Bélgica",
+  "intro": "Bonjour / Hallo! Puede que hagáis una parada rápida en Bélgica de camino al norte. Un país pequeñito (más pequeño que Andalucía) pero con dos idiomas oficiales, cómics famosos en todo el mundo y el chocolate más elogiado de Europa.",
+  "datos_curiosos": [
+    "Bélgica tiene tres idiomas oficiales: neerlandés (flamenco) en el norte, francés en el sur (Valonia) y alemán en una pequeña zona al este. Bruselas es oficialmente bilingüe francés-neerlandés.",
+    "Bélgica es la cuna del cómic europeo: Tintín y los Pitufos nacieron aquí. Bruselas tiene más de 50 murales de cómic pintados en fachadas de edificios por toda la ciudad.",
+    "Los belgas comen patatas fritas con más de 30 tipos de salsas distintas, servidas en cucuruchos de papel llamados 'frietjes'. Dicen que las patatas fritas se inventaron aquí, no en Francia."
+  ],
+  "frases_idioma": [
+    { "original": "Hallo!", "traduccion": "¡Hola! en neerlandés (se pronuncia 'jalo')" },
+    { "original": "Dank u!", "traduccion": "¡Gracias! en neerlandés (se pronuncia 'dank u')" },
+    { "original": "Où sont les frites?", "traduccion": "¿Dónde están las patatas fritas? en francés" }
+  ],
+  "sello": {
+    "descripcion": "Cucurucho de patatas fritas con los colores de Bélgica.",
+    "color_fondo": "#FAE042",
+    "color_texto": "#000000"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}
