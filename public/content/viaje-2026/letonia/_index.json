@@ -1,0 +1,10 @@
+{
+  "etapa_id": "letonia",
+  "pais": "Letonia",
+  "titulo": "Riga y el art nouveau",
+  "descripcion": "Arte, arquitectura y naturaleza. Mates con proporciones y escalas, lengua con textos sobre Riga.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — arte y números", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Letonia", "archivo": "lectura.json" }
+  ]
+}

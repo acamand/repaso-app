@@ -1,0 +1,10 @@
+{
+  "etapa_id": "estonia",
+  "pais": "Estonia",
+  "titulo": "El país digital",
+  "descripcion": "Tecnología, islas y Edad Media. Mates con tecnología y datos, lengua con textos sobre innovación.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — datos y tecnología", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Estonia", "archivo": "lectura.json" }
+  ]
+}

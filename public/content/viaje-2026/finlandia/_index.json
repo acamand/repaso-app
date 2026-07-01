@@ -1,0 +1,11 @@
+{
+  "etapa_id": "finlandia",
+  "pais": "Finlandia",
+  "titulo": "El país de los mil lagos",
+  "descripcion": "Lagos, saunas y educación. Mates con grandes números y proporciones, lengua con textos sobre naturaleza y sociedad finlandesa.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — lagos, saunas y números grandes", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Finlandia", "archivo": "lectura.json" },
+    { "id": "escritura", "titulo": "Escritura creativa — naturaleza y comparaciones", "archivo": "escritura.json" }
+  ]
+}

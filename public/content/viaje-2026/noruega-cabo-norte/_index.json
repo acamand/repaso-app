@@ -1,0 +1,12 @@
+{
+  "etapa_id": "noruega-cabo-norte",
+  "pais": "Noruega",
+  "titulo": "Cabo Norte — el punto más al norte",
+  "descripcion": "Fiordos, sol de medianoche y coronas noruegas. Mates con coordenadas y moneda, lengua con textos sobre geografía extrema.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — coronas y latitudes", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — el viaje en números", "archivo": "problemas.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — Cabo Norte", "archivo": "lectura.json" },
+    { "id": "escritura", "titulo": "Escritura creativa — sol de medianoche", "archivo": "escritura.json" }
+  ]
+}
