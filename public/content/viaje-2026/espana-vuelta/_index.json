@@ -1,0 +1,10 @@
+{
+  "etapa_id": "espana-vuelta",
+  "pais": "España",
+  "titulo": "Vuelta a casa",
+  "descripcion": "El gran resumen. Mates con las cuentas del viaje completo, lengua con reflexiones y escritura de cierre.",
+  "unidades": [
+    { "id": "problemas", "titulo": "Problemas — el viaje en números", "archivo": "problemas.json" },
+    { "id": "escritura", "titulo": "Escritura — el gran cierre", "archivo": "escritura.json" }
+  ]
+}
