@@ -1,0 +1,10 @@
+{
+  "etapa_id": "francia-vuelta",
+  "pais": "Francia",
+  "titulo": "Francia de vuelta",
+  "descripcion": "Tour de Francia, baguettes y cifras del viaje. Mates con estadísticas del viaje, lengua con textos de cierre.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — cifras del Tour", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — cierres y reflexiones", "archivo": "lectura.json" }
+  ]
+}
