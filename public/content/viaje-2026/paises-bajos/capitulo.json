@@ -1,0 +1,21 @@
+{
+  "etapa_id": "paises-bajos",
+  "pais": "Países Bajos",
+  "intro": "Hallo! Una posible parada en los Países Bajos (Holanda) durante la bajada. Un país completamente llano, con más bicicletas que habitantes y una relación muy especial con el agua: gran parte del territorio está por debajo del nivel del mar.",
+  "datos_curiosos": [
+    "Cerca de un tercio del territorio de los Países Bajos está por debajo del nivel del mar. Por eso construyeron diques, canales y molinos desde hace siglos para ganarle tierra al mar (los llamados 'pólders').",
+    "Hay más bicicletas que personas en los Países Bajos: unos 23 millones de bicis para 17,5 millones de habitantes. Ámsterdam tiene más aparcamientos para bicis que para coches.",
+    "Los molinos de viento tradicionales no solo generaban energía: también bombeaban agua para drenar los pólders y mantener la tierra seca. Kinderdijk, cerca de Róterdam, conserva 19 molinos históricos juntos."
+  ],
+  "frases_idioma": [
+    { "original": "Hallo!", "traduccion": "¡Hola! (se pronuncia 'jalo')" },
+    { "original": "Dank je wel!", "traduccion": "¡Muchas gracias!" },
+    { "original": "Waar kan ik een fiets huren?", "traduccion": "¿Dónde puedo alquilar una bici?" }
+  ],
+  "sello": {
+    "descripcion": "Molino de viento junto a un canal, con una bicicleta.",
+    "color_fondo": "#21468B",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}

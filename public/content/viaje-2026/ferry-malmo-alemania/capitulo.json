@@ -1,0 +1,21 @@
+{
+  "etapa_id": "ferry-malmo-alemania",
+  "pais": "Mar Báltico",
+  "intro": "Segundo ferry del viaje: desde el sur de Suecia (cerca de Malmö) cruzáis el mar Báltico hasta el norte de Alemania. Es un atajo estupendo para no rodear toda Dinamarca por carretera y ahorrar así casi un día entero de conducción.",
+  "datos_curiosos": [
+    "Cruzar en ferry desde el sur de Suecia hasta Alemania ahorra rodear toda la península de Jutlandia (Dinamarca) por tierra, un desvío de varios cientos de kilómetros y muchas horas al volante.",
+    "Suecia y Dinamarca están conectadas por el puente de Öresund, uno de los puentes-túnel más largos de Europa (casi 16 km), pero para cruzar directamente a Alemania el ferry sigue siendo la ruta más rápida.",
+    "En los ferries del Báltico es habitual dejar el vehículo en la bodega y subir a cubierta o a las zonas comunes durante la travesía: es un buen momento para estirar las piernas después de tantas horas conduciendo."
+  ],
+  "frases_idioma": [
+    { "original": "Hej då!", "traduccion": "¡Adiós! en sueco, despidiéndose de Suecia" },
+    { "original": "Auf Wiedersehen!", "traduccion": "¡Adiós! en alemán... aunque en realidad estáis llegando a Alemania" },
+    { "original": "Wie lange dauert die Fähre?", "traduccion": "¿Cuánto dura el ferry? en alemán" }
+  ],
+  "sello": {
+    "descripcion": "Ferry cruzando el Báltico con las banderas de Suecia y Alemania.",
+    "color_fondo": "#3A6E8F",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}
