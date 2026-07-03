@@ -5,6 +5,7 @@
     { "id": "categorias",  "titulo": "Categorías gramaticales", "saberes": ["LCL.1.D.5", "categorias-gramaticales"], "archivo": "categorias-gramaticales.json" },
     { "id": "sintaxis",    "titulo": "Sintaxis básica", "saberes": ["sujeto-predicado", "complementos"], "archivo": "sintaxis.json" },
     { "id": "ortografia",  "titulo": "Ortografía", "saberes": ["acentuacion-eso", "uso-letras-eso"], "archivo": "ortografia.json" },
-    { "id": "literatura",  "titulo": "Literatura y figuras", "saberes": ["figuras-literarias"], "archivo": "literatura.json" }
+    { "id": "literatura",  "titulo": "Literatura y figuras", "saberes": ["figuras-literarias"], "archivo": "literatura.json" },
+    { "id": "comprension-lectora", "titulo": "Comprensión lectora avanzada", "saberes": ["comprension-lectora-inferencial", "vocabulario-contextual"], "archivo": "comprension-lectora.json" }
   ]
 }
