@@ -6,6 +6,7 @@
     { "id": "ortografia", "titulo": "Ortografía",          "saberes": ["tildes", "uso-b-v", "uso-h"], "archivo": "ortografia.json" },
     { "id": "lectura",    "titulo": "Comprensión lectora", "saberes": ["comprension-lectora"], "archivo": "lectura.json" },
     { "id": "vocabulario","titulo": "Vocabulario",         "saberes": ["sinonimos-antonimos", "familias-palabras"], "archivo": "vocabulario.json" },
-    { "id": "sustantivos-adjetivos", "titulo": "Sustantivos y adjetivos", "saberes": ["clases-sustantivos", "grados-adjetivo"], "archivo": "sustantivos-adjetivos.json" }
+    { "id": "sustantivos-adjetivos", "titulo": "Sustantivos y adjetivos", "saberes": ["clases-sustantivos", "grados-adjetivo"], "archivo": "sustantivos-adjetivos.json" },
+    { "id": "determinantes-pronombres", "titulo": "Determinantes y pronombres", "saberes": ["determinantes", "pronombres"], "archivo": "determinantes-pronombres.json" }
   ]
 }
