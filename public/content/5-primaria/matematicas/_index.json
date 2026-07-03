@@ -8,6 +8,7 @@
     { "id": "medida",      "titulo": "Medidas",           "saberes": ["unidades-longitud", "unidades-masa", "unidades-tiempo"], "archivo": "medida.json" },
     { "id": "calculo",     "titulo": "Cálculo y operaciones", "saberes": ["operaciones-combinadas", "calculo-mental"], "archivo": "calculo.json" },
     { "id": "divisibilidad", "titulo": "Múltiplos y divisores", "saberes": ["multiplos-divisores"], "archivo": "divisibilidad.json" },
-    { "id": "estadistica", "titulo": "Estadística básica", "saberes": ["media-moda"], "archivo": "estadistica.json" }
+    { "id": "estadistica", "titulo": "Estadística básica", "saberes": ["media-moda"], "archivo": "estadistica.json" },
+    { "id": "potencias", "titulo": "Potencias", "saberes": ["potencias"], "archivo": "potencias.json" }
   ]
 }

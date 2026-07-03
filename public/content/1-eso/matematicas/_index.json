@@ -7,6 +7,7 @@
     { "id": "proporcionalidad", "titulo": "Proporcionalidad y porcentajes", "saberes": ["proporcionalidad", "porcentajes-eso"], "archivo": "proporcionalidad.json" },
     { "id": "algebra", "titulo": "Iniciación al álgebra", "saberes": ["lenguaje-algebraico", "ecuaciones-primer-grado"], "archivo": "algebra.json" },
     { "id": "geometria", "titulo": "Geometría", "saberes": ["areas-perimetros", "angulos-rectas"], "archivo": "geometria.json" },
-    { "id": "estadistica", "titulo": "Estadística", "saberes": ["media-mediana-moda"], "archivo": "estadistica.json" }
+    { "id": "estadistica", "titulo": "Estadística", "saberes": ["media-mediana-moda"], "archivo": "estadistica.json" },
+    { "id": "probabilidad", "titulo": "Probabilidad", "saberes": ["probabilidad-basica"], "archivo": "probabilidad.json" }
   ]
 }
