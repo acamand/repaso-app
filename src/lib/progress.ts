@@ -17,6 +17,7 @@ function defaultViajeProgress(): ViajeProgress {
     capitulosVistos: [],
     sellos: {},
     estrellas: {},
+    curiosidadesVistas: [],
   };
 }
 
@@ -36,8 +37,8 @@ function emptyPerfilProgress(): PerPerfilProgress {
 }
 
 // Migración suave: perfiles guardados antes de añadir `viaje` (o campos nuevos
-// dentro de `viaje`, como `estrellas`) reciben los valores por defecto que falten
-// sin perder lo ya guardado.
+// dentro de `viaje`, como `estrellas` o `curiosidadesVistas`) reciben los valores
+// por defecto que falten sin perder lo ya guardado.
 function hydratePerfilProgress(p: PerPerfilProgress): PerPerfilProgress {
   const base = defaultViajeProgress();
   const viajeGuardado = (p as Partial<PerPerfilProgress>).viaje;
@@ -99,6 +100,24 @@ export function setEtapaActual(state: ProgressState, etapaId: string): ProgressS
     porPerfil: {
       ...state.porPerfil,
       [perfilId]: { ...actual, viaje: { ...actual.viaje, etapaActualId: etapaId } },
+    },
+  };
+}
+
+/** Guarda la lista de curiosidades diarias ya vistas del perfil activo. */
+export function setCuriosidadesVistas(
+  state: ProgressState,
+  vistas: string[],
+): ProgressState {
+  const perfilId = state.perfilActivo;
+  if (!perfilId) return state;
+  const actual = state.porPerfil[perfilId];
+  if (!actual) return state;
+  return {
+    ...state,
+    porPerfil: {
+      ...state.porPerfil,
+      [perfilId]: { ...actual, viaje: { ...actual.viaje, curiosidadesVistas: vistas } },
     },
   };
 }
