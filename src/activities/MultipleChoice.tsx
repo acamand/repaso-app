@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { MultipleChoiceActivity } from '@/types';
 import { ActivityHeader } from '@/components/ActivityHeader';
+import { XPFeedback } from '@/components/XPFeedback';
 import type { ActivityRendererProps } from './types';
 
 export function MultipleChoice({
@@ -70,6 +71,7 @@ export function MultipleChoice({
           >
             {acierto ? '¡Correcto!' : `Casi. La opción correcta era la ${String.fromCharCode(65 + activity.correcta)}.`}
           </div>
+          <XPFeedback acierto={acierto} xp={activity.xp} />
           {activity.explicacion && (
             <p className="text-sm text-paper-700 italic">{activity.explicacion}</p>
           )}

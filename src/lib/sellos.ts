@@ -69,6 +69,45 @@ export function evaluarSellos(
 }
 
 /**
+ * Calcula las estrellas (1-3) de cada etapa con sello, según el % de aciertos
+ * entre las actividades de esa etapa que el alumno ha intentado:
+ *   1 estrella  = tiene el sello (completó las actividades mínimas)
+ *   2 estrellas = más del 70% de aciertos
+ *   3 estrellas = más del 90% de aciertos
+ * Las estrellas nunca bajan (se guarda la mejor marca), para no penalizar al
+ * intentar actividades nuevas. Devuelve el viaje sin tocar si no hay cambios.
+ */
+export function calcularEstrellas(
+  viaje: ViajeProgress,
+  actividadesCompletadas: Record<string, CompletedActivity>,
+  etapaInfo: EtapaInfo,
+): ViajeProgress {
+  const nuevas: Record<string, number> = { ...viaje.estrellas };
+  let cambio = false;
+
+  for (const etapaId of Object.keys(viaje.sellos)) {
+    const ids = etapaInfo.activityIds[etapaId] ?? [];
+    const intentadas = ids.filter((id) => actividadesCompletadas[id]);
+    let estrellas = 1; // tener el sello ya vale una estrella
+    if (intentadas.length > 0) {
+      const aciertos = intentadas.filter(
+        (id) => actividadesCompletadas[id].acierto === true,
+      ).length;
+      const pct = aciertos / intentadas.length;
+      if (pct > 0.9) estrellas = 3;
+      else if (pct > 0.7) estrellas = 2;
+    }
+    const mejor = Math.max(nuevas[etapaId] ?? 0, estrellas);
+    if (nuevas[etapaId] !== mejor) {
+      nuevas[etapaId] = mejor;
+      cambio = true;
+    }
+  }
+
+  return cambio ? { ...viaje, estrellas: nuevas } : viaje;
+}
+
+/**
  * Marca un capítulo como visto. Si el criterio es `siempre`, otorga el sello
  * en el acto (útil para etapas-travesía sin actividades, como ferries).
  */

@@ -164,6 +164,8 @@ export interface ViajeProgress {
   capitulosVistos: string[];
   /** Sellos conseguidos por etapa. */
   sellos: Record<string, Sello>;
+  /** Estrellas (1-3) conseguidas por etapa, según el % de aciertos. */
+  estrellas: Record<string, number>;
 }
 
 // ---------- Perfil y progreso ----------

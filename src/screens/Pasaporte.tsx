@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { Flag } from '@/components/Flag';
+import { Estrellas } from '@/components/Estrellas';
 
 interface Props {
   progress: PerPerfilProgress;
@@ -79,6 +80,7 @@ export function Pasaporte({ progress, onBack }: Props) {
                   ruta={ruta}
                   capitulo={capitulos[etapa.id] ?? null}
                   sello={progress.viaje.sellos[etapa.id] ?? null}
+                  estrellas={progress.viaje.estrellas[etapa.id] ?? 0}
                 />
               ))}
             </div>
@@ -94,9 +96,10 @@ interface PaginaProps {
   ruta: Ruta;
   capitulo: Capitulo | null;
   sello: Sello | null;
+  estrellas: number;
 }
 
-function PaginaPasaporte({ etapa, ruta, capitulo, sello }: PaginaProps) {
+function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas }: PaginaProps) {
   const datos = getDatosPais(ruta, etapa.pais);
   return (
     <div className={`card p-4 flex items-center gap-4 ${etapa.opcional ? 'opacity-60' : ''}`}>
@@ -109,6 +112,11 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello }: PaginaProps) {
         <div className="text-xs text-paper-700 truncate">
           {[datos?.capital, datos?.moneda].filter((s) => s && s !== '—').join(' · ')}
         </div>
+        {sello && (
+          <div className="mt-1.5">
+            <Estrellas conseguidas={estrellas} size={15} />
+          </div>
+        )}
         {etapa.opcional && (
           <div className="text-[0.65rem] uppercase tracking-wider text-paper-500 mt-0.5">
             opcional
