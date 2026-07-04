@@ -8,6 +8,7 @@
     { "id": "algebra", "titulo": "Iniciación al álgebra", "saberes": ["lenguaje-algebraico", "ecuaciones-primer-grado"], "archivo": "algebra.json" },
     { "id": "geometria", "titulo": "Geometría", "saberes": ["areas-perimetros", "angulos-rectas"], "archivo": "geometria.json" },
     { "id": "estadistica", "titulo": "Estadística", "saberes": ["media-mediana-moda"], "archivo": "estadistica.json" },
-    { "id": "probabilidad", "titulo": "Probabilidad", "saberes": ["probabilidad-basica"], "archivo": "probabilidad.json" }
+    { "id": "probabilidad", "titulo": "Probabilidad", "saberes": ["probabilidad-basica"], "archivo": "probabilidad.json" },
+    { "id": "retos-especiales", "titulo": "Retos del camino", "saberes": ["proporcionalidad"], "archivo": "retos-especiales.json" }
   ]
 }
