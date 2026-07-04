@@ -12,6 +12,15 @@
     { "original": "Takk!", "traduccion": "¡Gracias! (Se pronuncia 'tak')" },
     { "original": "Hvor er campingplassen?", "traduccion": "¿Dónde está el camping?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "El túnel más largo del mundo", "emoji": "🚇", "texto": "El túnel de Lærdal, en Noruega, tiene 24,5 km de largo. Es el túnel de carretera más largo del mundo. Tiene tres 'cuevas' iluminadas con luz azul en su interior para que los conductores descansen la vista y no se duerman."},
+    {"titulo": "Noruega y el salmón japonés", "emoji": "🍣", "texto": "El salmón en el sushi fue idea de Noruega. En los años 80, los noruegos convencieron a los japoneses de usar salmón crudo en el sushi (antes no lo usaban). Hoy el salmón es el pescado más popular en el sushi de todo el mundo."},
+    {"titulo": "Frigorífico global de semillas", "emoji": "🌱", "texto": "En las islas Svalbard, Noruega tiene la Bóveda Global de Semillas: un almacén dentro de una montaña congelada que guarda copias de todas las semillas del mundo. Si alguna catástrofe destruyera los cultivos, las semillas estarían a salvo. Hay más de un millón de variedades."},
+    {"titulo": "Los vikingos llegaron a América primero", "emoji": "⛵", "texto": "Los vikingos noruegos llegaron a América del Norte 500 años antes que Colón. Leif Erikson desembarcó en lo que hoy es Canadá alrededor del año 1000. Lo llamaron Vinland (tierra de viñas)."},
+    {"titulo": "Sol de medianoche y noche polar", "emoji": "🌅", "texto": "En Cabo Norte, donde estáis, el sol no se pone entre mediados de mayo y finales de julio. Pero en invierno es al revés: desde noviembre hasta enero, el sol no sale. Los noruegos llaman a esto 'mørketid' (tiempo oscuro) y combaten la oscuridad con velas y hygge."},
+    {"titulo": "El país más caro del mundo", "emoji": "💰", "texto": "Noruega es uno de los países más caros del mundo. Un Big Mac cuesta unos 7 €, un café más de 5 €, y una cerveza en un bar puede superar los 10 €. Sin embargo, los salarios también son de los más altos: un profesor noruego gana unos 5.000 €/mes."},
+    {"titulo": "Trolls en todas partes", "emoji": "👹", "texto": "Los trolls son criaturas del folclore noruego que viven en montañas y cuevas. Según la leyenda, se convierten en piedra si les da la luz del sol. Por toda Noruega veréis figuras de trolls en tiendas, señales y hasta en nombres de lugares (Trollstigen = 'escalera de trolls')."}
+  ],
   "sello": {
     "descripcion": "Globo terráqueo de Cabo Norte con sol de medianoche.",
     "color_fondo": "#BA0C2F",

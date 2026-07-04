@@ -10,6 +10,16 @@
   "frases_idioma": [
     { "original": "¡Buen viaje!", "traduccion": "(Ya la sabéis, pero es la frase del día. En francés será «Bon voyage!»)" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "El idioma secreto del abanico", "emoji": "🪭", "texto": "En el siglo XIX, las mujeres españolas usaban el abanico para comunicarse en secreto. Abrirlo del todo significaba 'te quiero', cerrarlo de golpe era 'me aburres', y apoyarlo en la mejilla derecha quería decir 'sí'."},
+    {"titulo": "La siesta tiene base científica", "emoji": "😴", "texto": "España es famosa por la siesta, pero tiene una razón biológica: entre las 13:00 y las 15:00 el cuerpo humano experimenta una bajada natural de energía, independientemente de si ha comido o no. Los científicos la llaman 'zona de somnolencia postprandial'."},
+    {"titulo": "El pueblo sin calles", "emoji": "🏘️", "texto": "Setenil de las Bodegas, en Cádiz, es un pueblo construido literalmente dentro de las rocas. Las casas están incrustadas bajo enormes salientes de piedra que hacen de techo natural. Algunas calles están completamente cubiertas por la roca."},
+    {"titulo": "España tiene un desierto de película", "emoji": "🏜️", "texto": "El desierto de Tabernas, en Almería, es el único desierto de Europa. Allí se rodaron películas famosas del Oeste americano como 'El bueno, el feo y el malo'. Tiene menos de 250 mm de lluvia al año."},
+    {"titulo": "Más aceite de oliva que nadie", "emoji": "🫒", "texto": "España produce casi la mitad del aceite de oliva de todo el mundo. Solo la provincia de Jaén (vecina de Córdoba) produce más aceite que toda Italia o toda Grecia juntas. En Andalucía hay más de 170 millones de olivos."},
+    {"titulo": "El reloj que marca las uvas", "emoji": "🍇", "texto": "En Nochevieja, los españoles comen 12 uvas, una con cada campanada del reloj. Esta tradición empezó en 1909 porque los viticultores de Alicante tenían un excedente de uva y se les ocurrió venderla como 'las uvas de la suerte'."},
+    {"titulo": "La Mezquita dentro de la Catedral", "emoji": "🕌", "texto": "La Mezquita-Catedral de Córdoba, vuestra ciudad, es un edificio único en el mundo: una catedral cristiana construida dentro de una mezquita islámica. Tiene 856 columnas de jaspe, mármol y granito. Cuando Carlos V vio la reforma, dijo: 'Habéis destruido lo que era único en el mundo'."},
+    {"titulo": "El tren más lento de España", "emoji": "🚂", "texto": "El tren que une Málaga con Fuengirola (solo 32 km) fue, durante años, conocido como 'el tren burra' por su lentitud. Hoy hay trenes AVE que van a 310 km/h, entre los más rápidos de Europa."}
+  ],
   "sello": {
     "descripcion": "Mezquita-Catedral de Córdoba sobre fondo de arcos bicolores.",
     "color_fondo": "#C44545",

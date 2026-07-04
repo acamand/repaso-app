@@ -12,6 +12,16 @@
     { "original": "Danke schön!", "traduccion": "¡Muchas gracias!" },
     { "original": "Wo ist der Campingplatz?", "traduccion": "¿Dónde está el camping?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "La cerveza es casi un alimento", "emoji": "🍺", "texto": "En Baviera, la cerveza fue declarada oficialmente 'alimento básico' en el siglo XVI. La Ley de Pureza (Reinheitsgebot) de 1516 sigue vigente y dicta que la cerveza solo puede hacerse con agua, malta de cebada, lúpulo y levadura. Nada más."},
+    {"titulo": "Cuidado con cruzar en rojo", "emoji": "🚦", "texto": "En Alemania, cruzar un semáforo en rojo como peatón se multa (hasta 10 €), pero lo realmente llamativo es que los alemanes casi nunca lo hacen, ni aunque no venga ningún coche. Es cuestión de ejemplo: los niños están mirando."},
+    {"titulo": "Domingos sin tiendas", "emoji": "🏪", "texto": "En Alemania, los domingos casi todas las tiendas están cerradas por ley (Ladenschlussgesetz). Solo abren gasolineras, estaciones de tren y algunas tiendas turísticas. Si necesitáis comprar algo un domingo, id a una gasolinera."},
+    {"titulo": "El bosque negro no es negro", "emoji": "🌲", "texto": "La Selva Negra (Schwarzwald) se llama así porque sus bosques de abetos son tan densos que casi no deja pasar la luz del sol. De ahí viene la tarta Selva Negra: chocolate (oscuro como el bosque), nata (nieve) y cerezas (que crecen en la región)."},
+    {"titulo": "Alemania tiene más zoos que nadie", "emoji": "🦁", "texto": "Con más de 400 zoos y parques de animales, Alemania tiene más que ningún otro país del mundo. El zoo de Berlín, fundado en 1844, es el más antiguo de Alemania y uno de los que tiene más especies (más de 1.400)."},
+    {"titulo": "Inventores alemanes por todas partes", "emoji": "💡", "texto": "Los alemanes inventaron cosas que usas cada día sin saberlo: la aspirina (Bayer, 1897), la imprenta (Gutenberg, ~1440), los ositos de gominola (Haribo, 1922), el motor diésel (Rudolf Diesel, 1893) y la pasta de dientes en tubo (1887)."},
+    {"titulo": "Pan con denominación de origen", "emoji": "🍞", "texto": "Alemania tiene más de 3.200 variedades de pan registradas oficialmente. La cultura alemana del pan fue declarada Patrimonio Cultural Inmaterial por la UNESCO en 2014. Hay panes de centeno, espelta, semillas, patata e incluso de remolacha."},
+    {"titulo": "Autobahn: rápidos pero seguros", "emoji": "🚗", "texto": "Aunque muchos tramos de la Autobahn no tienen límite de velocidad, la tasa de accidentes mortales en autopistas alemanas es menor que en Francia o Italia. Los alemanes son muy disciplinados: se apartan al carril derecho y solo adelantan por la izquierda. Nunca."}
+  ],
   "sello": {
     "descripcion": "Puerta de Brandeburgo con engranaje industrial.",
     "color_fondo": "#1F3F58",

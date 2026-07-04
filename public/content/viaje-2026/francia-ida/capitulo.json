@@ -12,6 +12,16 @@
     { "original": "Merci beaucoup!", "traduccion": "¡Muchas gracias!" },
     { "original": "Où est le camping, s'il vous plaît?", "traduccion": "¿Dónde está el camping, por favor?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "Prohibido llamar a un cerdo Napoleón", "emoji": "🐷", "texto": "En Francia hay una ley antigua que prohíbe llamar a un cerdo 'Napoleón'. Aunque hoy nadie la aplica, sigue técnicamente vigente. Napoleón Bonaparte es una figura tan importante en Francia que su nombre está protegido."},
+    {"titulo": "La Torre Eiffel crece en verano", "emoji": "🗼", "texto": "Debido a la dilatación del metal con el calor, la Torre Eiffel puede crecer hasta 15 cm en los días más calurosos del verano. En invierno se encoge. Los ingenieros lo tuvieron en cuenta al diseñarla en 1889."},
+    {"titulo": "El queso más apestoso del mundo", "emoji": "🧀", "texto": "El Époisses de Bourgogne es considerado el queso más oloroso de Francia. Su olor es tan fuerte que está prohibido llevarlo en el transporte público de algunas ciudades francesas. Aun así, los franceses lo adoran."},
+    {"titulo": "Comer caracoles es un lujo", "emoji": "🐌", "texto": "Los franceses comen unos 30.000 toneladas de caracoles al año (escargots). Se preparan con mantequilla, ajo y perejil. Aunque suene raro, es un plato de alta cocina que puede costar más de 20 € en un restaurante."},
+    {"titulo": "Un país de rotondas", "emoji": "🔄", "texto": "Francia tiene más rotondas que cualquier otro país del mundo: más de 65.000. Eso es aproximadamente la mitad de todas las rotondas del planeta. Si habéis conducido por Francia, seguro que habéis notado que hay una cada pocos kilómetros."},
+    {"titulo": "El museo más visitado del mundo", "emoji": "🖼️", "texto": "El Louvre de París recibe más de 9 millones de visitantes al año. Si cada visitante pasara solo 30 segundos frente a cada obra, necesitaría 100 días sin dormir para verlas todas. Tiene más de 380.000 piezas (aunque solo exhibe 35.000)."},
+    {"titulo": "Los franceses y el pan", "emoji": "🥖", "texto": "Hay una ley en Francia (el 'décret pain' de 1993) que define exactamente qué puede llamarse baguette: solo harina, agua, sal y levadura. Si le añades conservantes o la congelas, ya no puedes venderla como 'baguette de tradition'."},
+    {"titulo": "Un país con 12 horas diferentes", "emoji": "⏰", "texto": "Gracias a sus territorios de ultramar (Guayana, Reunión, Polinesia, Nueva Caledonia…), cuando en París son las 12:00, en algún rincón de Francia pueden ser las 23:00 del día anterior. Tiene más husos horarios que Rusia o Estados Unidos."}
+  ],
   "sello": {
     "descripcion": "Torre Eiffel con baguette cruzada.",
     "color_fondo": "#2E5C7E",

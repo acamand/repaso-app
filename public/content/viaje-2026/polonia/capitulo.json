@@ -12,6 +12,16 @@
     { "original": "Dziękuję!", "traduccion": "¡Gracias! (Se pronuncia 'dsienkúye')" },
     { "original": "Ile to kosztuje?", "traduccion": "¿Cuánto cuesta esto? (Útil porque aquí se paga en złoty, no en euros)" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "El país de las cigüeñas", "emoji": "🐦", "texto": "Polonia alberga una cuarta parte de todas las cigüeñas blancas de Europa. Los polacos las consideran símbolo de buena suerte y protegen sus nidos por ley. En muchos pueblos veréis enormes nidos en los tejados, los postes de luz y las chimeneas."},
+    {"titulo": "Varsovia resucitó de los escombros", "emoji": "🏗️", "texto": "En la Segunda Guerra Mundial, el 85% de Varsovia fue destruida. Después de la guerra, los polacos reconstruyeron su casco antiguo piedra a piedra, usando cuadros de pintores del siglo XVIII como referencia. La reconstrucción fue tan fiel que la UNESCO la declaró Patrimonio de la Humanidad."},
+    {"titulo": "La mina de sal subterránea", "emoji": "⛏️", "texto": "La mina de sal de Wieliczka, cerca de Cracovia, lleva en funcionamiento desde el siglo XIII. Dentro hay capillas, lagos subterráneos y hasta una catedral entera tallada en sal, con lámparas de araña hechas de cristales de sal. Está a 135 metros bajo tierra."},
+    {"titulo": "Pierogi: la comida nacional", "emoji": "🥟", "texto": "Los pierogi son empanadillas rellenas que los polacos comen de mil formas: con patata y queso, con carne, con col, con setas, e incluso con fresas y nata como postre. Se parecen a las gyozas japonesas pero con sabores muy diferentes."},
+    {"titulo": "Copérnico era polaco", "emoji": "🌍", "texto": "Nicolás Copérnico, el astrónomo que descubrió que la Tierra gira alrededor del Sol (y no al revés), nació en Toruń, Polonia, en 1473. Su descubrimiento fue tan revolucionario que la Iglesia tardó más de 200 años en aceptarlo."},
+    {"titulo": "El corredor más estrecho de Europa", "emoji": "🗺️", "texto": "El corredor de Suwałki, por donde vais a pasar, es uno de los puntos geopolíticos más vigilados de Europa. Apenas 100 km separan Bielorrusia de Kaliningrado (territorio ruso). Si esa franja se cortara, los países bálticos quedarían aislados del resto de la UE."},
+    {"titulo": "Polonia y el ámbar", "emoji": "💎", "texto": "La costa báltica de Polonia es famosa por el ámbar, una resina de árboles fosilizada hace millones de años. A veces contiene insectos prehistóricos atrapados dentro (como en Jurassic Park). Gdańsk es conocida como 'la capital mundial del ámbar'."},
+    {"titulo": "Vodka: ¿polaca o rusa?", "emoji": "🥃", "texto": "Polonia y Rusia llevan siglos discutiendo sobre quién inventó el vodka. Los documentos más antiguos que mencionan destilación de vodka son polacos (siglo XV). Los polacos están muy orgullosos de ello, aunque la discusión sigue abierta."}
+  ],
   "sello": {
     "descripcion": "Bisonte europeo con bosque de fondo.",
     "color_fondo": "#6B9080",
