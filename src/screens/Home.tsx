@@ -15,6 +15,7 @@ interface Props {
   onChangeEtapaActual: (etapaId: string) => void;
   onSwitchProfile: () => void;
   onShowPasaporte: () => void;
+  onShowGuia: () => void;
 }
 
 export function Home({
@@ -24,6 +25,7 @@ export function Home({
   onChangeEtapaActual,
   onSwitchProfile,
   onShowPasaporte,
+  onShowGuia,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -84,6 +86,13 @@ export function Home({
               {profile.nivel === '5-primaria' ? '5º Primaria' : '1º ESO'}
             </div>
           </div>
+          <button
+            onClick={onShowGuia}
+            className="text-xs text-paper-700 hover:text-ink"
+            title="Guía de viaje"
+          >
+            Guía
+          </button>
           <button
             onClick={onShowPasaporte}
             className="text-xs text-paper-700 hover:text-ink"

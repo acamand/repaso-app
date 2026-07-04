@@ -123,6 +123,7 @@ export interface Ruta {
 export interface FraseIdioma {
   original: string;
   traduccion: string;
+  pronunciacion?: string;
 }
 
 /** Cuándo se considera el capítulo terminado y se otorga el sello. */

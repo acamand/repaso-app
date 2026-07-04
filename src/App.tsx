@@ -16,6 +16,7 @@ import { ProfileSelect } from '@/screens/ProfileSelect';
 import { Home } from '@/screens/Home';
 import { SessionRunner } from '@/screens/SessionRunner';
 import { Pasaporte } from '@/screens/Pasaporte';
+import { GuiaViaje } from '@/screens/GuiaViaje';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import type { ActivityResult } from '@/activities/types';
@@ -25,6 +26,7 @@ type View =
   | { tag: 'home' }
   | { tag: 'session'; session: DailySession }
   | { tag: 'pasaporte' }
+  | { tag: 'guia' }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
 
 export default function App() {
@@ -116,12 +118,17 @@ export default function App() {
         }}
         onSwitchProfile={() => setView({ tag: 'select' })}
         onShowPasaporte={() => setView({ tag: 'pasaporte' })}
+        onShowGuia={() => setView({ tag: 'guia' })}
       />
     );
   }
 
   if (view.tag === 'pasaporte') {
     return <Pasaporte progress={progress} onBack={() => setView({ tag: 'home' })} />;
+  }
+
+  if (view.tag === 'guia') {
+    return <GuiaViaje progress={progress} onBack={() => setView({ tag: 'home' })} />;
   }
 
   if (view.tag === 'llegada') {
