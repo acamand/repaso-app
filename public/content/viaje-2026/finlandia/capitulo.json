@@ -12,6 +12,16 @@
     { "original": "Kiitos!", "traduccion": "¡Gracias! (Se pronuncia 'kiitos', alargando la 'i')" },
     { "original": "Missä on leirintäalue?", "traduccion": "¿Dónde está el camping? (El finés es complicado, ¡pero intentadlo!)" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "Campeonatos mundiales absurdos", "emoji": "🏆", "texto": "Finlandia organiza campeonatos mundiales de cosas insólitas: lanzamiento de teléfono móvil, carrera de esposas, fútbol en un pantano, y sentarse en un hormiguero. Los finlandeses tienen un humor muy particular."},
+    {"titulo": "Sauna diplomática", "emoji": "🧖", "texto": "En Finlandia, las reuniones de negocios y hasta las negociaciones políticas se hacen a veces en la sauna. El parlamento finlandés tiene su propia sauna. Se considera que la sauna iguala a las personas: todos están igual de desnudos."},
+    {"titulo": "Bebés que duermen fuera", "emoji": "👶", "texto": "En Finlandia (y otros países nórdicos) es tradición dejar a los bebés dormir la siesta fuera, en sus carritos, incluso con temperaturas bajo cero. Los finlandeses creen que el aire frío fortalece el sistema inmunológico y mejora el sueño."},
+    {"titulo": "No hay deberes (casi)", "emoji": "📚", "texto": "Los alumnos finlandeses pasan menos horas en clase que en casi cualquier país desarrollado y apenas llevan deberes a casa. Sin embargo, sus resultados en las pruebas PISA están entre los mejores del mundo. El secreto: profesores muy bien formados y menos presión."},
+    {"titulo": "Más saunas que coches", "emoji": "🚗", "texto": "En Finlandia hay 3,3 millones de saunas para 5,5 millones de habitantes. Eso es más saunas que coches. La mayoría de las casas, apartamentos e incluso oficinas tienen sauna. Hay saunas en autobuses, teleféricos y hasta una rueda noria."},
+    {"titulo": "Heavy metal per cápita", "emoji": "🎸", "texto": "Finlandia tiene más bandas de heavy metal por habitante que ningún otro país del mundo: unas 54 bandas por cada 100.000 habitantes. Algunos de sus grupos más famosos son Nightwish, HIM y Apocalyptica (que tocan metal con violonchelos)."},
+    {"titulo": "Papá Noel vive aquí (oficialmente)", "emoji": "🎅", "texto": "El pueblo de Rovaniemi, en Laponia finlandesa, es la residencia oficial de Papá Noel. Tiene oficina de correos propia y recibe unas 500.000 cartas al año de niños de todo el mundo. Se puede visitar todo el año."},
+    {"titulo": "El país más feliz del mundo", "emoji": "😊", "texto": "Finlandia ha sido nombrado el país más feliz del mundo por el Informe Mundial de la Felicidad durante varios años seguidos. Los finlandeses atribuyen su felicidad a la naturaleza, la confianza social, la educación gratuita y, por supuesto, la sauna."}
+  ],
   "sello": {
     "descripcion": "Lago finlandés con sauna de madera y bosque de abedules.",
     "color_fondo": "#003580",

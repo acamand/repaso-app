@@ -12,6 +12,16 @@
     { "original": "Tack!", "traduccion": "¡Gracias! (Se pronuncia 'tak', casi igual que en noruego)" },
     { "original": "Var är campingplatsen?", "traduccion": "¿Dónde está el camping?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "Fika: el café sagrado", "emoji": "☕", "texto": "En Suecia, la 'fika' es una pausa para tomar café con un bollo que es casi obligatoria. No es solo un café: es un ritual social. Muchas empresas suecas tienen dos fikas al día en el horario laboral. Saltársela se considera de mala educación."},
+    {"titulo": "El hotel de hielo", "emoji": "🧊", "texto": "En Jukkasjärvi, al norte de Suecia, hay un hotel construido enteramente de hielo y nieve que se reconstruye cada invierno. Las habitaciones están a −5 °C y duermes en una cama de hielo con sacos de dormir especiales. En primavera, el hotel se derrite."},
+    {"titulo": "Suecia y los inventos", "emoji": "🔧", "texto": "Suecia ha dado al mundo inventos que usas sin saberlo: la dinamita (Alfred Nobel, 1867), el marcapasos cardíaco (Rune Elmqvist, 1958), Spotify (Daniel Ek, 2006), Skype (parcialmente sueco), la cremallera moderna y Minecraft (Markus Persson, 2009)."},
+    {"titulo": "Cuidado con los alces", "emoji": "🫎", "texto": "En Suecia hay unas 15.000 colisiones con alces al año. Un alce adulto puede pesar 700 kg, así que un choque puede ser muy peligroso. Las señales de 'alce' son tan icónicas que los turistas las roban como souvenir. Los suecos han tenido que atornillarlas."},
+    {"titulo": "La basura que no existe", "emoji": "♻️", "texto": "Suecia recicla o aprovecha energéticamente el 99% de su basura doméstica. Es tan eficiente que importa basura de otros países (como Noruega e Irlanda) para alimentar sus plantas de incineración que generan electricidad y calefacción."},
+    {"titulo": "El premio más famoso del mundo", "emoji": "🏅", "texto": "Los Premios Nobel se entregan cada 10 de diciembre en Estocolmo (excepto el de la Paz, que se da en Oslo). Alfred Nobel inventó la dinamita y dejó su fortuna para premiar a quienes más contribuyeran a la humanidad. Cada premio incluye unos 950.000 €."},
+    {"titulo": "Lagom: ni mucho ni poco", "emoji": "⚖️", "texto": "'Lagom' es una palabra sueca intraducible que significa 'la cantidad justa, ni mucho ni poco'. Resume la mentalidad sueca: moderación, equilibrio, no destacar demasiado. Los suecos aplican lagom a todo: la comida, el trabajo, la ropa, la temperatura de la sauna."},
+    {"titulo": "Derecho a pasear por cualquier sitio", "emoji": "🥾", "texto": "El 'Allemansrätten' (derecho de acceso público) permite a cualquier persona caminar, acampar una noche y recoger frutos silvestres en cualquier terreno, aunque sea propiedad privada. Solo hay dos reglas: no molestar y no destruir. Los suecos lo aprenden desde pequeños."}
+  ],
   "sello": {
     "descripcion": "Alce sueco con bosque de pinos y bandera azul y amarilla.",
     "color_fondo": "#006AA7",

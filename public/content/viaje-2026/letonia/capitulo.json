@@ -12,6 +12,14 @@
     { "original": "Paldies!", "traduccion": "¡Gracias! (Se pronuncia 'paldies')" },
     { "original": "Cik tas maksā?", "traduccion": "¿Cuánto cuesta esto?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "El gato negro de Riga", "emoji": "🐈‍⬛", "texto": "En el centro de Riga hay un edificio famoso llamado 'la Casa del Gato'. Su dueño, enfadado con el gremio de comerciantes de enfrente, puso un gato negro de metal en el tejado con el trasero apuntando hacia su sede. Le obligaron a girarlo, pero la historia quedó como símbolo del humor letón."},
+    {"titulo": "El árbol de Navidad nació aquí (quizá)", "emoji": "🎄", "texto": "Riga afirma que el primer árbol de Navidad decorado de la historia se puso en su plaza en 1510, antes que en Estrasburgo (que reclama el mismo honor). Una placa en la plaza del Ayuntamiento lo conmemora. La disputa sigue abierta."},
+    {"titulo": "Letonia cantó para ser libre", "emoji": "🎶", "texto": "La independencia de Letonia se asocia con la 'Revolución Cantante': en 1988-1991, los letones cantaron canciones populares prohibidas en enormes concentraciones como forma de protesta pacífica contra la URSS. La música fue literalmente su arma."},
+    {"titulo": "Internet supersónica", "emoji": "📡", "texto": "Letonia tiene una de las velocidades de internet más rápidas de Europa: una media de más de 90 Mbps. Es más rápida que la de España, Alemania o Francia. Todo un logro para un país de 1,8 millones de habitantes."},
+    {"titulo": "El mercado más grande de Europa", "emoji": "🏬", "texto": "El Mercado Central de Riga es uno de los más grandes de Europa. Está construido dentro de cinco enormes hangares de zepelines de la Primera Guerra Mundial. Cada hangar tiene un producto: pescado, carne, lácteos, verduras y productos preparados."},
+    {"titulo": "Más mujeres que hombres", "emoji": "👩", "texto": "Letonia tiene una de las mayores diferencias de género del mundo: hay un 18% más de mujeres que de hombres. Las razones son históricas (guerras, emigración masculina) y biológicas (las mujeres viven más). En Riga, la diferencia es aún mayor."}
+  ],
   "sello": {
     "descripcion": "Fachada art nouveau de Riga con gato negro en el tejado.",
     "color_fondo": "#8B2332",

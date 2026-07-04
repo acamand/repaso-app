@@ -12,6 +12,14 @@
     { "original": "Ačiū!", "traduccion": "¡Gracias! (Se pronuncia 'achiú', casi como un estornudo)" },
     { "original": "Kur yra kemperių aikštelė?", "traduccion": "¿Dónde está el área de autocaravanas?" }
   ],
+  "curiosidades_diarias": [
+    {"titulo": "El deporte más raro: llevar a tu mujer a cuestas", "emoji": "🏃", "texto": "En los países bálticos existe un campeonato de 'carrera de esposas' (wife carrying). El marido carga a su mujer a cuestas por una pista de obstáculos. El premio es el peso de la esposa en cerveza. Lituania participa con entusiasmo."},
+    {"titulo": "La colina de las cruces", "emoji": "✝️", "texto": "Cerca de Šiauliai hay una colina cubierta por más de 200.000 cruces de todos los tamaños. Nadie sabe cuándo empezó la tradición, pero los soviéticos la demolieron tres veces y cada vez los lituanos volvieron a ponerlas. Es un símbolo de resistencia pacífica."},
+    {"titulo": "Capital europea del baloncesto", "emoji": "🏀", "texto": "Lituania, con solo 2,8 millones de habitantes, ha sido subcampeona olímpica de baloncesto y tiene más canastas por habitante que cualquier país de Europa. El baloncesto llegó en 1922 cuando un lituano-americano lo trajo de Estados Unidos."},
+    {"titulo": "Centro de Europa (según los franceses)", "emoji": "📍", "texto": "En 1989, el Instituto Geográfico Nacional de Francia calculó que el centro geográfico de Europa está en Lituania, a 26 km al norte de Vilna. Hay un monumento y un parque temático. Otros países reclaman el mismo honor, pero Lituania tiene el certificado francés."},
+    {"titulo": "El idioma más antiguo de Europa", "emoji": "📜", "texto": "Los lingüistas consideran el lituano como la lengua viva más cercana al protoindoeuropeo, el idioma ancestral del que derivan casi todos los idiomas europeos. Un lituano puede entender algunas palabras en sánscrito (lengua de la India antigua) que un español no reconocería."},
+    {"titulo": "Castillo sobre el agua", "emoji": "🏰", "texto": "El castillo de Trakai está construido sobre una isla en medio de un lago. Es el único castillo insular de Europa del Este. En la Edad Media fue la residencia de los grandes duques de Lituania, cuando el país era uno de los más extensos de Europa."}
+  ],
   "sello": {
     "descripcion": "Torre de Gediminas de Vilna con balón de baloncesto.",
     "color_fondo": "#B85C38",
