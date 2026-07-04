@@ -7,6 +7,7 @@
     { "id": "lectura",    "titulo": "Comprensión lectora", "saberes": ["comprension-lectora"], "archivo": "lectura.json" },
     { "id": "vocabulario","titulo": "Vocabulario",         "saberes": ["sinonimos-antonimos", "familias-palabras"], "archivo": "vocabulario.json" },
     { "id": "sustantivos-adjetivos", "titulo": "Sustantivos y adjetivos", "saberes": ["clases-sustantivos", "grados-adjetivo"], "archivo": "sustantivos-adjetivos.json" },
-    { "id": "determinantes-pronombres", "titulo": "Determinantes y pronombres", "saberes": ["determinantes", "pronombres"], "archivo": "determinantes-pronombres.json" }
+    { "id": "determinantes-pronombres", "titulo": "Determinantes y pronombres", "saberes": ["determinantes", "pronombres"], "archivo": "determinantes-pronombres.json" },
+    { "id": "retos-especiales", "titulo": "Retos del camino", "saberes": ["expresion-escrita-narrativa", "expresion-escrita-descriptiva"], "archivo": "retos-especiales.json" }
   ]
 }

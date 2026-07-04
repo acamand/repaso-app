@@ -9,6 +9,7 @@
     { "id": "calculo",     "titulo": "Cálculo y operaciones", "saberes": ["operaciones-combinadas", "calculo-mental"], "archivo": "calculo.json" },
     { "id": "divisibilidad", "titulo": "Múltiplos y divisores", "saberes": ["multiplos-divisores"], "archivo": "divisibilidad.json" },
     { "id": "estadistica", "titulo": "Estadística básica", "saberes": ["media-moda"], "archivo": "estadistica.json" },
-    { "id": "potencias", "titulo": "Potencias", "saberes": ["potencias"], "archivo": "potencias.json" }
+    { "id": "potencias", "titulo": "Potencias", "saberes": ["potencias"], "archivo": "potencias.json" },
+    { "id": "retos-especiales", "titulo": "Retos del camino", "saberes": ["problemas-aritmetica", "media-moda"], "archivo": "retos-especiales.json" }
   ]
 }
