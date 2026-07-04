@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { CuadernoProblemaActivity } from '@/types';
 import { ActivityHeader } from '@/components/ActivityHeader';
+import { XPFeedback } from '@/components/XPFeedback';
 import type { ActivityRendererProps } from './types';
 
 export function CuadernoProblema({
@@ -78,14 +79,17 @@ export function CuadernoProblema({
           </div>
 
           {autoEval && (
-            <button
-              onClick={() =>
-                onComplete({ acierto: autoEval === 'bien', intentos: 1 })
-              }
-              className="btn-primary"
-            >
-              Continuar
-            </button>
+            <div className="space-y-3">
+              <XPFeedback acierto={autoEval === 'bien'} xp={activity.xp} />
+              <button
+                onClick={() =>
+                  onComplete({ acierto: autoEval === 'bien', intentos: 1 })
+                }
+                className="btn-primary"
+              >
+                Continuar
+              </button>
+            </div>
           )}
         </div>
       )}

@@ -16,6 +16,7 @@ interface Props {
   onSwitchProfile: () => void;
   onShowPasaporte: () => void;
   onShowGuia: () => void;
+  onShowLogros: () => void;
 }
 
 export function Home({
@@ -26,6 +27,7 @@ export function Home({
   onSwitchProfile,
   onShowPasaporte,
   onShowGuia,
+  onShowLogros,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -87,20 +89,27 @@ export function Home({
             </div>
           </div>
           <button
+            onClick={onShowLogros}
+            className="text-xs text-paper-700 hover:text-ink shrink-0"
+            title="Mis logros"
+          >
+            Logros
+          </button>
+          <button
             onClick={onShowGuia}
-            className="text-xs text-paper-700 hover:text-ink"
+            className="text-xs text-paper-700 hover:text-ink shrink-0"
             title="Guía de viaje"
           >
             Guía
           </button>
           <button
             onClick={onShowPasaporte}
-            className="text-xs text-paper-700 hover:text-ink"
+            className="text-xs text-paper-700 hover:text-ink shrink-0"
             title="Ver pasaporte"
           >
             Pasaporte
           </button>
-          <button onClick={onSwitchProfile} className="text-xs text-paper-700 hover:text-ink">
+          <button onClick={onSwitchProfile} className="text-xs text-paper-700 hover:text-ink shrink-0">
             Cambiar perfil
           </button>
         </div>

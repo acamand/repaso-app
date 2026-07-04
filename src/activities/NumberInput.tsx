@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { NumberInputActivity } from '@/types';
 import { ActivityHeader } from '@/components/ActivityHeader';
+import { XPFeedback } from '@/components/XPFeedback';
 import type { ActivityRendererProps } from './types';
 
 export function NumberInput({
@@ -57,6 +58,7 @@ export function NumberInput({
               ? '¡Correcto!'
               : `Casi. La respuesta era ${activity.respuesta}${activity.unidad ? ' ' + activity.unidad : ''}.`}
           </div>
+          <XPFeedback acierto={acierto} xp={activity.xp} />
           {activity.explicacion && (
             <p className="text-sm text-paper-700 italic">{activity.explicacion}</p>
           )}

@@ -10,13 +10,14 @@ import {
   setActiveProfile,
   setEtapaActual,
 } from '@/lib/progress';
-import { evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
+import { calcularEstrellas, evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { ProfileSelect } from '@/screens/ProfileSelect';
 import { Home } from '@/screens/Home';
 import { SessionRunner } from '@/screens/SessionRunner';
 import { Pasaporte } from '@/screens/Pasaporte';
 import { GuiaViaje } from '@/screens/GuiaViaje';
+import { MisLogros } from '@/screens/MisLogros';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import type { ActivityResult } from '@/activities/types';
@@ -27,6 +28,7 @@ type View =
   | { tag: 'session'; session: DailySession }
   | { tag: 'pasaporte' }
   | { tag: 'guia' }
+  | { tag: 'logros' }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
 
 export default function App() {
@@ -76,7 +78,8 @@ export default function App() {
       if (!perfilId) return next;
       const perfil = next.porPerfil[perfilId];
       if (!perfil) return next;
-      const nuevoViaje = evaluarSellos(perfil.viaje, perfil.actividadesCompletadas, etapaInfo);
+      const conSellos = evaluarSellos(perfil.viaje, perfil.actividadesCompletadas, etapaInfo);
+      const nuevoViaje = calcularEstrellas(conSellos, perfil.actividadesCompletadas, etapaInfo);
       if (nuevoViaje === perfil.viaje) return next;
       return {
         ...next,
@@ -119,6 +122,7 @@ export default function App() {
         onSwitchProfile={() => setView({ tag: 'select' })}
         onShowPasaporte={() => setView({ tag: 'pasaporte' })}
         onShowGuia={() => setView({ tag: 'guia' })}
+        onShowLogros={() => setView({ tag: 'logros' })}
       />
     );
   }
@@ -129,6 +133,10 @@ export default function App() {
 
   if (view.tag === 'guia') {
     return <GuiaViaje progress={progress} onBack={() => setView({ tag: 'home' })} />;
+  }
+
+  if (view.tag === 'logros') {
+    return <MisLogros progress={progress} onBack={() => setView({ tag: 'home' })} />;
   }
 
   if (view.tag === 'llegada') {

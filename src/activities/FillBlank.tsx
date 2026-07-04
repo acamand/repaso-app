@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FillBlankActivity } from '@/types';
 import { ActivityHeader } from '@/components/ActivityHeader';
+import { XPFeedback } from '@/components/XPFeedback';
 import type { ActivityRendererProps } from './types';
 
 function normaliza(s: string): string {
@@ -89,6 +90,7 @@ export function FillBlank({
               </>
             )}
           </div>
+          <XPFeedback acierto={acierto} xp={activity.xp} />
           {activity.explicacion && (
             <p className="text-sm text-paper-700 italic">{activity.explicacion}</p>
           )}
