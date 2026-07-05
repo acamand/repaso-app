@@ -31,6 +31,7 @@ function emptyPerfilProgress(): PerPerfilProgress {
     tiempoHoyS: 0,
     fechaHoy: null,
     viaje: defaultViajeProgress(),
+    tutorialVisto: false,
   };
 }
 
@@ -40,8 +41,8 @@ function emptyPerfilProgress(): PerPerfilProgress {
 function hydratePerfilProgress(p: PerPerfilProgress): PerPerfilProgress {
   const base = defaultViajeProgress();
   const viajeGuardado = (p as Partial<PerPerfilProgress>).viaje;
-  if (!viajeGuardado) return { ...p, viaje: base };
-  return { ...p, viaje: { ...base, ...viajeGuardado } };
+  const viaje = viajeGuardado ? { ...base, ...viajeGuardado } : base;
+  return { ...p, viaje, tutorialVisto: p.tutorialVisto ?? false };
 }
 
 function emptyState(): ProgressState {
@@ -72,6 +73,18 @@ export function addProfile(state: ProgressState, profile: Profile): ProgressStat
 
 export function setActiveProfile(state: ProgressState, profileId: string): ProgressState {
   return { ...state, perfilActivo: profileId };
+}
+
+/** Marca el tutorial narrativo como visto para el perfil activo. */
+export function setTutorialVisto(state: ProgressState): ProgressState {
+  const perfilId = state.perfilActivo;
+  if (!perfilId) return state;
+  const actual = state.porPerfil[perfilId];
+  if (!actual || actual.tutorialVisto) return state;
+  return {
+    ...state,
+    porPerfil: { ...state.porPerfil, [perfilId]: { ...actual, tutorialVisto: true } },
+  };
 }
 
 /** Cambia la etapa actual del perfil activo. */

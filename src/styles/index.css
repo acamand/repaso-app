@@ -57,6 +57,13 @@
 }
 .xp-pop { animation: xpPop 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
 
+/* La autocaravana del mapa flota suavemente. */
+@keyframes vanBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2.5px); }
+}
+.van-bob { animation: vanBob 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
 /* Respeta reduce-motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }

@@ -29,3 +29,21 @@ export async function loadAllActivities(nivel: Nivel, materia: Materia): Promise
   );
   return arrays.flat();
 }
+
+/**
+ * Carga los «Retos del camino» de un nivel (de ambas materias). Degrada a []
+ * si el archivo aún no existe en el banco.
+ */
+export async function loadRetos(nivel: Nivel): Promise<Activity[]> {
+  const materias: Materia[] = ['lengua', 'matematicas'];
+  const arrays = await Promise.all(
+    materias.map(async (m) => {
+      try {
+        return await loadUnidad(nivel, m, 'retos-especiales.json');
+      } catch {
+        return [];
+      }
+    }),
+  );
+  return arrays.flat();
+}

@@ -6,13 +6,15 @@ import { Flag } from '@/components/Flag';
 interface Props {
   progress: PerPerfilProgress;
   onBack: () => void;
+  /** Si se indica, abre directamente el detalle de esa etapa al entrar. */
+  etapaInicial?: string;
 }
 
-export function GuiaViaje({ progress, onBack }: Props) {
+export function GuiaViaje({ progress, onBack, etapaInicial }: Props) {
   const [ruta, setRuta] = useState<Ruta | null>(null);
   const [capitulos, setCapitulos] = useState<Record<string, Capitulo | null>>({});
   const [cargando, setCargando] = useState(true);
-  const [detalle, setDetalle] = useState<string | null>(null);
+  const [detalle, setDetalle] = useState<string | null>(etapaInicial ?? null);
 
   useEffect(() => {
     let cancelado = false;

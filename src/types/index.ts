@@ -9,7 +9,8 @@ export type ActivityType =
   | 'multiple_choice'
   | 'fill_blank'
   | 'number_input'
-  | 'cuaderno_problema';
+  | 'cuaderno_problema'
+  | 'drag_match';
 
 export interface ActivityBase {
   id: string;
@@ -65,11 +66,26 @@ export interface CuadernoProblemaActivity extends ActivityBase {
   solucion: string;
 }
 
+export interface DragMatchActivity extends ActivityBase {
+  type: 'drag_match';
+  formato: 'digital';
+  /** Consigna de la actividad (p.ej. «Empareja cada elemento con su categoría»). */
+  instrucciones: string;
+  /** Piezas que el alumno coloca. */
+  elementos: string[];
+  /** Zonas de destino donde se colocan los elementos. */
+  categorias: string[];
+  /** Pares correctos [índiceElemento, índiceCategoría]. */
+  soluciones: Array<[number, number]>;
+  explicacion?: string;
+}
+
 export type Activity =
   | MultipleChoiceActivity
   | FillBlankActivity
   | NumberInputActivity
-  | CuadernoProblemaActivity;
+  | CuadernoProblemaActivity
+  | DragMatchActivity;
 
 /** Índice de una materia: lista de unidades y archivos JSON donde viven las actividades. */
 export interface MateriaIndex {
@@ -203,6 +219,8 @@ export interface PerPerfilProgress {
   tiempoHoyS: number;
   fechaHoy: string | null;
   viaje: ViajeProgress;
+  /** Si el perfil ya ha visto el tutorial narrativo de bienvenida. */
+  tutorialVisto?: boolean;
 }
 
 export interface CompletedActivity {

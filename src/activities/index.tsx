@@ -3,6 +3,7 @@ import { MultipleChoice } from './MultipleChoice';
 import { FillBlank } from './FillBlank';
 import { NumberInput } from './NumberInput';
 import { CuadernoProblema } from './CuadernoProblema';
+import { DragMatch } from './DragMatch';
 import type { ActivityResult } from './types';
 
 interface Props {
@@ -20,6 +21,8 @@ export function ActivityRenderer({ activity, onComplete }: Props) {
       return <NumberInput activity={activity} onComplete={onComplete} />;
     case 'cuaderno_problema':
       return <CuadernoProblema activity={activity} onComplete={onComplete} />;
+    case 'drag_match':
+      return <DragMatch activity={activity} onComplete={onComplete} />;
     default:
       return (
         <div className="card p-6">

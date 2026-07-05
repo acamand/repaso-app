@@ -17,6 +17,7 @@ interface Props {
   onShowPasaporte: () => void;
   onShowGuia: () => void;
   onShowLogros: () => void;
+  onShowTutorial: () => void;
 }
 
 export function Home({
@@ -28,6 +29,7 @@ export function Home({
   onShowPasaporte,
   onShowGuia,
   onShowLogros,
+  onShowTutorial,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -216,6 +218,15 @@ export function Home({
           <Stat label="Racha" valor={progress.rachaDias} sufijo="días" />
           <Stat label="Actividades" valor={Object.keys(progress.actividadesCompletadas).length} />
         </section>
+
+        <div className="text-center">
+          <button
+            onClick={onShowTutorial}
+            className="text-xs text-paper-700 hover:text-ink underline underline-offset-2"
+          >
+            ¿Cómo funciona la app?
+          </button>
+        </div>
       </main>
     </div>
   );

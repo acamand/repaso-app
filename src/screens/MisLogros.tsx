@@ -1,12 +1,13 @@
 import type { PerPerfilProgress } from '@/types';
-import { NIVELES, estadoNivel, xpParaNivel } from '@/lib/niveles';
+import { NIVELES, estadoNivel, progresoHaciaHito } from '@/lib/niveles';
 
 interface Props {
   progress: PerPerfilProgress;
   onBack: () => void;
+  onIrReto: () => void;
 }
 
-export function MisLogros({ progress, onBack }: Props) {
+export function MisLogros({ progress, onBack, onIrReto }: Props) {
   const xp = progress.xpTotal;
   const { nivel, nombre, hito, xpHastaHito, progresoHito } = estadoNivel(xp);
 
@@ -65,35 +66,71 @@ export function MisLogros({ progress, onBack }: Props) {
           <h2 className="font-display text-xl mb-3 px-1">Niveles y recompensas</h2>
           <div className="space-y-2">
             {NIVELES.map((n) => {
-              const alcanzado = xp >= xpParaNivel(n.nivel);
+              const { alcanzado, faltan, progreso } = progresoHaciaHito(xp, n);
               const esActual = n.nombre === nombre;
+              const esReto = n.tipo === 'reto';
               return (
                 <div
                   key={n.nivel}
-                  className={`card p-4 flex items-center gap-4 ${alcanzado ? '' : 'opacity-55'}`}
+                  className={`card p-4 ${alcanzado ? '' : 'bg-white/40'}`}
                 >
-                  <div
-                    className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-lg font-display
-                      ${alcanzado ? 'bg-mustard/20 text-ink border-2 border-mustard' : 'bg-parchment2 text-paper-500 border-2 border-paper-300'}`}
-                  >
-                    {alcanzado ? '✓' : '🔒'}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-2 flex-wrap">
-                      <span className="font-display text-base">
-                        Nivel {n.nivel} — {n.nombre}
-                      </span>
-                      {esActual && alcanzado && (
-                        <span className="text-[0.6rem] uppercase tracking-wider text-copper border border-copper/40 rounded-full px-1.5 py-0.5">
-                          actual
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 text-lg font-display
+                        ${alcanzado
+                          ? 'bg-sage/15 text-sage border-2 border-sage'
+                          : 'bg-parchment2 text-paper-500 border-2 border-paper-300'}`}
+                    >
+                      {alcanzado ? '✓' : '🔒'}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className={`font-display text-base ${alcanzado ? '' : 'text-paper-700'}`}>
+                          Nivel {n.nivel} — {n.nombre}
+                        </span>
+                        {esActual && (
+                          <span className="text-[0.6rem] uppercase tracking-wider text-copper border border-copper/40 rounded-full px-1.5 py-0.5">
+                            actual
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-paper-700 mt-0.5">
+                        {esReto && '🏆 '}
+                        {n.desbloquea}
+                      </div>
+                    </div>
+                    <div className="text-right shrink-0">
+                      {alcanzado ? (
+                        <span className="text-[0.6rem] uppercase tracking-wider text-sage">
+                          desbloqueado
+                        </span>
+                      ) : (
+                        <span className="text-[11px] text-paper-700 font-mono">
+                          faltan {faltan} XP
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-paper-700 mt-0.5">{n.desbloquea}</div>
                   </div>
-                  <div className="text-[11px] text-paper-500 font-mono shrink-0">
-                    {xpParaNivel(n.nivel)} XP
-                  </div>
+
+                  {/* Barra parcial para niveles no alcanzados */}
+                  {!alcanzado && (
+                    <div className="h-1.5 bg-parchment2 rounded-full overflow-hidden mt-3">
+                      <div
+                        className="h-full bg-slate/60 transition-all"
+                        style={{ width: `${Math.max(3, progreso * 100)}%` }}
+                      />
+                    </div>
+                  )}
+
+                  {/* Acceso directo al reto si es un nivel de reto ya desbloqueado */}
+                  {alcanzado && esReto && (
+                    <button
+                      onClick={onIrReto}
+                      className="btn-secondary w-full mt-3 text-sm py-2"
+                    >
+                      Ir al reto 🏆
+                    </button>
+                  )}
                 </div>
               );
             })}
