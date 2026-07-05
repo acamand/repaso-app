@@ -67,6 +67,28 @@ export interface EstadoNivel {
   progresoHito: number;
 }
 
+/** Progreso hacia un hito concreto (para las tarjetas de Mis Logros). */
+export function progresoHaciaHito(
+  xp: number,
+  hito: NivelDef,
+): { alcanzado: boolean; faltan: number; progreso: number } {
+  const objetivo = xpParaNivel(hito.nivel);
+  const alcanzado = xp >= objetivo;
+  const idx = NIVELES.findIndex((m) => m.nivel === hito.nivel);
+  const base = idx > 0 ? xpParaNivel(NIVELES[idx - 1].nivel) : 0;
+  const faltan = Math.max(0, objetivo - xp);
+  const progreso = objetivo > base ? Math.max(0, Math.min(1, (xp - base) / (objetivo - base))) : 1;
+  return { alcanzado, faltan, progreso };
+}
+
+/** Hitos recién alcanzados al pasar de `oldXp` a `newXp` (para la celebración). */
+export function hitosNuevos(oldXp: number, newXp: number): NivelDef[] {
+  return NIVELES.filter((m) => {
+    const t = xpParaNivel(m.nivel);
+    return t > oldXp && t <= newXp;
+  });
+}
+
 /** Estado de nivel listo para pintar en Home y en Mis Logros. */
 export function estadoNivel(xp: number): EstadoNivel {
   const { nivel } = nivelDeXP(xp);

@@ -3,13 +3,15 @@ import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
+import { MapaEuropa } from '@/components/MapaEuropa';
 
 interface Props {
   progress: PerPerfilProgress;
   onBack: () => void;
+  onVerGuia: (etapaId: string) => void;
 }
 
-export function Pasaporte({ progress, onBack }: Props) {
+export function Pasaporte({ progress, onBack, onVerGuia }: Props) {
   const [ruta, setRuta] = useState<Ruta | null>(null);
   const [capitulos, setCapitulos] = useState<Record<string, Capitulo | null>>({});
   const [cargando, setCargando] = useState(true);
@@ -66,6 +68,23 @@ export function Pasaporte({ progress, onBack }: Props) {
         {!cargando && !ruta && (
           <p className="text-brick text-center py-10">No se pudo cargar la ruta del viaje.</p>
         )}
+
+        {ruta && (
+          <MapaEuropa
+            ruta={ruta}
+            capitulos={capitulos}
+            progress={progress}
+            etapaActualId={progress.viaje.etapaActualId}
+            onVerGuia={onVerGuia}
+          />
+        )}
+
+        {ruta && (
+          <div className="text-xs uppercase tracking-[0.2em] text-paper-500 text-center pt-2">
+            Sellos del pasaporte
+          </div>
+        )}
+
         {ruta?.fases.map((fase) => (
           <section key={fase.id}>
             <div className="flex items-baseline justify-between mb-3 px-1">

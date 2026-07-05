@@ -9,7 +9,10 @@ import {
   saveProgress,
   setActiveProfile,
   setEtapaActual,
+  setTutorialVisto,
 } from '@/lib/progress';
+import { hitosNuevos } from '@/lib/niveles';
+import type { NivelDef } from '@/lib/niveles';
 import { calcularEstrellas, evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { ProfileSelect } from '@/screens/ProfileSelect';
@@ -18,18 +21,27 @@ import { SessionRunner } from '@/screens/SessionRunner';
 import { Pasaporte } from '@/screens/Pasaporte';
 import { GuiaViaje } from '@/screens/GuiaViaje';
 import { MisLogros } from '@/screens/MisLogros';
+import { Retos } from '@/screens/Retos';
+import { Tutorial } from '@/screens/Tutorial';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
+import { LevelUpModal } from '@/components/LevelUpModal';
 import type { ActivityResult } from '@/activities/types';
 
 type View =
   | { tag: 'select' }
   | { tag: 'home' }
+  | { tag: 'tutorial' }
   | { tag: 'session'; session: DailySession }
   | { tag: 'pasaporte' }
-  | { tag: 'guia' }
+  | { tag: 'guia'; etapaInicial?: string }
   | { tag: 'logros' }
+  | { tag: 'retos' }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
+
+function hoyISO(): string {
+  return new Date().toISOString().slice(0, 10);
+}
 
 export default function App() {
   const [state, setState] = useState<ProgressState>(() => loadProgress());
@@ -38,6 +50,7 @@ export default function App() {
     return { tag: s.perfilActivo ? 'home' : 'select' };
   });
   const [etapaInfo, setEtapaInfo] = useState<EtapaInfo | null>(null);
+  const [subioNivel, setSubioNivel] = useState<NivelDef | null>(null);
 
   useEffect(() => saveProgress(state), [state]);
 
@@ -71,8 +84,15 @@ export default function App() {
     result: ActivityResult,
     tiempoS: number,
   ) => {
+    // Detección de subida de nivel (mismo cálculo de XP que recordActivity).
+    const gained = result.acierto ? activity.xp : 0;
+    if (gained > 0) {
+      const nuevos = hitosNuevos(progress.xpTotal, progress.xpTotal + gained);
+      if (nuevos.length > 0) setSubioNivel(nuevos[nuevos.length - 1]);
+    }
+
     setState((s) => {
-      let next = recordActivity(s, activity, result.acierto, result.intentos, tiempoS);
+      const next = recordActivity(s, activity, result.acierto, result.intentos, tiempoS);
       if (!etapaInfo) return next;
       const perfilId = next.perfilActivo;
       if (!perfilId) return next;
@@ -88,24 +108,41 @@ export default function App() {
     });
   };
 
+  const empezarReto = (reto: Activity) => {
+    setView({
+      tag: 'session',
+      session: { fecha: hoyISO(), actividades: [reto], duracionEstimadaS: reto.tiempo_estimado_s },
+    });
+  };
+
+  let content: React.ReactNode;
+
   if (view.tag === 'select' || !profile) {
-    return (
+    content = (
       <ProfileSelect
         state={state}
         onSelect={(id) => {
           setState((s) => setActiveProfile(s, id));
-          setView({ tag: 'home' });
+          const p = state.porPerfil[id];
+          setView(p && !p.tutorialVisto ? { tag: 'tutorial' } : { tag: 'home' });
         }}
         onCreate={(p) => {
           setState((s) => addProfile(s, p));
+          setView({ tag: 'tutorial' });
+        }}
+      />
+    );
+  } else if (view.tag === 'tutorial') {
+    content = (
+      <Tutorial
+        onFinish={() => {
+          setState((s) => setTutorialVisto(s));
           setView({ tag: 'home' });
         }}
       />
     );
-  }
-
-  if (view.tag === 'home') {
-    return (
+  } else if (view.tag === 'home') {
+    content = (
       <Home
         profile={profile}
         progress={progress}
@@ -123,25 +160,44 @@ export default function App() {
         onShowPasaporte={() => setView({ tag: 'pasaporte' })}
         onShowGuia={() => setView({ tag: 'guia' })}
         onShowLogros={() => setView({ tag: 'logros' })}
+        onShowTutorial={() => setView({ tag: 'tutorial' })}
       />
     );
-  }
-
-  if (view.tag === 'pasaporte') {
-    return <Pasaporte progress={progress} onBack={() => setView({ tag: 'home' })} />;
-  }
-
-  if (view.tag === 'guia') {
-    return <GuiaViaje progress={progress} onBack={() => setView({ tag: 'home' })} />;
-  }
-
-  if (view.tag === 'logros') {
-    return <MisLogros progress={progress} onBack={() => setView({ tag: 'home' })} />;
-  }
-
-  if (view.tag === 'llegada') {
+  } else if (view.tag === 'pasaporte') {
+    content = (
+      <Pasaporte
+        progress={progress}
+        onBack={() => setView({ tag: 'home' })}
+        onVerGuia={(etapaId) => setView({ tag: 'guia', etapaInicial: etapaId })}
+      />
+    );
+  } else if (view.tag === 'guia') {
+    content = (
+      <GuiaViaje
+        progress={progress}
+        etapaInicial={view.etapaInicial}
+        onBack={() => setView({ tag: 'home' })}
+      />
+    );
+  } else if (view.tag === 'logros') {
+    content = (
+      <MisLogros
+        progress={progress}
+        onBack={() => setView({ tag: 'home' })}
+        onIrReto={() => setView({ tag: 'retos' })}
+      />
+    );
+  } else if (view.tag === 'retos') {
+    content = (
+      <Retos
+        nivel={profile.nivel}
+        onBack={() => setView({ tag: 'home' })}
+        onDoReto={empezarReto}
+      />
+    );
+  } else if (view.tag === 'llegada') {
     const { llegada, session } = view;
-    return (
+    content = (
       <LlegadaPais
         etapa={llegada.etapa}
         capitulo={llegada.capitulo}
@@ -165,13 +221,29 @@ export default function App() {
         }}
       />
     );
+  } else {
+    content = (
+      <SessionRunner
+        session={view.session}
+        onActivityDone={handleActivityDone}
+        onFinish={() => setView({ tag: 'home' })}
+      />
+    );
   }
 
   return (
-    <SessionRunner
-      session={view.session}
-      onActivityDone={handleActivityDone}
-      onFinish={() => setView({ tag: 'home' })}
-    />
+    <>
+      {content}
+      {subioNivel && (
+        <LevelUpModal
+          hito={subioNivel}
+          onIrReto={() => {
+            setSubioNivel(null);
+            setView({ tag: 'retos' });
+          }}
+          onCerrar={() => setSubioNivel(null)}
+        />
+      )}
+    </>
   );
 }
