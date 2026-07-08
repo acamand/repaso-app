@@ -20,8 +20,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.svg', 'icons/*.png'],
       manifest: {
-        name: 'Repaso — Bitácora de verano',
-        short_name: 'Repaso',
+        name: 'Park4Learn — Bitácora de verano',
+        short_name: 'Park4Learn',
         description: 'App de repaso para 5º Primaria y 1º ESO.',
         theme_color: '#2E5C7E',
         background_color: '#F5F2EC',
