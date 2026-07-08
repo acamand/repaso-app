@@ -30,7 +30,7 @@ export function ProfileSelect({ state, onSelect, onCreate }: Props) {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <p className="text-xs uppercase tracking-[0.2em] text-copper mb-2">Bitácora de verano</p>
-          <h1 className="font-display text-4xl mb-2">Repaso</h1>
+          <h1 className="font-display text-4xl mb-2">Park4Learn</h1>
           <p className="text-paper-700">Tu cuaderno de exploración.</p>
         </div>
 

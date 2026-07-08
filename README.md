@@ -1,4 +1,4 @@
-# Repaso — Bitácora de verano
+# Park4Learn — Bitácora de verano
 
 App educativa de repaso para **5º de Educación Primaria** y **1º de ESO** (currículo LOMLOE, Andalucía).
 
