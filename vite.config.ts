@@ -18,7 +18,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/*.svg', 'icons/*.png'],
+      includeAssets: ['icons/*.png'],
       manifest: {
         name: 'Park4Learn — Bitácora de verano',
         short_name: 'Park4Learn',
