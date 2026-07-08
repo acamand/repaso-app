@@ -156,6 +156,16 @@ export interface DisenoSello {
   color_texto: string;
 }
 
+/** Curiosidad cultural que se muestra como recompensa al terminar una sesión. */
+export interface CuriosidadDiaria {
+  /** Título corto y llamativo. */
+  titulo: string;
+  /** 2-4 frases explicando la curiosidad. */
+  texto: string;
+  /** Emoji representativo. */
+  emoji: string;
+}
+
 export interface Capitulo {
   etapa_id: string;
   pais: string;
@@ -165,6 +175,8 @@ export interface Capitulo {
   datos_curiosos: string[];
   /** 1-2 frases típicas en el idioma local con su traducción. */
   frases_idioma: FraseIdioma[];
+  /** Curiosidades para la recompensa de fin de sesión. Puede estar vacío. */
+  curiosidades_diarias: CuriosidadDiaria[];
   sello: DisenoSello;
   completado_criterio: CompletadoCriterio;
 }
@@ -182,6 +194,8 @@ export interface ViajeProgress {
   sellos: Record<string, Sello>;
   /** Estrellas (1-3) conseguidas por etapa, según el % de aciertos. */
   estrellas: Record<string, number>;
+  /** Claves de curiosidades diarias ya mostradas (formato `etapaId::titulo`). */
+  curiosidadesVistas: string[];
 }
 
 // ---------- Perfil y progreso ----------

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Activity, DailySession, ProgressState } from '@/types';
 import {
   addProfile,
@@ -8,6 +8,7 @@ import {
   rolloverDay,
   saveProgress,
   setActiveProfile,
+  setCuriosidadesVistas,
   setEtapaActual,
   setTutorialVisto,
 } from '@/lib/progress';
@@ -23,6 +24,7 @@ import { GuiaViaje } from '@/screens/GuiaViaje';
 import { MisLogros } from '@/screens/MisLogros';
 import { Retos } from '@/screens/Retos';
 import { Tutorial } from '@/screens/Tutorial';
+import { CuriosidadDia } from '@/screens/CuriosidadDia';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import { LevelUpModal } from '@/components/LevelUpModal';
@@ -37,6 +39,7 @@ type View =
   | { tag: 'guia'; etapaInicial?: string }
   | { tag: 'logros' }
   | { tag: 'retos' }
+  | { tag: 'curiosidad'; xpGanado: number }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
 
 function hoyISO(): string {
@@ -51,6 +54,8 @@ export default function App() {
   });
   const [etapaInfo, setEtapaInfo] = useState<EtapaInfo | null>(null);
   const [subioNivel, setSubioNivel] = useState<NivelDef | null>(null);
+  // XP acumulado en la sesión en curso (ref para leerlo en el momento de terminar).
+  const xpSesionRef = useRef(0);
 
   useEffect(() => saveProgress(state), [state]);
 
@@ -90,6 +95,8 @@ export default function App() {
       const nuevos = hitosNuevos(progress.xpTotal, progress.xpTotal + gained);
       if (nuevos.length > 0) setSubioNivel(nuevos[nuevos.length - 1]);
     }
+    // XP acumulado de la sesión, para la Curiosidad del día al terminar.
+    xpSesionRef.current += gained;
 
     setState((s) => {
       const next = recordActivity(s, activity, result.acierto, result.intentos, tiempoS);
@@ -147,6 +154,7 @@ export default function App() {
         profile={profile}
         progress={progress}
         onStartSession={(session, llegada) => {
+          xpSesionRef.current = 0;
           if (llegada) {
             setView({ tag: 'llegada', llegada, session });
           } else {
@@ -221,12 +229,21 @@ export default function App() {
         }}
       />
     );
+  } else if (view.tag === 'curiosidad') {
+    content = (
+      <CuriosidadDia
+        progress={progress}
+        xpGanado={view.xpGanado}
+        onCuriosidadesVistas={(vistas) => setState((s) => setCuriosidadesVistas(s, vistas))}
+        onVolver={() => setView({ tag: 'home' })}
+      />
+    );
   } else {
     content = (
       <SessionRunner
         session={view.session}
         onActivityDone={handleActivityDone}
-        onFinish={() => setView({ tag: 'home' })}
+        onFinish={() => setView({ tag: 'curiosidad', xpGanado: xpSesionRef.current })}
       />
     );
   }
