@@ -18,6 +18,7 @@ interface Props {
   onShowGuia: () => void;
   onShowLogros: () => void;
   onShowTutorial: () => void;
+  onShowAvatar: () => void;
 }
 
 export function Home({
@@ -30,6 +31,7 @@ export function Home({
   onShowGuia,
   onShowLogros,
   onShowTutorial,
+  onShowAvatar,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -83,7 +85,13 @@ export function Home({
     <div className="min-h-dvh">
       <header className="border-b border-paper-300/60 bg-parchment/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Avatar config={profile.avatar} size={40} />
+          <button
+            onClick={onShowAvatar}
+            className="shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-slate/40"
+            title="Personalizar avatar"
+          >
+            <Avatar config={profile.avatar} size={40} />
+          </button>
           <div className="flex-1 min-w-0">
             <div className="font-medium leading-tight truncate">{profile.nombre}</div>
             <div className="text-xs text-paper-700">

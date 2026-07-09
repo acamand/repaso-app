@@ -1,5 +1,6 @@
 import type {
   Activity,
+  AvatarConfig,
   CompletedActivity,
   PerPerfilProgress,
   Profile,
@@ -8,6 +9,7 @@ import type {
 } from '@/types';
 import { readState, writeState } from './storage';
 import { PRIMERA_ETAPA_ID } from './ruta';
+import { idsPiezasDesbloqueadas } from './avatarPiezas';
 
 const FECHA_HOY = () => new Date().toISOString().slice(0, 10);
 
@@ -33,6 +35,7 @@ function emptyPerfilProgress(): PerPerfilProgress {
     fechaHoy: null,
     viaje: defaultViajeProgress(),
     tutorialVisto: false,
+    piezasAvatarDesbloqueadas: idsPiezasDesbloqueadas(1),
   };
 }
 
@@ -43,7 +46,12 @@ function hydratePerfilProgress(p: PerPerfilProgress): PerPerfilProgress {
   const base = defaultViajeProgress();
   const viajeGuardado = (p as Partial<PerPerfilProgress>).viaje;
   const viaje = viajeGuardado ? { ...base, ...viajeGuardado } : base;
-  return { ...p, viaje, tutorialVisto: p.tutorialVisto ?? false };
+  // Si faltaba el registro de piezas desbloqueadas (perfil anterior a esta
+  // función), se recalcula según el nivel YA alcanzado: así no se le "roban"
+  // al alumno piezas que ya se había ganado antes de que esto existiera.
+  const piezasAvatarDesbloqueadas =
+    p.piezasAvatarDesbloqueadas ?? idsPiezasDesbloqueadas(nivelDeXP(p.xpTotal ?? 0).nivel);
+  return { ...p, viaje, tutorialVisto: p.tutorialVisto ?? false, piezasAvatarDesbloqueadas };
 }
 
 function emptyState(): ProgressState {
@@ -74,6 +82,16 @@ export function addProfile(state: ProgressState, profile: Profile): ProgressStat
 
 export function setActiveProfile(state: ProgressState, profileId: string): ProgressState {
   return { ...state, perfilActivo: profileId };
+}
+
+/** Guarda una nueva configuración de avatar para el perfil activo. */
+export function setAvatarConfig(state: ProgressState, config: AvatarConfig): ProgressState {
+  const perfilId = state.perfilActivo;
+  if (!perfilId) return state;
+  return {
+    ...state,
+    perfiles: state.perfiles.map((p) => (p.id === perfilId ? { ...p, avatar: config } : p)),
+  };
 }
 
 /** Marca el tutorial narrativo como visto para el perfil activo. */
@@ -170,13 +188,18 @@ export function recordActivity(
     racha = 1;
   }
 
+  const nuevoXpTotal = actual.xpTotal + xpGanado;
+
   const nuevoProgreso: PerPerfilProgress = {
     ...actual,
-    xpTotal: actual.xpTotal + xpGanado,
+    xpTotal: nuevoXpTotal,
     rachaDias: racha,
     ultimaActividadFecha: hoy,
     actividadesCompletadas: { ...actual.actividadesCompletadas, [activity.id]: completada },
     tiempoHoyS: actual.tiempoHoyS + tiempoInvertidoS,
+    // Recalculado siempre desde el nivel actual: así el guardarropa nunca se
+    // desincroniza del XP real (mismo patrón que estrellas/sellos del viaje).
+    piezasAvatarDesbloqueadas: idsPiezasDesbloqueadas(nivelDeXP(nuevoXpTotal).nivel),
   };
 
   return { ...state, porPerfil: { ...state.porPerfil, [perfilId]: nuevoProgreso } };
