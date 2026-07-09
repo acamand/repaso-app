@@ -235,6 +235,8 @@ export interface PerPerfilProgress {
   viaje: ViajeProgress;
   /** Si el perfil ya ha visto el tutorial narrativo de bienvenida. */
   tutorialVisto?: boolean;
+  /** IDs `categoria:valor` de piezas de avatar desbloqueadas (se recalcula según el nivel). */
+  piezasAvatarDesbloqueadas: string[];
 }
 
 export interface CompletedActivity {

@@ -5,9 +5,10 @@ interface Props {
   progress: PerPerfilProgress;
   onBack: () => void;
   onIrReto: () => void;
+  onShowAvatar: () => void;
 }
 
-export function MisLogros({ progress, onBack, onIrReto }: Props) {
+export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
   const xp = progress.xpTotal;
   const { nivel, nombre, hito, xpHastaHito, progresoHito } = estadoNivel(xp);
 
@@ -22,6 +23,13 @@ export function MisLogros({ progress, onBack, onIrReto }: Props) {
             <div className="text-[0.65rem] uppercase tracking-[0.25em] text-copper">Progreso</div>
             <div className="font-display text-lg leading-tight truncate">Mis logros</div>
           </div>
+          <button
+            onClick={onShowAvatar}
+            className="text-xs text-paper-700 hover:text-ink shrink-0"
+            title="Personalizar avatar"
+          >
+            Avatar
+          </button>
         </div>
       </header>
 

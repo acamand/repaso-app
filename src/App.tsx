@@ -4,16 +4,20 @@ import {
   addProfile,
   getActiveProgress,
   loadProgress,
+  nivelDeXP,
   recordActivity,
   rolloverDay,
   saveProgress,
   setActiveProfile,
+  setAvatarConfig,
   setCuriosidadesVistas,
   setEtapaActual,
   setTutorialVisto,
 } from '@/lib/progress';
 import { hitosNuevos } from '@/lib/niveles';
 import type { NivelDef } from '@/lib/niveles';
+import { piezasNuevasEntreNiveles } from '@/lib/avatarPiezas';
+import type { PiezaAvatar } from '@/lib/avatarPiezas';
 import { calcularEstrellas, evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { ProfileSelect } from '@/screens/ProfileSelect';
@@ -25,6 +29,7 @@ import { MisLogros } from '@/screens/MisLogros';
 import { Retos } from '@/screens/Retos';
 import { Tutorial } from '@/screens/Tutorial';
 import { CuriosidadDia } from '@/screens/CuriosidadDia';
+import { AvatarEditor } from '@/screens/AvatarEditor';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import { LevelUpModal } from '@/components/LevelUpModal';
@@ -39,6 +44,7 @@ type View =
   | { tag: 'guia'; etapaInicial?: string }
   | { tag: 'logros' }
   | { tag: 'retos' }
+  | { tag: 'avatar' }
   | { tag: 'curiosidad'; xpGanado: number }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
 
@@ -54,6 +60,7 @@ export default function App() {
   });
   const [etapaInfo, setEtapaInfo] = useState<EtapaInfo | null>(null);
   const [subioNivel, setSubioNivel] = useState<NivelDef | null>(null);
+  const [piezaNueva, setPiezaNueva] = useState<PiezaAvatar | null>(null);
   // XP acumulado en la sesión en curso (ref para leerlo en el momento de terminar).
   const xpSesionRef = useRef(0);
 
@@ -92,8 +99,16 @@ export default function App() {
     // Detección de subida de nivel (mismo cálculo de XP que recordActivity).
     const gained = result.acierto ? activity.xp : 0;
     if (gained > 0) {
-      const nuevos = hitosNuevos(progress.xpTotal, progress.xpTotal + gained);
-      if (nuevos.length > 0) setSubioNivel(nuevos[nuevos.length - 1]);
+      const xpAntes = progress.xpTotal;
+      const xpDespues = xpAntes + gained;
+      const nuevos = hitosNuevos(xpAntes, xpDespues);
+      const nivelAntes = nivelDeXP(xpAntes).nivel;
+      const nivelDespues = nivelDeXP(xpDespues).nivel;
+      const piezas = piezasNuevasEntreNiveles(nivelAntes, nivelDespues);
+      if (nuevos.length > 0) {
+        setSubioNivel(nuevos[nuevos.length - 1]);
+        setPiezaNueva(piezas.length > 0 ? piezas[piezas.length - 1] : null);
+      }
     }
     // XP acumulado de la sesión, para la Curiosidad del día al terminar.
     xpSesionRef.current += gained;
@@ -169,6 +184,7 @@ export default function App() {
         onShowGuia={() => setView({ tag: 'guia' })}
         onShowLogros={() => setView({ tag: 'logros' })}
         onShowTutorial={() => setView({ tag: 'tutorial' })}
+        onShowAvatar={() => setView({ tag: 'avatar' })}
       />
     );
   } else if (view.tag === 'pasaporte') {
@@ -193,6 +209,7 @@ export default function App() {
         progress={progress}
         onBack={() => setView({ tag: 'home' })}
         onIrReto={() => setView({ tag: 'retos' })}
+        onShowAvatar={() => setView({ tag: 'avatar' })}
       />
     );
   } else if (view.tag === 'retos') {
@@ -201,6 +218,15 @@ export default function App() {
         nivel={profile.nivel}
         onBack={() => setView({ tag: 'home' })}
         onDoReto={empezarReto}
+      />
+    );
+  } else if (view.tag === 'avatar') {
+    content = (
+      <AvatarEditor
+        avatar={profile.avatar}
+        progress={progress}
+        onSave={(config) => setState((s) => setAvatarConfig(s, config))}
+        onBack={() => setView({ tag: 'home' })}
       />
     );
   } else if (view.tag === 'llegada') {
@@ -251,14 +277,25 @@ export default function App() {
   return (
     <>
       {content}
-      {subioNivel && (
+      {subioNivel && profile && (
         <LevelUpModal
           hito={subioNivel}
+          avatarActual={profile.avatar}
+          piezaNueva={piezaNueva}
           onIrReto={() => {
             setSubioNivel(null);
+            setPiezaNueva(null);
             setView({ tag: 'retos' });
           }}
-          onCerrar={() => setSubioNivel(null)}
+          onPersonalizar={() => {
+            setSubioNivel(null);
+            setPiezaNueva(null);
+            setView({ tag: 'avatar' });
+          }}
+          onCerrar={() => {
+            setSubioNivel(null);
+            setPiezaNueva(null);
+          }}
         />
       )}
     </>

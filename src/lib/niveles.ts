@@ -25,11 +25,11 @@ export interface NivelDef {
  */
 export const NIVELES: NivelDef[] = [
   { nivel: 1, nombre: 'Viajero novato', desbloquea: 'El comienzo de la aventura', tipo: 'inicio' },
-  { nivel: 2, nombre: 'Copiloto', desbloquea: 'Nueva pieza de avatar: un peinado nuevo', tipo: 'avatar-pelo' },
+  { nivel: 2, nombre: 'Copiloto', desbloquea: 'Nuevo peinado: Coleta aventurera', tipo: 'avatar-pelo' },
   { nivel: 3, nombre: 'Navegante', desbloquea: 'Tu primer reto especial', tipo: 'reto' },
-  { nivel: 5, nombre: 'Explorador', desbloquea: 'Nueva pieza de avatar: ropa nueva', tipo: 'avatar-ropa' },
+  { nivel: 5, nombre: 'Explorador', desbloquea: 'Nueva ropa: Chaleco explorador', tipo: 'avatar-ropa' },
   { nivel: 7, nombre: 'Aventurero', desbloquea: 'Reto especial del país en el que estás', tipo: 'reto' },
-  { nivel: 10, nombre: 'Expedicionario', desbloquea: 'Nueva pieza de avatar: un accesorio', tipo: 'avatar-accesorio' },
+  { nivel: 10, nombre: 'Expedicionario', desbloquea: 'Nuevo accesorio: Gafas de explorador', tipo: 'avatar-accesorio' },
   { nivel: 15, nombre: 'Maestro viajero', desbloquea: 'Título especial en tu perfil', tipo: 'titulo' },
 ];
 
