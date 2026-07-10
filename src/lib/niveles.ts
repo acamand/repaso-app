@@ -20,16 +20,23 @@ export interface NivelDef {
 
 /**
  * Hitos con nombre. Entre dos hitos, el nivel conserva el nombre del hito
- * inferior (p.ej. niveles 3 y 4 son ambos "Navegante").
- * Los retos especiales aún no están implementados: solo se anuncian aquí.
+ * inferior (p.ej. niveles 6 y 7 son ambos "Cartógrafo").
+ * Los hitos de tipo 'reto' coinciden exactamente con el campo
+ * `nivel_desbloqueo` de un reto especial concreto (ver retos-especiales.json
+ * y src/lib/retos.ts): el texto de aquí es genérico porque el reto real
+ * depende del curso, y se anuncia con su título propio en el modal.
  */
 export const NIVELES: NivelDef[] = [
   { nivel: 1, nombre: 'Viajero novato', desbloquea: 'El comienzo de la aventura', tipo: 'inicio' },
   { nivel: 2, nombre: 'Copiloto', desbloquea: 'Nuevo peinado: Coleta aventurera', tipo: 'avatar-pelo' },
   { nivel: 3, nombre: 'Navegante', desbloquea: 'Tu primer reto especial', tipo: 'reto' },
+  { nivel: 4, nombre: 'Rastreador', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 5, nombre: 'Explorador', desbloquea: 'Nueva ropa: Chaleco explorador', tipo: 'avatar-ropa' },
-  { nivel: 7, nombre: 'Aventurero', desbloquea: 'Reto especial del país en el que estás', tipo: 'reto' },
+  { nivel: 6, nombre: 'Cartógrafo', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
+  { nivel: 8, nombre: 'Trotamundos', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
+  { nivel: 9, nombre: 'Centinela', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 10, nombre: 'Expedicionario', desbloquea: 'Nuevo accesorio: Gafas de explorador', tipo: 'avatar-accesorio' },
+  { nivel: 12, nombre: 'Sabio del camino', desbloquea: 'El reto especial más exigente', tipo: 'reto' },
   { nivel: 15, nombre: 'Maestro viajero', desbloquea: 'Título especial en tu perfil', tipo: 'titulo' },
 ];
 

@@ -1,7 +1,8 @@
-import type { AvatarConfig } from '@/types';
+import type { Activity, AvatarConfig } from '@/types';
 import type { NivelDef } from '@/lib/niveles';
 import type { PiezaAvatar } from '@/lib/avatarPiezas';
 import { aplicarPieza } from '@/lib/avatarPiezas';
+import { tituloReto } from '@/lib/retos';
 import { Avatar } from '@/components/Avatar';
 
 interface Props {
@@ -9,15 +10,27 @@ interface Props {
   avatarActual: AvatarConfig;
   /** Pieza de avatar desbloqueada en este mismo salto de nivel, si hay alguna. */
   piezaNueva: PiezaAvatar | null;
+  /** Reto especial desbloqueado en este mismo salto de nivel, si hay alguno. */
+  retoNuevo: Activity | null;
   onIrReto: () => void;
   onPersonalizar: () => void;
   onCerrar: () => void;
 }
 
 /** Modal de celebración al alcanzar un nuevo hito de nivel. */
-export function LevelUpModal({ hito, avatarActual, piezaNueva, onIrReto, onPersonalizar, onCerrar }: Props) {
+export function LevelUpModal({
+  hito,
+  avatarActual,
+  piezaNueva,
+  retoNuevo,
+  onIrReto,
+  onPersonalizar,
+  onCerrar,
+}: Props) {
   const esReto = hito.tipo === 'reto';
-  const esPiezaProtagonista = hito.tipo.startsWith('avatar-');
+  // Se omite la caja genérica cuando ya mostramos la pieza/reto real desbloqueado,
+  // para no repetir la misma noticia dos veces con textos distintos.
+  const esPiezaProtagonista = hito.tipo.startsWith('avatar-') || (esReto && !!retoNuevo);
   const previewConfig = piezaNueva ? aplicarPieza(avatarActual, piezaNueva) : avatarActual;
 
   return (
@@ -39,6 +52,19 @@ export function LevelUpModal({ hito, avatarActual, piezaNueva, onIrReto, onPerso
           {!esPiezaProtagonista && (
             <div className="mt-4 p-3 rounded-soft bg-mustard/15 border border-mustard/40 text-sm">
               Has desbloqueado: <strong>{hito.desbloquea}</strong>
+            </div>
+          )}
+
+          {/* Reto especial concreto desbloqueado, con su título real. */}
+          {retoNuevo && (
+            <div className="mt-4 p-4 rounded-soft bg-white/60 border border-paper-300 flex items-center gap-4 text-left">
+              <span className="text-3xl shrink-0" aria-hidden>🏆</span>
+              <div>
+                <div className="text-[0.6rem] uppercase tracking-wider text-copper">
+                  Nuevo reto disponible
+                </div>
+                <div className="font-display text-lg leading-tight">{tituloReto(retoNuevo)}</div>
+              </div>
             </div>
           )}
 
