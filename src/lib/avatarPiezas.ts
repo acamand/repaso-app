@@ -38,8 +38,8 @@ export const PIEZAS_AVATAR: PiezaAvatar[] = [
   { categoria: 'fondo', valor: 'cielo', nombre: 'Cielo', nivel: 1 },
   { categoria: 'fondo', valor: 'bosque', nombre: 'Bosque', nivel: 3 },
   { categoria: 'fondo', valor: 'montana', nombre: 'Montaña', nivel: 3 },
-  { categoria: 'fondo', valor: 'atardecer', nombre: 'Atardecer', nivel: 7 },
-  { categoria: 'fondo', valor: 'ciudad', nombre: 'Ciudad', nivel: 7 },
+  { categoria: 'fondo', valor: 'atardecer', nombre: 'Atardecer', nivel: 8 },
+  { categoria: 'fondo', valor: 'ciudad', nombre: 'Ciudad', nivel: 8 },
   { categoria: 'fondo', valor: 'aurora', nombre: 'Aurora boreal', nivel: 15 },
 
   // --- Accesorio ---

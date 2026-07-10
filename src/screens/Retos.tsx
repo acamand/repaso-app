@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import type { Activity, Nivel } from '@/types';
+import type { Activity, Nivel, PerPerfilProgress } from '@/types';
 import { loadRetos } from '@/lib/content';
+import { nivelDeXP } from '@/lib/progress';
+import { nombreDeNivel } from '@/lib/niveles';
+import { nivelDesbloqueoReto, retoDesbloqueado, tituloReto } from '@/lib/retos';
 
 interface Props {
   nivel: Nivel;
+  progress: PerPerfilProgress;
   onBack: () => void;
   onDoReto: (reto: Activity) => void;
 }
@@ -13,18 +17,13 @@ const materiaLabel: Record<string, string> = {
   lengua: 'Lengua',
 };
 
-/** Título legible de un reto: la primera línea del enunciado, sin el emoji. */
-function tituloReto(a: Activity): string {
-  const primera = a.enunciado.split('\n')[0].trim();
-  return primera.replace(/^🏆\s*/, '');
-}
-
-export function Retos({ nivel, onBack, onDoReto }: Props) {
+export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
   const [retos, setRetos] = useState<Activity[] | null>(null);
+  const nivelActual = nivelDeXP(progress.xpTotal).nivel;
 
   useEffect(() => {
     loadRetos(nivel)
-      .then(setRetos)
+      .then((rs) => setRetos([...rs].sort((a, b) => nivelDesbloqueoReto(a) - nivelDesbloqueoReto(b))))
       .catch(() => setRetos([]));
   }, [nivel]);
 
@@ -56,24 +55,57 @@ export function Retos({ nivel, onBack, onDoReto }: Props) {
           </div>
         )}
 
-        {retos?.map((reto) => (
-          <button
-            key={reto.id}
-            onClick={() => onDoReto(reto)}
-            className="card p-4 w-full text-left hover:ring-2 hover:ring-copper/40 transition"
-          >
-            <div className="flex items-start gap-3">
-              <span className="text-2xl shrink-0" aria-hidden>🏆</span>
-              <div className="flex-1 min-w-0">
-                <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
-                  <span className="chip-xp">+{reto.xp} XP</span>
+        {retos?.map((reto) => {
+          const nivelReq = nivelDesbloqueoReto(reto);
+          const desbloqueado = retoDesbloqueado(reto, nivelActual);
+
+          if (!desbloqueado) {
+            return (
+              <div key={reto.id} className="card p-4 opacity-60">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl shrink-0" aria-hidden>🔒</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-display text-base leading-snug text-paper-700">
+                      Reto especial bloqueado
+                    </div>
+                    <div className="flex items-center gap-2 mt-2 flex-wrap">
+                      <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
+                      <span className="text-[11px] text-paper-700 font-mono">
+                        Se desbloquea en el nivel {nivelReq} — {nombreDeNivel(nivelReq)}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </button>
-        ))}
+            );
+          }
+
+          const completado = !!progress.actividadesCompletadas[reto.id];
+
+          return (
+            <button
+              key={reto.id}
+              onClick={() => onDoReto(reto)}
+              className="card p-4 w-full text-left hover:ring-2 hover:ring-copper/40 transition"
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl shrink-0" aria-hidden>🏆</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
+                  <div className="flex items-center gap-2 mt-2 flex-wrap">
+                    <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
+                    <span className="chip-xp">+{reto.xp} XP</span>
+                    {completado && (
+                      <span className="text-[0.6rem] uppercase tracking-wider text-sage">
+                        ✓ hecho
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </button>
+          );
+        })}
       </main>
     </div>
   );

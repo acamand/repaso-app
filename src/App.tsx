@@ -18,6 +18,8 @@ import { hitosNuevos } from '@/lib/niveles';
 import type { NivelDef } from '@/lib/niveles';
 import { piezasNuevasEntreNiveles } from '@/lib/avatarPiezas';
 import type { PiezaAvatar } from '@/lib/avatarPiezas';
+import { retosNuevosEntreNiveles } from '@/lib/retos';
+import { loadRetos } from '@/lib/content';
 import { calcularEstrellas, evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { ProfileSelect } from '@/screens/ProfileSelect';
@@ -59,8 +61,10 @@ export default function App() {
     return { tag: s.perfilActivo ? 'home' : 'select' };
   });
   const [etapaInfo, setEtapaInfo] = useState<EtapaInfo | null>(null);
+  const [retos, setRetos] = useState<Activity[]>([]);
   const [subioNivel, setSubioNivel] = useState<NivelDef | null>(null);
   const [piezaNueva, setPiezaNueva] = useState<PiezaAvatar | null>(null);
+  const [retoNuevo, setRetoNuevo] = useState<Activity | null>(null);
   // XP acumulado en la sesión en curso (ref para leerlo en el momento de terminar).
   const xpSesionRef = useRef(0);
 
@@ -91,6 +95,18 @@ export default function App() {
     ? state.perfiles.find((p) => p.id === state.perfilActivo) ?? null
     : null;
 
+  // Retos del curso del perfil activo, precargados para poder anunciar en el
+  // modal de subida de nivel exactamente cuál se acaba de desbloquear.
+  useEffect(() => {
+    if (!profile) {
+      setRetos([]);
+      return;
+    }
+    loadRetos(profile.nivel)
+      .then(setRetos)
+      .catch(() => setRetos([]));
+  }, [profile?.nivel]);
+
   const handleActivityDone = (
     activity: Activity,
     result: ActivityResult,
@@ -105,9 +121,11 @@ export default function App() {
       const nivelAntes = nivelDeXP(xpAntes).nivel;
       const nivelDespues = nivelDeXP(xpDespues).nivel;
       const piezas = piezasNuevasEntreNiveles(nivelAntes, nivelDespues);
+      const retosDesbloqueados = retosNuevosEntreNiveles(retos, nivelAntes, nivelDespues);
       if (nuevos.length > 0) {
         setSubioNivel(nuevos[nuevos.length - 1]);
         setPiezaNueva(piezas.length > 0 ? piezas[piezas.length - 1] : null);
+        setRetoNuevo(retosDesbloqueados.length > 0 ? retosDesbloqueados[retosDesbloqueados.length - 1] : null);
       }
     }
     // XP acumulado de la sesión, para la Curiosidad del día al terminar.
@@ -216,6 +234,7 @@ export default function App() {
     content = (
       <Retos
         nivel={profile.nivel}
+        progress={progress}
         onBack={() => setView({ tag: 'home' })}
         onDoReto={empezarReto}
       />
@@ -267,6 +286,7 @@ export default function App() {
   } else {
     content = (
       <SessionRunner
+        key={view.session.actividades.map((a) => a.id).join(',')}
         session={view.session}
         onActivityDone={handleActivityDone}
         onFinish={() => setView({ tag: 'curiosidad', xpGanado: xpSesionRef.current })}
@@ -282,19 +302,28 @@ export default function App() {
           hito={subioNivel}
           avatarActual={profile.avatar}
           piezaNueva={piezaNueva}
+          retoNuevo={retoNuevo}
           onIrReto={() => {
+            const reto = retoNuevo;
             setSubioNivel(null);
             setPiezaNueva(null);
-            setView({ tag: 'retos' });
+            setRetoNuevo(null);
+            if (reto) {
+              empezarReto(reto);
+            } else {
+              setView({ tag: 'retos' });
+            }
           }}
           onPersonalizar={() => {
             setSubioNivel(null);
             setPiezaNueva(null);
+            setRetoNuevo(null);
             setView({ tag: 'avatar' });
           }}
           onCerrar={() => {
             setSubioNivel(null);
             setPiezaNueva(null);
+            setRetoNuevo(null);
           }}
         />
       )}

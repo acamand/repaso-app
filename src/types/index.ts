@@ -27,6 +27,8 @@ export interface ActivityBase {
   /** Tiempo estimado en segundos (lo usa el planificador para no pasarse de la hora diaria). */
   tiempo_estimado_s: number;
   enunciado: string;
+  /** Nivel del alumno requerido para desbloquearlo (solo se usa en los retos especiales). */
+  nivel_desbloqueo?: number;
 }
 
 export interface MultipleChoiceActivity extends ActivityBase {
