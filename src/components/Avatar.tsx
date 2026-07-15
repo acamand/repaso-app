@@ -187,7 +187,3 @@ export const AVATAR_OPCIONES = {
   fondo: Object.keys(fondoColores),
   accesorio: ['ninguno', 'gorro', 'bufanda', 'gafas', 'mochila'],
 } as const;
-
-export function avatarPorDefecto(): AvatarConfig {
-  return { base: 'explorer-1', pelo: 'oscuro', ropa: 'azul', fondo: 'arena', accesorio: 'ninguno' };
-}

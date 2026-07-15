@@ -1,5 +1,9 @@
 import type { AvatarConfig } from '@/types';
 
+export function avatarPorDefecto(): AvatarConfig {
+  return { base: 'explorer-1', pelo: 'oscuro', ropa: 'azul', fondo: 'arena', accesorio: 'ninguno' };
+}
+
 export type CategoriaPieza = 'pelo' | 'ropa' | 'fondo' | 'accesorio';
 
 export interface PiezaAvatar {
