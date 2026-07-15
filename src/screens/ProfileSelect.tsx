@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Profile, Nivel, ProgressState } from '@/types';
-import { Avatar, avatarPorDefecto } from '@/components/Avatar';
+import { Avatar } from '@/components/Avatar';
+import { avatarPorDefecto } from '@/lib/avatarPiezas';
 
 interface Props {
   state: ProgressState;

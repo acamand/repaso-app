@@ -7,11 +7,48 @@ import type {
   ProgressState,
   ViajeProgress,
 } from '@/types';
-import { readState, writeState } from './storage';
+import { readRaw, writeState } from './storage';
 import { PRIMERA_ETAPA_ID } from './ruta';
-import { idsPiezasDesbloqueadas } from './avatarPiezas';
+import { avatarPorDefecto, idsPiezasDesbloqueadas } from './avatarPiezas';
 
 const FECHA_HOY = () => new Date().toISOString().slice(0, 10);
+
+/**
+ * Versión del esquema de ProgressState guardado en localStorage.
+ *
+ * El progreso del alumno es sagrado: nunca debe perderse por un cambio en la
+ * estructura de datos. Cuando añadas o cambies un campo:
+ *   1. Incrementa CURRENT_VERSION.
+ *   2. Añade al final de MIGRATIONS la función que transforma la versión
+ *      anterior en la nueva. Debe ser ADITIVA (rellena valores por defecto
+ *      para lo nuevo) y nunca debe borrar datos ya guardados.
+ * `migrarEstado` aplica todas las migraciones pendientes en orden y, además,
+ * pasa el resultado por un saneado defensivo (`sanearProgressState`) que
+ * garantiza la forma correcta incluso si una migración tiene un fallo o el
+ * JSON guardado está parcialmente corrupto.
+ */
+export const CURRENT_VERSION = 1;
+
+type RawState = Record<string, unknown>;
+
+// v0 -> v1: primera versión formal del esquema versionado. No hay ningún
+// campo que reubicar todavía — el saneado defensivo de `sanearProgressState`
+// (que se aplica siempre, después de las migraciones) ya rellena por su
+// cuenta todo lo añadido antes de que existiera este sistema (avatar del
+// perfil, viaje, tutorialVisto, piezasAvatarDesbloqueadas…). Este paso queda
+// como plantilla: cuando v2 necesite mover o transformar un campo concreto
+// (no solo rellenarlo con un valor por defecto), va aquí.
+const MIGRATIONS: Array<(raw: RawState) => RawState> = [
+  (raw) => raw,
+];
+
+function isObject(v: unknown): v is Record<string, unknown> {
+  return typeof v === 'object' && v !== null && !Array.isArray(v);
+}
+
+function stringArray(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+}
 
 function defaultViajeProgress(): ViajeProgress {
   return {
@@ -39,36 +76,129 @@ function emptyPerfilProgress(): PerPerfilProgress {
   };
 }
 
-// Migración suave: perfiles guardados antes de añadir `viaje` (o campos nuevos
-// dentro de `viaje`, como `estrellas` o `curiosidadesVistas`) reciben los valores
-// por defecto que falten sin perder lo ya guardado.
-function hydratePerfilProgress(p: PerPerfilProgress): PerPerfilProgress {
-  const base = defaultViajeProgress();
-  const viajeGuardado = (p as Partial<PerPerfilProgress>).viaje;
-  const viaje = viajeGuardado ? { ...base, ...viajeGuardado } : base;
-  // Si faltaba el registro de piezas desbloqueadas (perfil anterior a esta
-  // función), se recalcula según el nivel YA alcanzado: así no se le "roban"
-  // al alumno piezas que ya se había ganado antes de que esto existiera.
-  const piezasAvatarDesbloqueadas =
-    p.piezasAvatarDesbloqueadas ?? idsPiezasDesbloqueadas(nivelDeXP(p.xpTotal ?? 0).nivel);
-  return { ...p, viaje, tutorialVisto: p.tutorialVisto ?? false, piezasAvatarDesbloqueadas };
-}
-
 function emptyState(): ProgressState {
   return { perfiles: [], perfilActivo: null, porPerfil: {} };
 }
 
-export function loadProgress(): ProgressState {
-  const raw = readState<ProgressState>(emptyState());
-  const porPerfil: Record<string, PerPerfilProgress> = {};
-  for (const [id, p] of Object.entries(raw.porPerfil)) {
-    porPerfil[id] = hydratePerfilProgress(p);
+// ---------- Saneado defensivo ----------
+// Ante un campo ausente o de tipo inesperado, cada función devuelve un valor
+// por defecto en vez de lanzar: un fallo aquí rompería el render de toda la
+// app y dejaría el progreso guardado inaccesible (aunque siga intacto en
+// localStorage). Se usan tanto al cargar el estado como al restaurar una
+// copia de seguridad importada manualmente.
+
+function hydrateAvatar(raw: unknown): AvatarConfig {
+  const base = avatarPorDefecto();
+  if (!isObject(raw)) return base;
+  return {
+    base: typeof raw.base === 'string' ? raw.base : base.base,
+    pelo: typeof raw.pelo === 'string' ? raw.pelo : base.pelo,
+    ropa: typeof raw.ropa === 'string' ? raw.ropa : base.ropa,
+    fondo: typeof raw.fondo === 'string' ? raw.fondo : base.fondo,
+    accesorio: typeof raw.accesorio === 'string' ? raw.accesorio : base.accesorio,
+  };
+}
+
+/** Sanea un perfil. Devuelve null solo si falta el `id` (imposible de enlazar con su progreso). */
+export function hydrateProfile(raw: unknown): Profile | null {
+  if (!isObject(raw) || typeof raw.id !== 'string' || !raw.id) return null;
+  return {
+    id: raw.id,
+    nombre: typeof raw.nombre === 'string' && raw.nombre.trim() ? raw.nombre : 'Explorador',
+    nivel: raw.nivel === '1-eso' ? '1-eso' : '5-primaria',
+    avatar: hydrateAvatar(raw.avatar),
+    creado: typeof raw.creado === 'number' ? raw.creado : Date.now(),
+  };
+}
+
+function hydrateViaje(raw: unknown): ViajeProgress {
+  const base = defaultViajeProgress();
+  if (!isObject(raw)) return base;
+  return {
+    etapaActualId: typeof raw.etapaActualId === 'string' ? raw.etapaActualId : base.etapaActualId,
+    capitulosVistos: Array.isArray(raw.capitulosVistos) ? stringArray(raw.capitulosVistos) : base.capitulosVistos,
+    sellos: isObject(raw.sellos) ? (raw.sellos as ViajeProgress['sellos']) : base.sellos,
+    estrellas: isObject(raw.estrellas) ? (raw.estrellas as ViajeProgress['estrellas']) : base.estrellas,
+    curiosidadesVistas: Array.isArray(raw.curiosidadesVistas)
+      ? stringArray(raw.curiosidadesVistas)
+      : base.curiosidadesVistas,
+  };
+}
+
+/** Sanea el progreso de un perfil, rellenando cualquier campo ausente o con tipo inesperado. */
+export function hydratePerfilProgress(raw: unknown): PerPerfilProgress {
+  const p = isObject(raw) ? raw : {};
+  const xpTotal = typeof p.xpTotal === 'number' && Number.isFinite(p.xpTotal) && p.xpTotal >= 0 ? p.xpTotal : 0;
+  return {
+    xpTotal,
+    rachaDias: typeof p.rachaDias === 'number' && Number.isFinite(p.rachaDias) ? p.rachaDias : 0,
+    ultimaActividadFecha: typeof p.ultimaActividadFecha === 'string' ? p.ultimaActividadFecha : null,
+    actividadesCompletadas: isObject(p.actividadesCompletadas)
+      ? (p.actividadesCompletadas as Record<string, CompletedActivity>)
+      : {},
+    saberesDominados: stringArray(p.saberesDominados),
+    logrosDesbloqueados: stringArray(p.logrosDesbloqueados),
+    tiempoHoyS: typeof p.tiempoHoyS === 'number' && Number.isFinite(p.tiempoHoyS) ? p.tiempoHoyS : 0,
+    fechaHoy: typeof p.fechaHoy === 'string' ? p.fechaHoy : null,
+    viaje: hydrateViaje(p.viaje),
+    tutorialVisto: p.tutorialVisto === true,
+    // Si faltaba (perfil anterior a esta función), se recalcula según el
+    // nivel YA alcanzado: así no se le "roban" al alumno piezas que ya se
+    // había ganado antes de que este campo existiera.
+    piezasAvatarDesbloqueadas: Array.isArray(p.piezasAvatarDesbloqueadas)
+      ? stringArray(p.piezasAvatarDesbloqueadas)
+      : idsPiezasDesbloqueadas(nivelDeXP(xpTotal).nivel),
+  };
+}
+
+function hydratePorPerfil(raw: unknown): Record<string, PerPerfilProgress> {
+  const out: Record<string, PerPerfilProgress> = {};
+  if (!isObject(raw)) return out;
+  for (const [id, p] of Object.entries(raw)) {
+    out[id] = hydratePerfilProgress(p);
   }
-  return { ...raw, porPerfil };
+  return out;
+}
+
+/** Saneado final: garantiza la forma correcta de ProgressState pase lo que pase antes. */
+function sanearProgressState(raw: RawState): ProgressState {
+  return {
+    perfiles: Array.isArray(raw.perfiles)
+      ? raw.perfiles.map(hydrateProfile).filter((p): p is Profile => p !== null)
+      : [],
+    perfilActivo: typeof raw.perfilActivo === 'string' ? raw.perfilActivo : null,
+    porPerfil: hydratePorPerfil(raw.porPerfil),
+  };
+}
+
+/** Aplica las migraciones pendientes (desde la versión guardada hasta CURRENT_VERSION) y sanea el resultado. */
+export function migrarEstado(raw: unknown): ProgressState {
+  let s: RawState = isObject(raw) ? raw : {};
+  const desde = typeof s.version === 'number' && s.version >= 0 ? Math.floor(s.version) : 0;
+  for (let v = desde; v < CURRENT_VERSION; v++) {
+    const paso = MIGRATIONS[v];
+    if (!paso) break; // no debería faltar, pero un paso ausente no debe romper la carga
+    s = paso(s);
+  }
+  return sanearProgressState(s);
+}
+
+export function loadProgress(): ProgressState {
+  try {
+    const raw = readRaw();
+    if (raw === null) return emptyState();
+    return migrarEstado(raw);
+  } catch (err) {
+    // El progreso nunca debe perderse en silencio por un fallo inesperado
+    // aquí: se registra el error para poder diagnosticarlo, pero como último
+    // recurso se cae a un estado vacío en vez de dejar la app rota.
+    console.error('Error migrando el progreso guardado, se usa estado vacío:', err);
+    return emptyState();
+  }
 }
 
 export function saveProgress(state: ProgressState): void {
-  writeState(state);
+  writeState({ ...state, version: CURRENT_VERSION });
 }
 
 export function addProfile(state: ProgressState, profile: Profile): ProgressState {
@@ -137,6 +267,37 @@ export function setCuriosidadesVistas(
       ...state.porPerfil,
       [perfilId]: { ...actual, viaje: { ...actual.viaje, curiosidadesVistas: vistas } },
     },
+  };
+}
+
+/**
+ * Restaura (o añade) un perfil y su progreso desde una copia de seguridad
+ * importada manualmente. Los datos se sanean igual que al cargar desde
+ * localStorage, así que una copia parcialmente corrupta o de una versión
+ * antigua de la app se recupera igual de bien. Si ya existe un perfil con
+ * el mismo id se sobrescribe (recuperación); si no, se añade como nuevo.
+ * El resto de perfiles guardados no se toca.
+ *
+ * Nunca lanza (igual que el resto de funciones de este módulo que
+ * transforman ProgressState): si el perfil de la copia no trae un `id`
+ * válido se le asigna uno nuevo, en vez de descartar la restauración.
+ */
+export function restoreFromBackup(
+  state: ProgressState,
+  rawProfile: unknown,
+  rawProgress: unknown,
+): ProgressState {
+  const perfil = hydrateProfile(rawProfile) ?? hydrateProfile({ ...Object(rawProfile), id: crypto.randomUUID() })!;
+  const progreso = hydratePerfilProgress(rawProgress);
+  const yaExiste = state.perfiles.some((p) => p.id === perfil.id);
+  const perfiles = yaExiste
+    ? state.perfiles.map((p) => (p.id === perfil.id ? perfil : p))
+    : [...state.perfiles, perfil];
+  return {
+    ...state,
+    perfiles,
+    perfilActivo: perfil.id,
+    porPerfil: { ...state.porPerfil, [perfil.id]: progreso },
   };
 }
 

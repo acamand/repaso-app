@@ -19,6 +19,7 @@ interface Props {
   onShowLogros: () => void;
   onShowTutorial: () => void;
   onShowAvatar: () => void;
+  onShowAjustes: () => void;
 }
 
 export function Home({
@@ -32,6 +33,7 @@ export function Home({
   onShowLogros,
   onShowTutorial,
   onShowAvatar,
+  onShowAjustes,
 }: Props) {
   const [session, setSession] = useState<DailySession | null>(null);
   const [cargando, setCargando] = useState(true);
@@ -121,6 +123,14 @@ export function Home({
           </button>
           <button onClick={onSwitchProfile} className="text-xs text-paper-700 hover:text-ink shrink-0">
             Cambiar perfil
+          </button>
+          <button
+            onClick={onShowAjustes}
+            className="text-xs text-paper-700 hover:text-ink shrink-0"
+            title="Ajustes y copia de seguridad"
+            aria-label="Ajustes y copia de seguridad"
+          >
+            ⚙
           </button>
         </div>
         <div className="max-w-2xl mx-auto px-4 pb-3">

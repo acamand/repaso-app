@@ -6,6 +6,7 @@ import {
   loadProgress,
   nivelDeXP,
   recordActivity,
+  restoreFromBackup,
   rolloverDay,
   saveProgress,
   setActiveProfile,
@@ -32,6 +33,7 @@ import { Retos } from '@/screens/Retos';
 import { Tutorial } from '@/screens/Tutorial';
 import { CuriosidadDia } from '@/screens/CuriosidadDia';
 import { AvatarEditor } from '@/screens/AvatarEditor';
+import { Ajustes } from '@/screens/Ajustes';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import { LevelUpModal } from '@/components/LevelUpModal';
@@ -47,6 +49,7 @@ type View =
   | { tag: 'logros' }
   | { tag: 'retos' }
   | { tag: 'avatar' }
+  | { tag: 'ajustes' }
   | { tag: 'curiosidad'; xpGanado: number }
   | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
 
@@ -203,6 +206,7 @@ export default function App() {
         onShowLogros={() => setView({ tag: 'logros' })}
         onShowTutorial={() => setView({ tag: 'tutorial' })}
         onShowAvatar={() => setView({ tag: 'avatar' })}
+        onShowAjustes={() => setView({ tag: 'ajustes' })}
       />
     );
   } else if (view.tag === 'pasaporte') {
@@ -245,6 +249,17 @@ export default function App() {
         avatar={profile.avatar}
         progress={progress}
         onSave={(config) => setState((s) => setAvatarConfig(s, config))}
+        onBack={() => setView({ tag: 'home' })}
+      />
+    );
+  } else if (view.tag === 'ajustes') {
+    content = (
+      <Ajustes
+        profile={profile}
+        progress={progress}
+        onRestore={(rawProfile, rawProgress) => {
+          setState((s) => restoreFromBackup(s, rawProfile, rawProgress));
+        }}
         onBack={() => setView({ tag: 'home' })}
       />
     );
