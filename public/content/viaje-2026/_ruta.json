@@ -1,8 +1,8 @@
 {
   "nombre": "Cabo Norte 2026",
-  "descripcion": "Ida y vuelta en autocaravana desde Córdoba hasta Cabo Norte, atravesando Europa por el este y volviendo por Suecia y Alemania.",
+  "descripcion": "Ida y vuelta en autocaravana desde Córdoba hasta Cabo Norte: subida por el oeste y Escandinavia (con ferry a Suecia), y bajada por los países bálticos y Polonia.",
   "inicio_estimado": "2026-07-07",
-  "duracion_total_dias_aprox": 45,
+  "duracion_total_dias_aprox": 46,
   "fases": [
     {
       "id": "subida",
@@ -11,14 +11,12 @@
       "etapas": [
         { "id": "espana-ida", "pais": "España", "dias_aprox": 3, "tema": "Salida desde Córdoba y travesía por la península." },
         { "id": "francia-ida", "pais": "Francia", "dias_aprox": 5, "tema": "Travesía de Francia de sur a norte." },
-        { "id": "belgica-ida", "pais": "Bélgica", "dias_aprox": 1, "tema": "Posible parada en Bélgica.", "opcional": true },
-        { "id": "alemania-ida", "pais": "Alemania", "dias_aprox": 2, "tema": "Tránsito por Alemania camino de Polonia." },
-        { "id": "polonia", "pais": "Polonia", "dias_aprox": 3, "tema": "Travesía hasta el corredor de Suwałki." },
-        { "id": "lituania", "pais": "Lituania", "dias_aprox": 1, "tema": "Primer país báltico." },
-        { "id": "letonia", "pais": "Letonia", "dias_aprox": 1, "tema": "Riga y entorno." },
-        { "id": "estonia", "pais": "Estonia", "dias_aprox": 2, "tema": "Hasta Tallinn." },
-        { "id": "ferry-tallinn-helsinki", "pais": "Mar Báltico", "dias_aprox": 0.5, "tema": "Ferry Tallinn → Helsinki.", "tipo": "travesia" },
-        { "id": "finlandia", "pais": "Finlandia", "dias_aprox": 3, "tema": "Subida por Finlandia." },
+        { "id": "belgica-ida", "pais": "Bélgica", "dias_aprox": 1, "tema": "Parada en Bélgica de camino al norte." },
+        { "id": "paises-bajos-ida", "pais": "Países Bajos", "dias_aprox": 1, "tema": "Parada corta en Países Bajos, camino de Alemania y el ferry a Suecia." },
+        { "id": "alemania-ida", "pais": "Alemania", "dias_aprox": 2, "tema": "Tránsito por Alemania camino del ferry a Suecia." },
+        { "id": "ferry-alemania-malmo", "pais": "Mar Báltico", "dias_aprox": 0.5, "tema": "Ferry Alemania → Suecia.", "tipo": "travesia" },
+        { "id": "suecia-ida", "pais": "Suecia", "dias_aprox": 7, "tema": "Subiendo por Suecia hacia Finlandia y Cabo Norte." },
+        { "id": "finlandia-ida", "pais": "Finlandia", "dias_aprox": 1, "tema": "Último tramo por Finlandia antes de Cabo Norte." },
         { "id": "noruega-cabo-norte", "pais": "Noruega", "dias_aprox": 1, "tema": "Tramo final hasta Cabo Norte." }
       ]
     },
@@ -33,12 +31,16 @@
     {
       "id": "bajada",
       "nombre": "Bajada hacia Córdoba",
-      "duracion_dias_aprox": 22,
+      "duracion_dias_aprox": 24,
       "etapas": [
-        { "id": "suecia", "pais": "Suecia", "dias_aprox": 7, "tema": "Atravesando Suecia casi de norte a sur." },
-        { "id": "ferry-malmo-alemania", "pais": "Mar Báltico", "dias_aprox": 0.5, "tema": "Ferry Malmö → Alemania.", "tipo": "travesia" },
+        { "id": "finlandia-vuelta", "pais": "Finlandia", "dias_aprox": 2, "tema": "Bajando por Finlandia tras Cabo Norte, camino del ferry a Estonia." },
+        { "id": "ferry-finlandia-estonia", "pais": "Mar Báltico", "dias_aprox": 0.5, "tema": "Ferry Finlandia → Estonia.", "tipo": "travesia" },
+        { "id": "estonia", "pais": "Estonia", "dias_aprox": 2, "tema": "Primer país báltico, recién llegados en ferry." },
+        { "id": "letonia", "pais": "Letonia", "dias_aprox": 1, "tema": "Riga y entorno." },
+        { "id": "lituania", "pais": "Lituania", "dias_aprox": 1, "tema": "Último país báltico antes de Polonia." },
+        { "id": "polonia", "pais": "Polonia", "dias_aprox": 3, "tema": "Bajada desde el corredor de Suwałki hacia Alemania." },
         { "id": "alemania-vuelta", "pais": "Alemania", "dias_aprox": 3, "tema": "Travesía de vuelta por Alemania." },
-        { "id": "paises-bajos", "pais": "Países Bajos", "dias_aprox": 2, "tema": "Posible parada en Países Bajos.", "opcional": true },
+        { "id": "paises-bajos-vuelta", "pais": "Países Bajos", "dias_aprox": 2, "tema": "Posible parada en Países Bajos.", "opcional": true },
         { "id": "belgica-vuelta", "pais": "Bélgica", "dias_aprox": 1, "tema": "Posible parada en Bélgica de vuelta.", "opcional": true },
         { "id": "francia-vuelta", "pais": "Francia", "dias_aprox": 5, "tema": "Travesía de Francia de norte a sur." },
         { "id": "espana-vuelta", "pais": "España", "dias_aprox": 3, "tema": "Último tramo hasta Córdoba." }

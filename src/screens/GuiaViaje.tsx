@@ -101,7 +101,10 @@ export function GuiaViaje({ progress, onBack, etapaInicial }: Props) {
                       className="w-14 h-9 rounded-sm shadow-sm shrink-0 border border-paper-300/40"
                     />
                     <div className="flex-1 min-w-0">
-                      <div className="font-display text-base leading-tight">{etapa.pais}</div>
+                      <div className="font-display text-base leading-tight flex items-center gap-1.5">
+                        {etapa.tipo === 'travesia' && <span aria-hidden>🚢</span>}
+                        {etapa.pais}
+                      </div>
                       <div className="text-xs text-paper-700 truncate">
                         {[datos?.capital, datos?.idioma].filter((s) => s && s !== '—').join(' · ')}
                       </div>

@@ -1,15 +1,15 @@
 {
-  "etapa_id": "ferry-tallinn-helsinki",
+  "etapa_id": "ferry-finlandia-estonia",
   "pais": "Mar Báltico",
-  "intro": "Toca subir la autocaravana a un ferry. En vez de rodear todo el golfo de Finlandia por carretera, cruzáis el mar Báltico en barco: en unas dos horas y media pasáis de Tallinn (Estonia) a Helsinki (Finlandia), sin conducir ni un kilómetro.",
+  "intro": "Segundo ferry del viaje: toca subir la autocaravana a un barco otra vez. En vez de rodear todo el golfo de Finlandia por carretera, cruzáis el mar Báltico en barco: en unas dos horas y media pasáis de Helsinki (Finlandia) a Tallinn (Estonia), sin conducir ni un kilómetro. Con este cruce empieza la bajada por los países bálticos.",
   "datos_curiosos": [
-    "El golfo de Finlandia separa Estonia de Finlandia por apenas 80 km de agua en su punto más corto. Los ferries hacen la travesía Tallinn-Helsinki varias veces al día, todo el año.",
+    "El golfo de Finlandia separa Estonia de Finlandia por apenas 80 km de agua en su punto más corto. Los ferries hacen la travesía Helsinki-Tallinn varias veces al día, todo el año.",
     "Algunos de estos ferries son gigantescos: pueden llevar más de 2.000 pasajeros y cientos de vehículos a la vez, con restaurantes, tiendas libres de impuestos y hasta zonas de juego para niños.",
     "En invierno, partes del golfo de Finlandia pueden congelarse, y los ferries necesitan rompehielos para abrir camino. En verano, en cambio, la travesía es tranquila y muchos pasajeros la hacen en cubierta viendo el horizonte."
   ],
   "frases_idioma": [
-    { "original": "Laeva!", "traduccion": "¡Barco! en estonio" },
-    { "original": "Hyvää matkaa!", "traduccion": "¡Buen viaje! en finés, para cuando lleguéis" },
+    { "original": "Hyvää matkaa!", "traduccion": "¡Buen viaje! en finés, despidiéndose de Finlandia" },
+    { "original": "Tere!", "traduccion": "¡Hola! en estonio, para cuando lleguéis" },
     { "original": "Missä on kansi?", "traduccion": "¿Dónde está la cubierta? en finés" }
   ],
   "sello": {

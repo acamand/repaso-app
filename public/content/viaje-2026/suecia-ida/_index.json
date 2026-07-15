@@ -1,7 +1,7 @@
 {
-  "etapa_id": "suecia",
+  "etapa_id": "suecia-ida",
   "pais": "Suecia",
-  "titulo": "Bajando por Suecia",
+  "titulo": "Subiendo por Suecia",
   "descripcion": "Alces, IKEA y el derecho a la naturaleza. Mates con distancias largas y coronas suecas, lengua con textos sobre sociedad y naturaleza.",
   "unidades": [
     { "id": "calentamiento", "titulo": "Cálculo mental — coronas suecas y distancias", "archivo": "calentamiento.json" },
