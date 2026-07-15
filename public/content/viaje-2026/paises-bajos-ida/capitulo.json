@@ -1,0 +1,14 @@
+{
+  "etapa_id": "paises-bajos-ida",
+  "pais": "Países Bajos",
+  "intro": "PENDIENTE: escribir la intro de la parada en Países Bajos durante la subida (antes de entrar en Alemania camino de Escandinavia).",
+  "datos_curiosos": [],
+  "frases_idioma": [],
+  "curiosidades_diarias": [],
+  "sello": {
+    "descripcion": "PENDIENTE",
+    "color_fondo": "#21468B",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}

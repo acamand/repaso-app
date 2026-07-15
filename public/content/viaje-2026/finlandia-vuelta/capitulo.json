@@ -1,0 +1,14 @@
+{
+  "etapa_id": "finlandia-vuelta",
+  "pais": "Finlandia",
+  "intro": "PENDIENTE: escribir la intro de la bajada por Finlandia, tras dejar atrás Cabo Norte y antes del ferry hacia Estonia.",
+  "datos_curiosos": [],
+  "frases_idioma": [],
+  "curiosidades_diarias": [],
+  "sello": {
+    "descripcion": "PENDIENTE",
+    "color_fondo": "#003580",
+    "color_texto": "#FFFFFF"
+  },
+  "completado_criterio": { "tipo": "siempre" }
+}

@@ -57,12 +57,26 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia
 
   const paisActual = getEtapa(ruta, etapaActualId)?.pais ?? null;
 
-  // Línea de la ruta pasando por el marcador de cada país, en orden.
+  // Línea de la ruta pasando por el marcador de cada país, en orden. Las
+  // travesías en ferry no tienen marcador propio (son "Mar Báltico", sin
+  // forma en el mapa); se anota su punto medio para dibujar un barco encima
+  // del tramo entre el país anterior y el siguiente.
   const puntos: Array<{ x: number; y: number }> = [];
+  const barcos: Array<{ x: number; y: number }> = [];
   let ultimo = '';
+  let travesiaPendiente = false;
   for (const e of listaEtapasEnOrden(ruta)) {
+    if (e.tipo === 'travesia') {
+      travesiaPendiente = true;
+      continue;
+    }
     const c = CENTRO[e.pais];
     if (!c || e.pais === ultimo) continue;
+    if (travesiaPendiente && puntos.length > 0) {
+      const prev = puntos[puntos.length - 1];
+      barcos.push({ x: (prev.x + c.x) / 2, y: (prev.y + c.y) / 2 });
+      travesiaPendiente = false;
+    }
     puntos.push(c);
     ultimo = e.pais;
   }
@@ -140,6 +154,20 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia
               </text>
             );
           })}
+
+          {/* barquitos sobre los tramos de ferry */}
+          {barcos.map((b, i) => (
+            <text
+              key={`barco-${i}`}
+              x={b.x}
+              y={b.y + 7}
+              textAnchor="middle"
+              fontSize="22"
+              style={{ pointerEvents: 'none' }}
+            >
+              🚢
+            </text>
+          ))}
 
           {/* autocaravana sobre el país actual */}
           {centroActual && <Camper cx={centroActual.x} cy={centroActual.y} />}

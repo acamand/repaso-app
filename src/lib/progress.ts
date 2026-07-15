@@ -27,24 +27,81 @@ const FECHA_HOY = () => new Date().toISOString().slice(0, 10);
  * garantiza la forma correcta incluso si una migración tiene un fallo o el
  * JSON guardado está parcialmente corrupto.
  */
-export const CURRENT_VERSION = 1;
+export const CURRENT_VERSION = 2;
 
 type RawState = Record<string, unknown>;
-
-// v0 -> v1: primera versión formal del esquema versionado. No hay ningún
-// campo que reubicar todavía — el saneado defensivo de `sanearProgressState`
-// (que se aplica siempre, después de las migraciones) ya rellena por su
-// cuenta todo lo añadido antes de que existiera este sistema (avatar del
-// perfil, viaje, tutorialVisto, piezasAvatarDesbloqueadas…). Este paso queda
-// como plantilla: cuando v2 necesite mover o transformar un campo concreto
-// (no solo rellenarlo con un valor por defecto), va aquí.
-const MIGRATIONS: Array<(raw: RawState) => RawState> = [
-  (raw) => raw,
-];
 
 function isObject(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
+
+// Ids de etapa que cambiaron de nombre al reordenar la ruta del viaje en
+// julio de 2026 (Escandinavia ahora se entra por Suecia con ferry desde
+// Alemania; países bálticos y Polonia pasan a la bajada). Solo se usa en la
+// migración v1 -> v2, para no perder sellos/estrellas ya conseguidos con el
+// id antiguo: `_ruta.json` ya usa los ids nuevos directamente.
+const ETAPA_ID_RENOMBRADAS: Record<string, string> = {
+  'suecia': 'suecia-ida',
+  'finlandia': 'finlandia-ida',
+  'paises-bajos': 'paises-bajos-vuelta',
+  'ferry-tallinn-helsinki': 'ferry-finlandia-estonia',
+  'ferry-malmo-alemania': 'ferry-alemania-malmo',
+};
+
+/** Renombra las claves de un objeto etapaId -> valor según ETAPA_ID_RENOMBRADAS. */
+function renombrarClavesEtapa(v: unknown): unknown {
+  if (!isObject(v)) return v;
+  const out: Record<string, unknown> = {};
+  for (const [k, val] of Object.entries(v)) {
+    out[ETAPA_ID_RENOMBRADAS[k] ?? k] = val;
+  }
+  return out;
+}
+
+const MIGRATIONS: Array<(raw: RawState) => RawState> = [
+  // v0 -> v1: primera versión formal del esquema versionado. No había ningún
+  // campo que reubicar todavía — el saneado defensivo de
+  // `sanearProgressState` (que se aplica siempre, después de las
+  // migraciones) ya rellena por su cuenta todo lo añadido antes de que
+  // existiera este sistema (avatar del perfil, viaje, tutorialVisto,
+  // piezasAvatarDesbloqueadas…).
+  (raw) => raw,
+
+  // v1 -> v2: reordenación de la ruta de julio 2026 (ver ETAPA_ID_RENOMBRADAS
+  // arriba). Remapea los ids de etapa dentro de `viaje` de cada perfil, para
+  // que un alumno que ya hubiera conseguido el sello de, p.ej., "suecia" no
+  // lo pierda solo porque esa etapa ahora se llama "suecia-ida".
+  (raw) => {
+    const porPerfilRaw = raw.porPerfil;
+    if (!isObject(porPerfilRaw)) return raw;
+    const porPerfil: Record<string, unknown> = {};
+    for (const [perfilId, p] of Object.entries(porPerfilRaw)) {
+      if (!isObject(p) || !isObject(p.viaje)) {
+        porPerfil[perfilId] = p;
+        continue;
+      }
+      const viajeRaw = p.viaje;
+      const etapaActualId =
+        typeof viajeRaw.etapaActualId === 'string'
+          ? (ETAPA_ID_RENOMBRADAS[viajeRaw.etapaActualId] ?? viajeRaw.etapaActualId)
+          : viajeRaw.etapaActualId;
+      const capitulosVistosRaw = viajeRaw.capitulosVistos;
+      porPerfil[perfilId] = {
+        ...p,
+        viaje: {
+          ...viajeRaw,
+          etapaActualId,
+          sellos: renombrarClavesEtapa(viajeRaw.sellos),
+          estrellas: renombrarClavesEtapa(viajeRaw.estrellas),
+          capitulosVistos: Array.isArray(capitulosVistosRaw)
+            ? capitulosVistosRaw.map((id) => (typeof id === 'string' ? (ETAPA_ID_RENOMBRADAS[id] ?? id) : id))
+            : capitulosVistosRaw,
+        },
+      };
+    }
+    return { ...raw, porPerfil };
+  },
+];
 
 function stringArray(v: unknown): string[] {
   return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
