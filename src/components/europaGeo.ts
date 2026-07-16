@@ -72,15 +72,15 @@ export const CENTRO: Record<string, { x: number; y: number }> = {
     "y": 507.7
   },
   "Finlandia": {
-    "x": 926.9,
-    "y": 392.3
+    "x": 906.2,
+    "y": 102.3
   },
   "Noruega": {
-    "x": 644,
-    "y": 424.4
+    "x": 882.9,
+    "y": 60.8
   },
   "Suecia": {
-    "x": 742.5,
-    "y": 405.5
+    "x": 819.1,
+    "y": 186.3
   }
 };

@@ -45,6 +45,12 @@ const OBJETIVO = {
 };
 
 // Puntos-marcador (lon,lat) ~ capital/centro de cada país de la ruta.
+// Suecia, Finlandia y Noruega usan un punto de la propia ruta (no la
+// capital) porque el viaje sube por el extremo norte de Escandinavia hasta
+// Cabo Norte: Kiruna (norte de Suecia), Utsjoki (norte de Finlandia, cerca
+// de la frontera noruega) y el propio Nordkapp, en vez de Estocolmo, un
+// punto central de Finlandia u Oslo — que quedarían muy al sur/oeste del
+// trazado real y desviarían la línea de la ruta en el mapa.
 const CAPITAL = {
   España: [-3.7, 40.3],
   Francia: [2.3, 47.2],
@@ -55,9 +61,9 @@ const CAPITAL = {
   Lituania: [23.9, 55.2],
   Letonia: [24.6, 56.9],
   Estonia: [25.6, 58.9],
-  Finlandia: [25.5, 62.0],
-  Noruega: [9.5, 61.4],
-  Suecia: [15.0, 62.0],
+  Finlandia: [27.03, 69.9],
+  Noruega: [25.7864, 71.1701],
+  Suecia: [20.2253, 67.8558],
 };
 
 const LON = [-25, 45];
