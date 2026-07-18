@@ -1,5 +1,40 @@
 [
-  {"id":"5pri-reto-mat-001","type":"cuaderno_problema","formato":"cuaderno","nivel":"5-primaria","materia":"matematicas","saber_basico":"problemas-aritmetica","dificultad":2,"xp":40,"tiempo_estimado_s":600,"nivel_desbloqueo":4,"enunciado":"🏆 RETO MATEMÁTICO — «El presupuesto del explorador»\n\n📜 Marco dice: «Un buen explorador sabe que los recursos son limitados. No se trata de gastar poco ni de gastar mucho, sino de gastar con cabeza. Eso se llama prudencia, y los antiguos sabios la consideraban una de las virtudes más importantes.»\n\nTu misión: planificar un día perfecto con un presupuesto de exactamente 50 €.\n\nPrecios del país donde estéis (invéntalos si no los sabéis exactos):\n- Desayuno en cafetería: entre 5 y 12 €\n- Entrada a monumento/museo: entre 3 y 15 €\n- Comida: entre 8 y 20 €\n- Transporte (bus/taxi): entre 2 y 10 €\n- Souvenir/recuerdo: entre 3 y 15 €\n- Merienda/helado: entre 2 y 6 €\n\na) Elige qué hacer y calcula el total. Debe ser lo más cercano a 50 € posible sin pasarse.\nb) ¿Cuánto te sobra?\nc) Si el presupuesto bajara a 35 €, ¿qué quitarías y por qué?\nd) Reflexión: ¿qué es más importante, hacer muchas cosas o disfrutar pocas? Justifica.","pistas":["Haz primero una lista de todo lo que quieres y suma. Si te pasas, recorta.","Para la reflexión: no hay respuesta correcta, pero arguméntala."],"solucion":"Autoevaluación:\n☐ ¿He elegido actividades con precios realistas?\n☐ ¿El total no supera 50 €?\n☐ ¿He justificado qué quitaría con 35 €?\n☐ ¿La reflexión final está argumentada?"},
-
-  {"id":"5pri-reto-mat-002","type":"cuaderno_problema","formato":"cuaderno","nivel":"5-primaria","materia":"matematicas","saber_basico":"media-moda","dificultad":2,"xp":40,"tiempo_estimado_s":600,"nivel_desbloqueo":8,"enunciado":"🏆 RETO MATEMÁTICO — «Las estadísticas del viajero»\n\n📜 Marta dice: «A mí me encanta contar cosas raras. ¿Cuántas veces hemos dicho 'gracias' en otro idioma hoy? ¿Cuántos minutos hemos hecho cola en el baño? Los números cuentan historias que nadie más ve. Yo soy la detective de los datos de mi familia.»\n\nTu misión: crear tu propia estadística del viaje.\n\na) Elige 3 cosas que puedas medir o contar durante una semana del viaje. Ejemplos: horas de sol, km recorridos, veces que alguien dice 'gracias' en otro idioma, minutos de cola en un baño, temperatura a las 12:00…\nb) Inventa (o usa datos reales si los tienes) los datos de 7 días para cada una.\nc) Calcula la media, la moda (si hay) y el dato más alto y más bajo de cada una.\nd) ¿Qué historia cuentan tus números? Escribe 4-5 líneas interpretando los datos como un periodista.","pistas":["Elige cosas variadas: una numérica (km), una de contar (veces que…) y una de medir (temperatura).","Para interpretar: ¿hay tendencia? ¿Algún día fue especial? ¿Qué día fue 'el mejor' según tus datos?"],"solucion":"Autoevaluación:\n☐ ¿3 cosas medidas durante 7 días?\n☐ ¿Media y extremos calculados?\n☐ ¿Interpretación de 4-5 líneas?"}
+  {
+    "id": "5pri-reto-mat-001",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "problemas-aritmetica",
+    "dificultad": 2,
+    "xp": 40,
+    "tiempo_estimado_s": 600,
+    "nivel_desbloqueo": 4,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — «El presupuesto del explorador»\n\n📜 Marco dice: «Un buen explorador sabe que los recursos son limitados. No se trata de gastar poco ni de gastar mucho, sino de gastar con cabeza. Eso se llama prudencia, y los antiguos sabios la consideraban una de las virtudes más importantes.»\n\nTu misión: planificar un día perfecto con un presupuesto de exactamente 50 €.\n\nPrecios del país donde estéis (invéntalos si no los sabéis exactos):\n- Desayuno en cafetería: entre 5 y 12 €\n- Entrada a monumento/museo: entre 3 y 15 €\n- Comida: entre 8 y 20 €\n- Transporte (bus/taxi): entre 2 y 10 €\n- Souvenir/recuerdo: entre 3 y 15 €\n- Merienda/helado: entre 2 y 6 €\n\na) Elige qué hacer y calcula el total. Debe ser lo más cercano a 50 € posible sin pasarse.\nb) ¿Cuánto te sobra?\nc) Si el presupuesto bajara a 35 €, ¿qué quitarías y por qué?\nd) Reflexión: ¿qué es más importante, hacer muchas cosas o disfrutar pocas? Justifica.",
+    "pistas": [
+      "Haz primero una lista de todo lo que quieres y suma. Si te pasas, recorta.",
+      "Para la reflexión: no hay respuesta correcta, pero arguméntala."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He elegido actividades con precios realistas?\n☐ ¿El total no supera 50 €?\n☐ ¿He justificado qué quitaría con 35 €?\n☐ ¿La reflexión final está argumentada?"
+  },
+  {
+    "id": "5pri-reto-mat-002",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "media-moda",
+    "dificultad": 2,
+    "xp": 40,
+    "tiempo_estimado_s": 600,
+    "nivel_desbloqueo": 8,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — «Las estadísticas del viajero»\n\n📜 Marta dice: «A mí me encanta contar cosas raras. ¿Cuántas veces hemos dicho 'gracias' en otro idioma hoy? ¿Cuántos minutos hemos hecho cola en el baño? Los números cuentan historias que nadie más ve. Yo soy la detective de los datos de mi familia.»\n\nTu misión: crear tu propia estadística del viaje.\n\na) Elige 3 cosas que puedas medir o contar durante una semana del viaje. Ejemplos: horas de sol, km recorridos, veces que alguien dice 'gracias' en otro idioma, minutos de cola en un baño, temperatura a las 12:00…\nb) Inventa (o usa datos reales si los tienes) los datos de 7 días para cada una.\nc) Calcula la media, la moda (si hay) y el dato más alto y más bajo de cada una.\nd) ¿Qué historia cuentan tus números? Escribe 4-5 líneas interpretando los datos como un periodista.",
+    "pistas": [
+      "Elige cosas variadas: una numérica (km), una de contar (veces que…) y una de medir (temperatura).",
+      "Para interpretar: ¿hay tendencia? ¿Algún día fue especial? ¿Qué día fue 'el mejor' según tus datos?"
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿3 cosas medidas durante 7 días?\n☐ ¿Media y extremos calculados?\n☐ ¿Interpretación de 4-5 líneas?"
+  }
 ]

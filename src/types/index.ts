@@ -29,6 +29,12 @@ export interface ActivityBase {
   enunciado: string;
   /** Nivel del alumno requerido para desbloquearlo (solo se usa en los retos especiales). */
   nivel_desbloqueo?: number;
+  /**
+   * Reto especial de una sola vez: una vez completado con acierto, se excluye
+   * para siempre del pool de la sesión diaria y no vuelve a dar XP, aunque se
+   * fuerce su repetición por cualquier vía.
+   */
+  esReto?: boolean;
 }
 
 export interface MultipleChoiceActivity extends ActivityBase {

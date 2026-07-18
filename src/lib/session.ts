@@ -22,10 +22,19 @@ export async function buildDailySession(
 
   const todas = [...mates, ...lengua, ...viajeEtapa];
 
+  // Los retos especiales son de una sola vez: superados con éxito, se
+  // excluyen del pool para siempre. Se filtra aquí, antes de calcular
+  // `eligible`, para que ni siquiera el fallback a "todas" (cuando todo lo
+  // demás está en cuarentena) pueda reintroducirlos.
+  const sinRetosSuperados = todas.filter((a) => {
+    const reg = progress.actividadesCompletadas[a.id];
+    return !(a.esReto && reg?.acierto === true);
+  });
+
   const hoy = new Date().toISOString().slice(0, 10);
   const limiteCooldown = isoMinusDays(hoy, COOLDOWN_DIAS);
 
-  const eligible = todas.filter((a) => {
+  const eligible = sinRetosSuperados.filter((a) => {
     const reg = progress.actividadesCompletadas[a.id];
     if (!reg) return true;
     // Las actividades falladas vuelven al pool sin esperar; solo las acertadas
@@ -34,7 +43,7 @@ export async function buildDailySession(
     return reg.fecha < limiteCooldown;
   });
 
-  const pool = eligible.length > 0 ? eligible : todas;
+  const pool = eligible.length > 0 ? eligible : sinRetosSuperados;
 
   const seed = hashStr(hoy + ':' + nivel + ':' + etapaActualId);
   const sample = shuffle(pool, seed);

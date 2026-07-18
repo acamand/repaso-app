@@ -80,7 +80,29 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
             );
           }
 
-          const completado = !!progress.actividadesCompletadas[reto.id];
+          // Los retos son de una sola vez: superados con éxito, quedan de
+          // solo lectura (no se puede volver a hacer clic para repetirlos y
+          // sumar XP otra vez).
+          const completado = progress.actividadesCompletadas[reto.id]?.acierto === true;
+
+          if (completado) {
+            return (
+              <div key={reto.id} className="card p-4 opacity-80">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl shrink-0" aria-hidden>🏆</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
+                    <div className="flex items-center gap-2 mt-2 flex-wrap">
+                      <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
+                      <span className="text-[0.6rem] uppercase tracking-wider text-sage">
+                        ✓ Completado
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          }
 
           return (
             <button
@@ -95,11 +117,6 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
                     <span className="chip-xp">+{reto.xp} XP</span>
-                    {completado && (
-                      <span className="text-[0.6rem] uppercase tracking-wider text-sage">
-                        ✓ hecho
-                      </span>
-                    )}
                   </div>
                 </div>
               </div>

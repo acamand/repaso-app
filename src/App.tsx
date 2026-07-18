@@ -115,8 +115,10 @@ export default function App() {
     result: ActivityResult,
     tiempoS: number,
   ) => {
-    // Detección de subida de nivel (mismo cálculo de XP que recordActivity).
-    const gained = result.acierto ? activity.xp : 0;
+    // Detección de subida de nivel (mismo cálculo de XP que recordActivity,
+    // incluida la regla de que un reto especial ya superado no vuelve a dar XP).
+    const yaSuperado = activity.esReto && progress.actividadesCompletadas[activity.id]?.acierto === true;
+    const gained = result.acierto && !yaSuperado ? activity.xp : 0;
     if (gained > 0) {
       const xpAntes = progress.xpTotal;
       const xpDespues = xpAntes + gained;

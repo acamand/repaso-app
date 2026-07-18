@@ -382,6 +382,14 @@ export function recordActivity(
   if (!perfilId) return state;
   const actual = rolloverDay(state.porPerfil[perfilId] ?? emptyPerfilProgress());
 
+  // Los retos especiales son de una sola vez: si ya se superaron con éxito,
+  // no se registra nada más (ni XP, ni intentos), sea cual sea la vía por la
+  // que se hayan vuelto a intentar. Red de seguridad además del filtro del
+  // planificador de sesión (session.ts) y del bloqueo en la pantalla de Retos.
+  if (activity.esReto && actual.actividadesCompletadas[activity.id]?.acierto === true) {
+    return { ...state, porPerfil: { ...state.porPerfil, [perfilId]: actual } };
+  }
+
   const hoy = FECHA_HOY();
   // Solo el acierto otorga XP. Los fallos no penalizan pero tampoco premian:
   // la actividad sigue disponible para repetir sin cuarentena (ver session.ts).
