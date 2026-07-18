@@ -23,7 +23,7 @@ export function ActivityHeader({ activity }: Props) {
       ) : (
         <span className="chip-cuaderno">📓 mixta</span>
       )}
-      <span className="chip-xp">+{activity.xp} XP</span>
+      <span className="chip-xp">+{activity.xp} FP</span>
     </div>
   );
 }

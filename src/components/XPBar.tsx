@@ -12,7 +12,7 @@ export function XPBar({ xp }: Props) {
         <div className="font-display text-base leading-tight truncate">
           Nivel {nivel} <span className="text-paper-700">— {nombre}</span>
         </div>
-        <span className="text-[11px] text-paper-700 font-mono shrink-0">{xp} XP</span>
+        <span className="text-[11px] text-paper-700 font-mono shrink-0">{xp} FP</span>
       </div>
       <div className="h-2 bg-parchment2 rounded-full overflow-hidden mt-1.5">
         <div
@@ -24,7 +24,7 @@ export function XPBar({ xp }: Props) {
         {hito ? (
           <>
             Siguiente nivel: <span className="font-medium">{hito.nombre}</span>{' '}
-            (te faltan {xpHastaHito} XP)
+            (te faltan {xpHastaHito} FP)
           </>
         ) : (
           <>¡Has alcanzado el nivel máximo! 🏆</>
