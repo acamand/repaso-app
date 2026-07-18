@@ -55,5 +55,24 @@
       "b) Divide el resultado de (a) entre 24."
     ],
     "solucion": "a) (6−2) × 45 = 180 horas extra de experiencias memorables.\nb) 180 ÷ 24 = 7,5 días completos 'extra' de vida vivida intensamente.\nc) 12 × 3 = 36 recuerdos duraderos como mínimo.\nd) Respuesta argumentada libre, apoyada en los cálculos anteriores."
+  },
+  {
+    "id": "1eso-reto-mat-004",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "proporcionalidad",
+    "dificultad": 3,
+    "xp": 50,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 13,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — Nivel 13: Navegante veterano\n\n📜 Marco dice: «Un cuerpo funciona bien cuando cada parte hace su función sin intentar hacer más ni menos de lo que le toca. Vamos a comprobar con números si el reparto de tareas en vuestra autocaravana es proporcional al tiempo libre de cada uno.»\n\nTu misión: analiza el reparto de tareas de tu familia con proporcionalidad.\n\na) Si en un día hay 4 horas de tareas domésticas del viaje (conducir, cocinar, organizar, limpiar) repartidas entre 2 adultos y 2 menores, y los adultos hacen el 80% del tiempo total de tareas, ¿cuántos minutos de tareas hace cada adulto y cuántos cada menor (suponiendo reparto igual dentro de cada grupo)?\nb) Si un menor quisiera asumir el 25% de lo que hace un adulto, ¿cuántos minutos más de tareas debería hacer?\nc) Calcula qué porcentaje del total de tareas domésticas representaría esa nueva contribución del menor.\nd) Reflexión: usando la metáfora de Marco Aurelio del cuerpo (manos, pies, dientes que colaboran sin competir), ¿crees que un reparto matemáticamente exacto (50-50, o proporcional a la edad) es siempre lo más 'justo'? ¿Qué otros factores además de los minutos habría que tener en cuenta?",
+    "pistas": [
+      "a) 80% de 240 minutos (4h) = tiempo de los adultos. El resto (20%) para los menores, repartido entre 2.",
+      "b) Calcula primero cuánto hace un adulto individualmente."
+    ],
+    "solucion": "a) Total: 240 min. Adultos: 80% = 192 min ÷ 2 = 96 min cada uno. Menores: 20% = 48 min ÷ 2 = 24 min cada uno.\nb) 25% de 96 = 24 min más.\nc) Nueva contribución del menor: 24+24 = 48 min sobre 240 = 20% (igual que antes, porque el reparto entre 2 menores no cambia el total si es el mismo menor quien ya hacía 24).\nd) Reflexión personal libre con argumentos."
   }
 ]

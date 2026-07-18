@@ -54,5 +54,24 @@
       "d) Por ejemplo: (países × palabras por país) + (días × horas de conducción) = total de 'experiencia viajera'."
     ],
     "solucion": "Autoevaluación:\n☐ ¿He contado días y países correctamente?\n☐ ¿He calculado las palabras nuevas aprendidas?\n☐ ¿He inventado una operación con sentido y la he explicado?"
+  },
+  {
+    "id": "5pri-reto-mat-004",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "problemas-aritmetica",
+    "dificultad": 2,
+    "xp": 50,
+    "tiempo_estimado_s": 600,
+    "nivel_desbloqueo": 13,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — Nivel 13: Navegante veterano\n\n📜 Marta dice: «Un equipo funciona bien cuando cada uno hace su parte y las cuentas cuadran para todos. Vamos a repartir tareas con números, no solo con buena voluntad.»\n\nTu misión: repartir las tareas de la autocaravana de forma justa.\n\na) En un día normal hay 8 tareas que hacer (conducir, cocinar, fregar, recoger, hacer la cama, sacar la basura, comprar, planificar la ruta). Si sois 4 en la familia, ¿cuántas tareas le tocarían a cada uno si se repartieran exactamente igual?\nb) En la realidad, algunas tareas llevan más tiempo que otras. Asigna un tiempo estimado (en minutos) a cada una de las 8 tareas y suma el total de minutos de trabajo diario del equipo.\nc) Si el adulto que conduce dedica el doble de tiempo total que los demás (por la conducción), calcula cuánto tiempo dedican, en total, el resto de la familia.\nd) Reflexión: ¿crees que 'repartir igual' (misma cantidad de tareas) es lo mismo que 'repartir justo' (según el tiempo y esfuerzo real de cada tarea)? Explica con tus propios cálculos.",
+    "pistas": [
+      "a) 8 ÷ 4 = 2 tareas por persona (en un reparto ideal).",
+      "c) Si el total de minutos es X y el conductor hace el doble que 'los demás juntos', plantea una ecuación sencilla."
+    ],
+    "solucion": "a) 8 ÷ 4 = 2 tareas por persona.\nb) Respuesta libre según estimaciones (ej: 240 minutos totales).\nc) Depende de los datos del alumno, pero debe mostrarse el razonamiento correctamente.\nd) Reflexión personal: 'igual' y 'justo' no siempre son lo mismo cuando el esfuerzo no es igual."
   }
 ]
