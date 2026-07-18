@@ -4,10 +4,14 @@ import { ActivityHeader } from '@/components/ActivityHeader';
 import { XPFeedback } from '@/components/XPFeedback';
 import type { ActivityRendererProps } from './types';
 
-function normaliza(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
+/** Normalizacion minima: siempre insensible a mayusculas/minusculas, tenga o no `flexible` activado. */
+function normalizaBase(s: string): string {
+  return s.trim().toLowerCase();
+}
+
+/** Normalizacion adicional para `flexible: true`: ademas ignora tildes/diacriticos. */
+function normalizaFlexible(s: string): string {
+  return normalizaBase(s)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 }
@@ -29,8 +33,9 @@ export function FillBlank({
   };
 
   const aciertos = activity.respuestas.map((aceptadas, i) => {
-    const dado = activity.flexible ? normaliza(respuestas[i] ?? '') : (respuestas[i] ?? '').trim();
-    const comparables = activity.flexible ? aceptadas.map(normaliza) : aceptadas;
+    const normaliza = activity.flexible ? normalizaFlexible : normalizaBase;
+    const dado = normaliza(respuestas[i] ?? '');
+    const comparables = aceptadas.map(normaliza);
     return comparables.includes(dado);
   });
   const acierto = aciertos.every(Boolean);
