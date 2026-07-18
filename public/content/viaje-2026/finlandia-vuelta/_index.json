@@ -1,0 +1,10 @@
+{
+  "etapa_id": "finlandia-vuelta",
+  "pais": "Finlandia",
+  "titulo": "Bajando hacia Helsinki",
+  "descripcion": "El descenso desde Laponia hasta la costa. Mates con distancias y ferry, lengua con textos sobre la vida finlandesa.",
+  "unidades": [
+    { "id": "calentamiento", "titulo": "Cálculo mental — el descenso hacia el ferry", "archivo": "calentamiento.json" },
+    { "id": "lectura", "titulo": "Comprensión lectora — camino a Helsinki", "archivo": "lectura.json" }
+  ]
+}

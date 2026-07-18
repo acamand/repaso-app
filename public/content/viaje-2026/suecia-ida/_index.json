@@ -5,6 +5,7 @@
   "descripcion": "Alces, IKEA y el derecho a la naturaleza. Mates con distancias largas y coronas suecas, lengua con textos sobre sociedad y naturaleza.",
   "unidades": [
     { "id": "calentamiento", "titulo": "Cálculo mental — coronas suecas y distancias", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — la gran subida por Suecia", "archivo": "problemas.json" },
     { "id": "lectura", "titulo": "Comprensión lectora — Suecia", "archivo": "lectura.json" }
   ]
 }
