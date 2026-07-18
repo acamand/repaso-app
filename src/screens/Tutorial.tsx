@@ -45,7 +45,8 @@ const PANTALLAS: Pantalla[] = [
       <p>
         Con los puntos XP <strong>subes de nivel</strong>. Cada nivel tiene un nombre de explorador y
         desbloquea <strong>retos especiales</strong>: las <em>Lecciones del Camino</em>. Son actividades
-        diferentes, más creativas, con reflexiones sobre el viaje y la vida. Merece la pena llegar a ellas.
+        diferentes, más creativas, con reflexiones sobre el viaje y la vida. Cada una se hace{' '}
+        <strong>una sola vez</strong>, así que merece la pena llegar a ellas con calma.
       </p>
     ),
   },

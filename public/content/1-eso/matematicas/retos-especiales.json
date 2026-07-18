@@ -36,5 +36,24 @@
       "Para la reflexión: piensa en felicidad, cultura, naturaleza, libertad… cosas que no se miden con números."
     ],
     "solucion": "Autoevaluación:\n☐ ¿Tabla con 5 países × 5 datos?\n☐ ¿Densidad calculada correctamente?\n☐ ¿Comparación del café con porcentaje del salario?\n☐ ¿Reflexión sobre los límites de las estadísticas?"
+  },
+  {
+    "id": "1eso-reto-mat-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "matematicas",
+    "saber_basico": "proporcionalidad",
+    "dificultad": 3,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 15,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — Nivel 15: Maestro viajero\n\n📜 Marta dice: «Séneca decía que la vida no es corta, sino que nosotros la hacemos corta al desperdiciarla en tonterías. Vamos a medir, con números de verdad, cuánto tiempo habéis 'ganado' en experiencias en este viaje comparado con quedaros en casa.»\n\nTu misión: calcula tu «tiempo de vida aprovechado» en este viaje.\n\na) Si el viaje dura 45 días y en un día normal de verano en casa dedicáis, de media, 2 horas a actividades realmente memorables (que recordaréis dentro de 10 años), pero en el viaje esa cifra sube a 6 horas diarias, ¿cuántas horas de \"experiencias memorables\" extra habéis ganado en total durante el viaje?\nb) Convierte esas horas extra a días completos (24 h).\nc) Si cada país visitado os ha dejado al menos 3 recuerdos que durarán toda la vida, y habéis visitado 12 países, ¿cuántos recuerdos duraderos os lleváis, como mínimo?\nd) Reflexión (8-10 líneas): Séneca decía que no es pobre quien tiene poco tiempo, sino quien lo malgasta. Según tus propios cálculos, ¿has 'ganado tiempo de vida' en este viaje aunque hayan pasado los mismos 45 días que si os hubierais quedado en casa? Argumenta con tus números.",
+    "pistas": [
+      "a) Diferencia de horas por día × número de días.",
+      "b) Divide el resultado de (a) entre 24."
+    ],
+    "solucion": "a) (6−2) × 45 = 180 horas extra de experiencias memorables.\nb) 180 ÷ 24 = 7,5 días completos 'extra' de vida vivida intensamente.\nc) 12 × 3 = 36 recuerdos duraderos como mínimo.\nd) Respuesta argumentada libre, apoyada en los cálculos anteriores."
   }
 ]

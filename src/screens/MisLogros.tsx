@@ -1,14 +1,16 @@
-import type { PerPerfilProgress } from '@/types';
+import type { Activity, PerPerfilProgress } from '@/types';
 import { NIVELES, estadoNivel, progresoHaciaHito } from '@/lib/niveles';
 
 interface Props {
   progress: PerPerfilProgress;
+  /** Retos especiales disponibles para el nivel del perfil, para saber cuáles desbloquea cada hito. */
+  retos: Activity[];
   onBack: () => void;
   onIrReto: () => void;
   onShowAvatar: () => void;
 }
 
-export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
+export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: Props) {
   const xp = progress.xpTotal;
   const { nivel, nombre, hito, xpHastaHito, progresoHito } = estadoNivel(xp);
 
@@ -77,6 +79,8 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
               const { alcanzado, faltan, progreso } = progresoHaciaHito(xp, n);
               const esActual = n.nombre === nombre;
               const esReto = n.tipo === 'reto';
+              const retosDeEsteNivel = retos.filter((r) => r.nivel_desbloqueo === n.nivel);
+              const tieneRetoBonus = !esReto && retosDeEsteNivel.length > 0;
               return (
                 <div
                   key={n.nivel}
@@ -106,6 +110,11 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
                         {esReto && '🏆 '}
                         {n.desbloquea}
                       </div>
+                      {tieneRetoBonus && (
+                        <div className="text-xs text-copper mt-0.5">
+                          🏆 + reto especial del camino
+                        </div>
+                      )}
                     </div>
                     <div className="text-right shrink-0">
                       {alcanzado ? (
@@ -131,7 +140,7 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
                   )}
 
                   {/* Acceso directo al reto si es un nivel de reto ya desbloqueado */}
-                  {alcanzado && esReto && (
+                  {alcanzado && (esReto || tieneRetoBonus) && (
                     <button
                       onClick={onIrReto}
                       className="btn-secondary w-full mt-3 text-sm py-2"
