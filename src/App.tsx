@@ -231,6 +231,7 @@ export default function App() {
     content = (
       <MisLogros
         progress={progress}
+        retos={retos}
         onBack={() => setView({ tag: 'home' })}
         onIrReto={() => setView({ tag: 'retos' })}
         onShowAvatar={() => setView({ tag: 'avatar' })}

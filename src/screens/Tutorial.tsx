@@ -33,7 +33,7 @@ const PANTALLAS: Pantalla[] = [
         <ul className="space-y-2 text-left list-none">
           <li className="flex gap-2"><span aria-hidden>🗓️</span><span>Cada día la app te propone una sesión de actividades (unos 25 minutos, nunca más de 1 hora).</span></li>
           <li className="flex gap-2"><span aria-hidden>📱</span><span>Hay actividades <strong>en pantalla</strong> (las resuelves aquí) y actividades <strong>de cuaderno 📓</strong> (las copias y resuelves en tu cuaderno).</span></li>
-          <li className="flex gap-2"><span aria-hidden>⭐</span><span>Si aciertas, ganas puntos <strong>XP</strong>. Si fallas, 0 puntos, pero la actividad volverá otro día para que lo intentes de nuevo.</span></li>
+          <li className="flex gap-2"><span aria-hidden>⭐</span><span>Si aciertas, ganas <strong>Furgo Points (FP)</strong>. Si fallas, 0 puntos, pero la actividad volverá otro día para que lo intentes de nuevo.</span></li>
         </ul>
       </>
     ),
@@ -43,9 +43,10 @@ const PANTALLAS: Pantalla[] = [
     nombre: 'Marco',
     cuerpo: (
       <p>
-        Con los puntos XP <strong>subes de nivel</strong>. Cada nivel tiene un nombre de explorador y
+        Con los <strong>Furgo Points (FP)</strong> subes de nivel. Cada nivel tiene un nombre de explorador y
         desbloquea <strong>retos especiales</strong>: las <em>Lecciones del Camino</em>. Son actividades
-        diferentes, más creativas, con reflexiones sobre el viaje y la vida. Merece la pena llegar a ellas.
+        diferentes, más creativas, con reflexiones sobre el viaje y la vida. Cada una se hace{' '}
+        <strong>una sola vez</strong>, así que merece la pena llegar a ellas con calma.
       </p>
     ),
   },

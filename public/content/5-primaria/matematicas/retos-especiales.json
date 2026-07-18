@@ -36,5 +36,23 @@
       "Para interpretar: ¿hay tendencia? ¿Algún día fue especial? ¿Qué día fue 'el mejor' según tus datos?"
     ],
     "solucion": "Autoevaluación:\n☐ ¿3 cosas medidas durante 7 días?\n☐ ¿Media y extremos calculados?\n☐ ¿Interpretación de 4-5 líneas?"
+  },
+  {
+    "id": "5pri-reto-mat-003",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "matematicas",
+    "saber_basico": "problemas-aritmetica",
+    "dificultad": 2,
+    "xp": 50,
+    "tiempo_estimado_s": 600,
+    "nivel_desbloqueo": 15,
+    "esReto": true,
+    "enunciado": "🏆 RETO MATEMÁTICO — Nivel 15: Maestro viajero\n\n📜 Marco dice: «Un buen explorador no solo cuenta lo que gasta, también cuenta lo que ha ganado en experiencia. Vamos a hacer las cuentas de todo lo aprendido.»\n\nTu misión: haz un resumen numérico de TODO tu viaje hasta ahora.\n\na) ¿Cuántos días llevas de viaje aproximadamente?\nb) ¿Cuántos países habéis visitado hasta ahora? Haz la lista.\nc) Si cada país os ha enseñado al menos 2 palabras nuevas en su idioma, ¿cuántas palabras nuevas sabéis ya (aproximadamente)?\nd) Inventa una operación matemática (con sumas, restas, multiplicaciones) que represente tu viaje, usando datos reales o inventados (días, países, kilómetros, palabras aprendidas). Explica qué significa cada número.",
+    "pistas": [
+      "d) Por ejemplo: (países × palabras por país) + (días × horas de conducción) = total de 'experiencia viajera'."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He contado días y países correctamente?\n☐ ¿He calculado las palabras nuevas aprendidas?\n☐ ¿He inventado una operación con sentido y la he explicado?"
   }
 ]

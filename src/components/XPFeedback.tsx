@@ -13,14 +13,14 @@ export function XPFeedback({ acierto, xp }: Props) {
     return (
       <div className="flex items-center justify-center py-1">
         <span className="xp-pop inline-flex items-center gap-1 font-display text-2xl font-bold text-mustard">
-          +{xp} XP
+          +{xp} FP
         </span>
       </div>
     );
   }
   return (
     <div className="flex items-center justify-center py-1">
-      <span className="text-sm text-paper-700">0 XP — ¡Inténtalo otro día! 💪</span>
+      <span className="text-sm text-paper-700">0 FP — ¡Inténtalo otro día! 💪</span>
     </div>
   );
 }

@@ -1,14 +1,16 @@
-import type { PerPerfilProgress } from '@/types';
+import type { Activity, PerPerfilProgress } from '@/types';
 import { NIVELES, estadoNivel, progresoHaciaHito } from '@/lib/niveles';
 
 interface Props {
   progress: PerPerfilProgress;
+  /** Retos especiales disponibles para el nivel del perfil, para saber cuáles desbloquea cada hito. */
+  retos: Activity[];
   onBack: () => void;
   onIrReto: () => void;
   onShowAvatar: () => void;
 }
 
-export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
+export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: Props) {
   const xp = progress.xpTotal;
   const { nivel, nombre, hito, xpHastaHito, progresoHito } = estadoNivel(xp);
 
@@ -46,7 +48,7 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
             />
           </div>
           <div className="flex justify-between mt-1.5 text-xs text-paper-700 font-mono">
-            <span>{xp} XP</span>
+            <span>{xp} FP</span>
             {hito ? (
               <span>
                 {nombre} → {hito.nombre}
@@ -59,7 +61,7 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
           <p className="text-sm text-paper-700 mt-4">
             {hito ? (
               <>
-                Te faltan <strong className="text-ink">{xpHastaHito} XP</strong> para ser{' '}
+                Te faltan <strong className="text-ink">{xpHastaHito} FP</strong> para ser{' '}
                 <strong className="text-ink">{hito.nombre}</strong> y desbloquear:{' '}
                 {hito.desbloquea.toLowerCase()}.
               </>
@@ -77,6 +79,8 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
               const { alcanzado, faltan, progreso } = progresoHaciaHito(xp, n);
               const esActual = n.nombre === nombre;
               const esReto = n.tipo === 'reto';
+              const retosDeEsteNivel = retos.filter((r) => r.nivel_desbloqueo === n.nivel);
+              const tieneRetoBonus = !esReto && retosDeEsteNivel.length > 0;
               return (
                 <div
                   key={n.nivel}
@@ -106,6 +110,11 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
                         {esReto && '🏆 '}
                         {n.desbloquea}
                       </div>
+                      {tieneRetoBonus && (
+                        <div className="text-xs text-copper mt-0.5">
+                          🏆 + reto especial del camino
+                        </div>
+                      )}
                     </div>
                     <div className="text-right shrink-0">
                       {alcanzado ? (
@@ -114,7 +123,7 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
                         </span>
                       ) : (
                         <span className="text-[11px] text-paper-700 font-mono">
-                          faltan {faltan} XP
+                          faltan {faltan} FP
                         </span>
                       )}
                     </div>
@@ -131,7 +140,7 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
                   )}
 
                   {/* Acceso directo al reto si es un nivel de reto ya desbloqueado */}
-                  {alcanzado && esReto && (
+                  {alcanzado && (esReto || tieneRetoBonus) && (
                     <button
                       onClick={onIrReto}
                       className="btn-secondary w-full mt-3 text-sm py-2"
@@ -145,34 +154,34 @@ export function MisLogros({ progress, onBack, onIrReto, onShowAvatar }: Props) {
           </div>
         </section>
 
-        {/* Cómo funcionan los puntos */}
+        {/* Cómo funcionan los Furgo Points */}
         <section className="card p-5">
-          <h2 className="font-display text-xl mb-3">Cómo funcionan los puntos</h2>
+          <h2 className="font-display text-xl mb-3">Cómo funcionan los Furgo Points (FP)</h2>
           <ul className="space-y-3 text-sm">
             <li className="flex gap-3">
               <span className="text-mustard text-lg leading-none shrink-0">◆</span>
               <span>
-                <strong>Respuesta correcta</strong> = los puntos completos de la actividad.
+                <strong>Respuesta correcta</strong> = los FP completos de la actividad.
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-paper-500 text-lg leading-none shrink-0">◇</span>
               <span>
-                <strong>Respuesta incorrecta</strong> = 0 puntos, pero podrás repetirla otro día.
+                <strong>Respuesta incorrecta</strong> = 0 FP, pero podrás repetirla otro día.
                 Fallar no resta.
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-copper text-lg leading-none shrink-0">📓</span>
               <span>
-                Las actividades <strong>de cuaderno</strong> dan más puntos, porque requieren más
+                Las actividades <strong>de cuaderno</strong> dan más FP, porque requieren más
                 esfuerzo.
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-slate text-lg leading-none shrink-0">▲</span>
               <span>
-                Cada <strong>nivel</strong> necesita más puntos que el anterior: cuanto más subes,
+                Cada <strong>nivel</strong> necesita más FP que el anterior: cuanto más subes,
                 más aventura desbloqueas.
               </span>
             </li>

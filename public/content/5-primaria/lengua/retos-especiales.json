@@ -74,5 +74,43 @@
       "Para describir el objeto: imagina que se lo explicas a alguien que nunca ha visto nada parecido, como un extraterrestre."
     ],
     "solucion": "Autoevaluación:\n☐ ¿He estado 60 segundos en silencio de verdad?\n☐ ¿He anotado los 5 sentidos?\n☐ ¿La descripción del objeto tiene 8+ líneas?\n☐ ¿He descubierto algo nuevo al mirar con atención?"
+  },
+  {
+    "id": "5pri-reto-005",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 10,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 10: Expedicionario\n\n📜 Lección del camino #5: «Prepararse para lo que puede pasar»\n\nNota de Marco:\n\n«¿Sabes qué hacían los viajeros antiguos antes de un camino largo? Se imaginaban las cosas que podían salir mal: una tormenta, una rueda pinchada, un camino cerrado. No para asustarse, sino para no pillarse por sorpresa. Si ya lo has pensado antes, cuando pasa de verdad, reaccionas con calma en vez de con pánico. Es como ensayar una obra de teatro: cuanto más la ensayas, menos nervios tienes el día de la función.»\n\nTu reto:\n\n1. Piensa en algo que podría salir mal en lo que os queda de viaje (una avería, un camping lleno, mal tiempo, un despiste). Escribe cómo reaccionarías SI pasara, con calma, paso a paso.\n2. Ahora piensa en algo que YA os salió mal en el viaje. ¿Reaccionasteis con calma o con nervios? ¿Qué harías diferente la próxima vez sabiendo lo que sabes ahora?\n3. Inventa un «plan B» gracioso para una situación absurda (ej: qué haríais si se os pincha una rueda en medio de Laponia rodeados de renos).\n4. Escribe un lema corto sobre prepararse para lo inesperado.",
+    "pistas": [
+      "No se trata de preocuparse todo el rato, sino de pensar tranquilamente 'si pasara esto, ¿qué haría?'",
+      "El plan B absurdo puede ser divertido, ¡no tiene que ser serio!"
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He imaginado algo que podría salir mal y cómo reaccionar?\n☐ ¿He contado algo que sí salió mal y qué aprendí?\n☐ ¿He inventado un plan B gracioso?\n☐ ¿Tengo un lema sobre prepararse?"
+  },
+  {
+    "id": "5pri-reto-006",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 12,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 12: Sabio del camino\n\n📜 Lección del camino #6: «Todos somos iguales bajo el mismo cielo»\n\nNota de Marta:\n\n«He conocido a niños de todos los países del viaje: suecos, finlandeses, polacos, alemanes… Al principio pensaba que serían muy diferentes a mí, pero descubrí algo curioso: todos se ríen de las mismas tonterías, todos protestan cuando tienen que ir a dormir, todos adoran los helados. Un filósofo romano llamado Séneca, que además nació en Córdoba (¡vuestra ciudad!), decía que por debajo de las diferencias de idioma, dinero o costumbres, todos los seres humanos merecen el mismo respeto porque compartimos lo mismo por dentro.»\n\nTu reto:\n\n1. Piensa en algún niño o niña que hayáis conocido (o visto) en el viaje, de otro país. ¿Qué cosas os han parecido diferentes? ¿Qué cosas os han parecido exactamente iguales?\n2. Séneca nació en Córdoba hace 2.000 años y hoy sus ideas se leen en medio mundo. Investiga (o pregunta a un adulto) una cosa más sobre él.\n3. Escribe una reflexión (10-12 líneas) sobre qué significa para ti que todos los seres humanos merezcan el mismo respeto, con un ejemplo concreto del viaje.\n4. Diseña una postal para enviar a un amigo o amiga de otro país imaginario, presentándote y contándole algo de tu cultura.",
+    "pistas": [
+      "Piensa en el patio del colegio: ¿los niños de otros países no juegan de forma parecida a los de tu clase?",
+      "Sobre Séneca: nació en Córdoba, fue filósofo y consejero de emperadores romanos."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He comparado un niño de otro país conmigo?\n☐ ¿He investigado un dato sobre Séneca?\n☐ ¿Reflexión de 10-12 líneas con ejemplo concreto?\n☐ ¿Postal de presentación creada?"
   }
 ]

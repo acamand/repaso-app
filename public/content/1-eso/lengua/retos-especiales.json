@@ -74,5 +74,43 @@
       "Para tu propia lección del camino: piensa en qué has aprendido este verano que te habría gustado saber antes."
     ],
     "solucion": "Autoevaluación:\n☐ ¿Carta al yo del primer día con consejos concretos? (10 líneas)\n☐ ¿Carta al yo de septiembre? (10 líneas)\n☐ ¿Reflexión argumentada con 4+ conectores? (12-15 líneas)\n☐ ¿Mi propia Lección del camino?\n☐ ¿He sido sincero y reflexivo, no superficial?"
+  },
+  {
+    "id": "1eso-reto-005",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-argumentativa",
+    "dificultad": 2,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 10,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 10: Expedicionario\n\n📜 Lección del camino #5: «Premeditatio malorum» (Séneca, siglo I)\n\nNota de Marco:\n\n«Séneca recomendaba un ejercicio curioso: antes de un viaje o de algo importante, imaginar con calma todo lo que podría salir mal. No para volverte un pesimista ni para amargarte el viaje, sino todo lo contrario: quien ha pensado antes en los problemas los recibe con más calma cuando llegan, y disfruta más lo que sale bien porque ya sabía que no era seguro.\n\nA esto lo llamaba \"premeditatio malorum\": la meditación previa de los males. Nosotros, sin saberlo, ya lo hemos hecho unas cuantas veces en este viaje: cuando revisamos la autocaravana antes de salir, cuando llevamos un plan B si llueve, cuando guardamos agua extra por si acaso.»\n\nTu reto:\n\n1. Explica con tus palabras la diferencia entre \"preocuparse angustiado\" y \"prever con calma\". Pon un ejemplo de cada uno.\n2. Cuenta una situación real del viaje en la que prever algo (o no haberlo hecho) cambió lo que pasó.\n3. Texto argumentativo (10-12 líneas): ¿es mejor prepararse para lo peor o vivir el momento sin pensar en lo que podría salir mal? Da argumentos de los dos lados y termina con tu propia opinión, matizada (no todo blanco o negro).\n4. Investiga un dato sobre Séneca y su relación con Córdoba (nació allí). Escríbelo en 2-3 líneas.",
+    "pistas": [
+      "La clave está en el TONO: preocuparse angustiado paraliza; prever con calma prepara.",
+      "Para el texto argumentativo: hay estudios de psicología moderna que hablan de la 'visualización negativa' como técnica para reducir la ansiedad."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He explicado la diferencia entre preocupación angustiada y previsión calmada?\n☐ ¿He aplicado el ejercicio a una situación real?\n☐ ¿Texto argumentativo con matices (no blanco o negro)?\n☐ ¿Dato sobre Séneca y Córdoba investigado?"
+  },
+  {
+    "id": "1eso-reto-006",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-argumentativa",
+    "dificultad": 3,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 12,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 12: Sabio del camino\n\n📜 Lección del camino #6: «La igualdad de todos los seres humanos» (Séneca, Carta 47)\n\nNota de Marta:\n\n«Este dato os va a sorprender. Hace 2.000 años, en Roma, había esclavitud: personas que eran propiedad de otras personas, sin ningún derecho. Casi todo el mundo lo veía normal, como algo de toda la vida. Pero Séneca escribió una carta (la Carta 47) diciendo algo rarísimo para su época: que los esclavos eran seres humanos igual que sus dueños, que \"todos venimos de la misma semilla\" y que el que manda hoy puede ser esclavo mañana, según los caprichos de la fortuna.\n\nNo cambió las leyes de golpe, pero plantó una idea que tardaría siglos en crecer. Hoy nos parece obvio que todos somos iguales; entonces era una idea revolucionaria y minoritaria.»\n\nTu reto:\n\n1. Explica con tus palabras qué decía Séneca en la Carta 47 sobre la igualdad entre las personas.\n2. ¿Por qué crees que una idea tan \"obvia\" para nosotros era tan rara en su época? Reflexiona sobre cómo cambian las ideas de una sociedad con el tiempo.\n3. Piensa en una idea que hoy es minoritaria o discutida, pero que dentro de 100 años quizá parezca tan obvia como la igualdad nos parece a nosotros ahora. Argumenta tu elección.\n4. Texto argumentativo (12-15 líneas) sobre la igualdad entre las personas de distintos países, usando ejemplos de lo que has visto en el viaje. Usa al menos 3 conectores argumentativos (además, sin embargo, por tanto, en cambio…).",
+    "pistas": [
+      "Para el punto 3: piensa en derechos de animales, inteligencia artificial, medio ambiente… no hace falta acertar, hace falta argumentar.",
+      "No hace falta ser exhaustivo en el punto 1, basta con la idea central: todos los seres humanos compartimos la misma naturaleza."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He explicado qué era la esclavitud romana?\n☐ ¿He reflexionado sobre la valentía de Séneca en su época?\n☐ ¿He dado un ejemplo de idea minoritaria que hoy es normal?\n☐ ¿Texto argumentativo con 3+ conectores y ejemplos?\n☐ ¿12-15 líneas?"
   }
 ]

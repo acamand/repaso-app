@@ -44,7 +44,8 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
       <main className="max-w-2xl mx-auto p-4 space-y-4">
         <p className="text-sm text-paper-700">
           Las <em>Lecciones del Camino</em>: actividades especiales de Marco y Marta, más creativas y
-          reflexivas. Se desbloquean al subir de nivel.
+          reflexivas. Se desbloquean al subir de nivel. Cada una se puede hacer <strong>una sola vez</strong>:
+          una vez superada, queda guardada como recuerdo y no se repite.
         </p>
 
         {retos === null && <p className="text-paper-700 text-center py-8">Cargando retos…</p>}
@@ -116,7 +117,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
                   <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
-                    <span className="chip-xp">+{reto.xp} XP</span>
+                    <span className="chip-xp">+{reto.xp} FP</span>
                   </div>
                 </div>
               </div>

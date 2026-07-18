@@ -82,34 +82,29 @@ export function LevelUpModal({
           )}
 
           <div className="mt-6 space-y-2">
-            {esReto && (
-              <>
-                <button onClick={onIrReto} className="btn-primary w-full">
-                  Ir al reto 🏆
-                </button>
-                {piezaNueva && (
-                  <button onClick={onPersonalizar} className="btn-secondary w-full">
-                    Personalizar avatar
-                  </button>
-                )}
-                <button onClick={onCerrar} className="text-xs text-paper-700 hover:text-ink">
-                  Ahora no
-                </button>
-              </>
+            {retoNuevo && (
+              <button onClick={onIrReto} className="btn-primary w-full">
+                Ir al reto 🏆
+              </button>
             )}
 
-            {!esReto && piezaNueva && (
-              <>
-                <button onClick={onPersonalizar} className="btn-primary w-full">
-                  Personalizar ahora
-                </button>
-                <button onClick={onCerrar} className="text-xs text-paper-700 hover:text-ink">
-                  Ahora no
-                </button>
-              </>
+            {!retoNuevo && piezaNueva && (
+              <button onClick={onPersonalizar} className="btn-primary w-full">
+                Personalizar ahora
+              </button>
             )}
 
-            {!esReto && !piezaNueva && (
+            {retoNuevo && piezaNueva && (
+              <button onClick={onPersonalizar} className="btn-secondary w-full">
+                Personalizar avatar
+              </button>
+            )}
+
+            {retoNuevo || piezaNueva ? (
+              <button onClick={onCerrar} className="text-xs text-paper-700 hover:text-ink">
+                Ahora no
+              </button>
+            ) : (
               <button onClick={onCerrar} className="btn-primary w-full">
                 ¡Genial!
               </button>

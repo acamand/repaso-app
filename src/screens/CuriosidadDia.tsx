@@ -83,7 +83,7 @@ export function CuriosidadDia({ progress, xpGanado, onCuriosidadesVistas, onVolv
 
           <div className="mt-4 inline-flex items-center gap-2 bg-mustard/15 border border-mustard/40 rounded-full px-4 py-1.5">
             <span className="font-display text-xl text-slate">+{xpGanado}</span>
-            <span className="text-sm text-paper-700">XP hoy</span>
+            <span className="text-sm text-paper-700">FP hoy</span>
           </div>
 
           {cargando && (
