@@ -5,6 +5,7 @@
   "descripcion": "Castillos, inventos y palabras larguísimas. Mates con grandes números, lengua con textos culturales.",
   "unidades": [
     { "id": "calentamiento", "titulo": "Cálculo mental — castillos e inventos", "archivo": "calentamiento.json" },
+    { "id": "problemas", "titulo": "Problemas — recta final hacia el sur", "archivo": "problemas.json" },
     { "id": "lectura", "titulo": "Comprensión lectora — cultura alemana", "archivo": "lectura.json" }
   ]
 }
