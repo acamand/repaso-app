@@ -36,7 +36,10 @@ export const NIVELES: NivelDef[] = [
   { nivel: 8, nombre: 'Trotamundos', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 9, nombre: 'Centinela', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 10, nombre: 'Expedicionario', desbloquea: 'Nuevo accesorio: Gafas de explorador', tipo: 'avatar-accesorio' },
+  { nivel: 11, nombre: 'Vigía', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 12, nombre: 'Sabio del camino', desbloquea: 'El reto especial más exigente', tipo: 'reto' },
+  { nivel: 13, nombre: 'Navegante veterano', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
+  { nivel: 14, nombre: 'Explorador experto', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 15, nombre: 'Maestro viajero', desbloquea: 'Título especial en tu perfil', tipo: 'titulo' },
 ];
 

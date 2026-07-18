@@ -112,5 +112,43 @@
       "Sobre Séneca: nació en Córdoba, fue filósofo y consejero de emperadores romanos."
     ],
     "solucion": "Autoevaluación:\n☐ ¿He comparado un niño de otro país conmigo?\n☐ ¿He investigado un dato sobre Séneca?\n☐ ¿Reflexión de 10-12 líneas con ejemplo concreto?\n☐ ¿Postal de presentación creada?"
+  },
+  {
+    "id": "5pri-reto-007",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 50,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 11,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 11: Vigía\n\n📜 Lección del camino #7: «Prepararse para la gente difícil» (Marco Aurelio)\n\nNota de Marco:\n\n«Marco Aurelio empezaba cada mañana con un pensamiento curioso: 'Hoy me voy a encontrar con alguien maleducado, alguien impaciente, alguien que me caerá mal'. No lo hacía para amargarse, sino para no sorprenderse. Así, cuando pasaba de verdad, no se enfadaba tanto: ya lo había previsto. En un viaje tan largo como el vuestro, seguro que os habéis cruzado con alguna persona borde, un camping saturado, o una cola eterna con gente impaciente.»\n\nTu reto:\n\n1. Cuenta una situación real del viaje en la que alguien (un desconocido, o incluso alguien de tu familia) estuviera de mal humor o fuera un poco borde contigo. ¿Cómo reaccionaste?\n2. Si hubieras «previsto» esa situación como hacía Marco Aurelio, ¿crees que habrías reaccionado diferente? ¿Cómo?\n3. Escribe 3 frases tipo «Hoy puede que me encuentre con...» pensando en situaciones típicas de la vida diaria (no solo del viaje) que os podrían molestar, y junto a cada una, cómo reaccionarías con calma.\n4. Reflexión: ¿es lo mismo 'prever que algo malo puede pasar' que 'ser pesimista'? Explica la diferencia con tus palabras.",
+    "pistas": [
+      "No se trata de esperar siempre lo peor, sino de no sorprenderte cuando la vida no es perfecta.",
+      "Ejemplo: 'Hoy puede que mi hermano me moleste. Si pasa, respiraré hondo antes de contestar.'"
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿He contado una situación real?\n☐ ¿He reflexionado sobre cómo habría reaccionado distinto?\n☐ ¿3 frases de previsión con reacción calmada?\n☐ ¿He explicado la diferencia entre prever y ser pesimista?"
+  },
+  {
+    "id": "5pri-reto-008",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 3,
+    "xp": 55,
+    "tiempo_estimado_s": 900,
+    "nivel_desbloqueo": 14,
+    "esReto": true,
+    "enunciado": "🏆 RETO ESPECIAL — Nivel 14: Explorador experto\n\n📜 Lección del camino #8: «Nacimos para colaborar» (Marco Aurelio)\n\nNota de Marta:\n\n«Marco Aurelio decía algo bonito: que las personas nacimos para colaborar, igual que las manos, los pies, los párpados o los dientes de arriba y de abajo trabajan juntos sin pelearse. Ninguna parte del cuerpo intenta hacer el trabajo de la otra sola; se ayudan. Pensad en vuestra familia en la autocaravana: un espacio pequeño, muchas tareas, mucho tiempo juntos. Eso solo funciona si cada uno colabora como una pieza del equipo.»\n\nTu reto:\n\n1. Haz una lista de todas las tareas que hacen falta cada día en la autocaravana (conducir, cocinar, recoger, elegir ruta, entretener, limpiar...). Junto a cada una, escribe quién la hace normalmente.\n2. ¿Hay alguna tarea que crees que podrías asumir tú más a menudo para ayudar mejor al equipo familiar?\n3. Compara la familia en la autocaravana con el ejemplo de Marco Aurelio (manos, pies, dientes). Escribe un texto de 10 líneas explicando el paralelismo con tus propias palabras.\n4. Inventa un lema familiar sobre la colaboración, como si fuera el escudo de armas de vuestro «equipo viajero».",
+    "pistas": [
+      "Piensa en tareas invisibles que a veces no se valoran: hacer reír a todos, tener paciencia, ceder el sitio…",
+      "El lema puede ser divertido: '¡Cuatro ruedas, un equipo!'"
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿Lista de tareas con quién las hace?\n☐ ¿He identificado una tarea que podría asumir más?\n☐ ¿Comparación con el ejemplo del cuerpo (10 líneas)?\n☐ ¿Lema familiar inventado?"
   }
 ]
