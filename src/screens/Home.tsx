@@ -232,7 +232,7 @@ export function Home({
         )}
 
         <section className="grid grid-cols-3 gap-3 text-center">
-          <Stat label="XP total" valor={progress.xpTotal} />
+          <Stat label="FP total" valor={progress.xpTotal} />
           <Stat label="Racha" valor={progress.rachaDias} sufijo="días" />
           <Stat label="Actividades" valor={Object.keys(progress.actividadesCompletadas).length} />
         </section>

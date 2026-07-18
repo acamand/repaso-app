@@ -117,7 +117,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
                   <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
-                    <span className="chip-xp">+{reto.xp} XP</span>
+                    <span className="chip-xp">+{reto.xp} FP</span>
                   </div>
                 </div>
               </div>
