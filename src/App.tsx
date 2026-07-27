@@ -79,6 +79,29 @@ export default function App() {
       .catch(() => setEtapaInfo({ activityIds: {}, criterios: {} }));
   }, []);
 
+  // Recalcula sellos/estrellas del perfil activo en cuanto `etapaInfo` esté
+  // disponible (o al cambiar de perfil). Cubre dos casos que `handleActivityDone`
+  // por sí solo no cubre: una actividad completada justo antes de que termine
+  // de cargar `etapaInfo` (la comprobación de esa actividad se habría saltado
+  // en silencio), y actividades ya completadas en sesiones anteriores cuyo
+  // sello no se otorgó porque en ese momento el criterio no era alcanzable.
+  useEffect(() => {
+    if (!etapaInfo || !state.perfilActivo) return;
+    setState((s) => {
+      const perfilId = s.perfilActivo;
+      if (!perfilId) return s;
+      const perfil = s.porPerfil[perfilId];
+      if (!perfil) return s;
+      const conSellos = evaluarSellos(perfil.viaje, perfil.actividadesCompletadas, etapaInfo);
+      const nuevoViaje = calcularEstrellas(conSellos, perfil.actividadesCompletadas, etapaInfo);
+      if (nuevoViaje === perfil.viaje) return s;
+      return {
+        ...s,
+        porPerfil: { ...s.porPerfil, [perfilId]: { ...perfil, viaje: nuevoViaje } },
+      };
+    });
+  }, [etapaInfo, state.perfilActivo]);
+
   // Rollover de día al montar
   useEffect(() => {
     if (!state.perfilActivo) return;

@@ -15,5 +15,5 @@
     "color_fondo": "#C44545",
     "color_texto": "#F2C14E"
   },
-  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 5 }
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 2 }
 }
