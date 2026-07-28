@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { NumberInputActivity } from '@/types';
 import { ActivityHeader } from '@/components/ActivityHeader';
 import { XPFeedback } from '@/components/XPFeedback';
+import { parseNumeroEs } from '@/lib/numero';
 import type { ActivityRendererProps } from './types';
 
 export function NumberInput({
@@ -12,7 +13,7 @@ export function NumberInput({
   const [estado, setEstado] = useState<'inicio' | 'comprobado'>('inicio');
   const [intentos, setIntentos] = useState(0);
 
-  const parsed = parseFloat(valor.replace(',', '.'));
+  const parsed = parseNumeroEs(valor);
   const tol = activity.tolerancia ?? 0.001;
   const acierto = !isNaN(parsed) && Math.abs(parsed - activity.respuesta) <= tol;
 
