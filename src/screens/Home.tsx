@@ -180,7 +180,7 @@ export function Home({
 
           {!cargando && session && session.actividades.length === 0 && !tope && (
             <p className="text-paper-700">
-              No hay actividades disponibles todavía. Pídele a un adulto que añada contenido al banco.
+              Ya casi no te queda tiempo de práctica por hoy. Vuelve un poco más tarde o mañana.
             </p>
           )}
 

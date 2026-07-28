@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
+import { descripcionSelloVisible } from '@/lib/selloIcono';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
 import { MapaEuropa } from '@/components/MapaEuropa';
+import { SelloBadge } from '@/components/SelloBadge';
 
 interface Props {
   progress: PerPerfilProgress;
@@ -120,6 +122,7 @@ interface PaginaProps {
 
 function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas }: PaginaProps) {
   const datos = getDatosPais(ruta, etapa.pais);
+  const descripcion = capitulo ? descripcionSelloVisible(capitulo.sello.descripcion) : null;
   return (
     <div className={`card p-4 flex items-center gap-4 ${etapa.opcional ? 'opacity-60' : ''}`}>
       <Flag
@@ -138,6 +141,9 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas }: PaginaProp
           <div className="mt-1.5">
             <Estrellas conseguidas={estrellas} size={15} />
           </div>
+        )}
+        {sello && descripcion && (
+          <div className="text-[0.7rem] text-paper-700 mt-1 leading-snug">{descripcion}</div>
         )}
         {etapa.opcional && (
           <div className="text-[0.65rem] uppercase tracking-wider text-paper-500 mt-0.5">
@@ -158,17 +164,16 @@ interface SelloProps {
 
 function SelloRedondel({ codigo, capitulo, sello }: SelloProps) {
   if (sello) {
-    const fondo = capitulo?.sello.color_fondo ?? '#2E5C7E';
-    const texto = capitulo?.sello.color_texto ?? '#FFFFFF';
     return (
-      <div
-        className="w-20 h-20 rounded-full flex flex-col items-center justify-center text-center shadow-md -rotate-6 border-2 shrink-0"
-        style={{ backgroundColor: fondo, color: texto, borderColor: texto }}
-        title={capitulo?.sello.descripcion}
-      >
-        <div className="font-display text-2xl leading-none">{codigo}</div>
-        <div className="text-[0.6rem] mt-1 opacity-90 font-mono">{formateaFecha(sello.fecha)}</div>
-      </div>
+      <SelloBadge
+        codigo={codigo}
+        descripcion={capitulo?.sello.descripcion ?? ''}
+        colorFondo={capitulo?.sello.color_fondo ?? '#2E5C7E'}
+        colorTexto={capitulo?.sello.color_texto ?? '#FFFFFF'}
+        fecha={sello.fecha}
+        size={80}
+        className="-rotate-6"
+      />
     );
   }
   return (
@@ -179,10 +184,4 @@ function SelloRedondel({ codigo, capitulo, sello }: SelloProps) {
       ?
     </div>
   );
-}
-
-function formateaFecha(iso: string): string {
-  const parts = iso.split('-');
-  if (parts.length !== 3) return iso;
-  return `${parts[2]}/${parts[1]}`;
 }
