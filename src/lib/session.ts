@@ -1,5 +1,7 @@
 import type { Activity, DailySession, Nivel, PerPerfilProgress } from '@/types';
 import { loadAllActivities } from './content';
+import { nivelDeXP } from './progress';
+import { retoDesbloqueado } from './retos';
 import { loadEtapaActivitiesByNivel } from './ruta';
 
 const LIMITE_DIARIO_S = 60 * 60;
@@ -22,13 +24,25 @@ export async function buildDailySession(
 
   const todas = [...mates, ...lengua, ...viajeEtapa];
 
-  // Los retos especiales son de una sola vez: superados con éxito, se
-  // excluyen del pool para siempre. Se filtra aquí, antes de calcular
-  // `eligible`, para que ni siquiera el fallback a "todas" (cuando todo lo
-  // demás está en cuarentena) pueda reintroducirlos.
+  // `retos-especiales.json` está listado como una unidad más dentro del
+  // índice curricular de cada materia (para que `loadRetos` no sea la única
+  // vía de acceso), así que `mates`/`lengua` ya incluyen TODOS los retos de
+  // TODOS los niveles, sin filtrar. Aquí se filtran dos cosas antes de
+  // calcular `eligible`, para que ni siquiera el fallback a "todas" (cuando
+  // todo lo demás está en cuarentena) pueda reintroducirlas:
+  //  - Retos ya superados con éxito: son de una sola vez, se excluyen para
+  //    siempre.
+  //  - Retos cuyo `nivel_desbloqueo` el alumno todavía no ha alcanzado: sin
+  //    este filtro, un reto pensado para mucho más adelante podía colarse en
+  //    la sesión diaria normal (la pantalla de Retos si aplica bien este
+  //    filtro, pero es solo una vía secundaria; la sesión diaria es la
+  //    principal).
+  const nivelActual = nivelDeXP(progress.xpTotal).nivel;
   const sinRetosSuperados = todas.filter((a) => {
     const reg = progress.actividadesCompletadas[a.id];
-    return !(a.esReto && reg?.acierto === true);
+    if (a.esReto && reg?.acierto === true) return false;
+    if (a.esReto && !retoDesbloqueado(a, nivelActual)) return false;
+    return true;
   });
 
   const hoy = new Date().toISOString().slice(0, 10);
@@ -48,7 +62,17 @@ export async function buildDailySession(
   const seed = hashStr(hoy + ':' + nivel + ':' + etapaActualId);
   const sample = shuffle(pool, seed);
 
-  const presupuestoTotal = Math.max(0, OBJETIVO_NORMAL_S - progress.tiempoHoyS);
+  // Cada sesión se dimensiona a OBJETIVO_NORMAL_S (25 min), pero sin superar
+  // lo que quede hasta el límite diario duro (60 min). OJO: no restar aquí
+  // directamente `progress.tiempoHoyS` a OBJETIVO_NORMAL_S — tiempoHoyS es un
+  // acumulado de TODO el día (tiempo real de reloj, no la suma de
+  // tiempo_estimado_s), así que tras una sola sesión ya puede superar los 25
+  // min aunque quede mucho margen hasta el límite duro; eso dejaba
+  // presupuestoTotal en 0 y la sesión completamente vacía en cuanto se pedía
+  // una segunda sesión el mismo día, bloqueando la app aunque hubiera
+  // cientos de actividades disponibles.
+  const restanteHastaLimiteDiario = Math.max(0, LIMITE_DIARIO_S - progress.tiempoHoyS);
+  const presupuestoTotal = Math.min(OBJETIVO_NORMAL_S, restanteHastaLimiteDiario);
   const seleccion: Activity[] = [];
   let presupuesto = presupuestoTotal;
 

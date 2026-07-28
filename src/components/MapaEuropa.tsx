@@ -3,6 +3,7 @@ import type { Capitulo, Etapa, PerPerfilProgress, Ruta } from '@/types';
 import { getDatosPais, getEtapa, listaEtapasEnOrden } from '@/lib/ruta';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
+import { SelloBadge } from '@/components/SelloBadge';
 import { CENTRO, EUROPA_VIEWBOX, FORMAS } from '@/components/europaGeo';
 
 interface Props {
@@ -23,6 +24,7 @@ interface PaisInfo {
   visitado: boolean;
   color: string;
   colorTexto: string;
+  descripcionSello: string;
   estrellas: number;
   etapaRepresentativa: string;
 }
@@ -37,6 +39,7 @@ function resumenPais(
   let visitado = false;
   let color = BEIGE;
   let colorTexto = '#5C5546';
+  let descripcionSello = '';
   let estrellas = 0;
   for (const e of etapas) {
     if (progress.viaje.sellos[e.id]) {
@@ -45,11 +48,12 @@ function resumenPais(
       if (cap) {
         color = cap.color_fondo;
         colorTexto = cap.color_texto;
+        descripcionSello = cap.descripcion;
       }
     }
     estrellas = Math.max(estrellas, progress.viaje.estrellas[e.id] ?? 0);
   }
-  return { pais, etapas, visitado, color, colorTexto, estrellas, etapaRepresentativa: etapas[0]?.id ?? '' };
+  return { pais, etapas, visitado, color, colorTexto, descripcionSello, estrellas, etapaRepresentativa: etapas[0]?.id ?? '' };
 }
 
 export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia }: Props) {
@@ -206,12 +210,14 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia
               )}
             </div>
             {sel.visitado && (
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-display shrink-0 border-2 -rotate-6"
-                style={{ backgroundColor: sel.color, color: sel.colorTexto, borderColor: sel.colorTexto }}
-              >
-                {selDatos?.codigo}
-              </div>
+              <SelloBadge
+                codigo={selDatos?.codigo ?? '??'}
+                descripcion={sel.descripcionSello}
+                colorFondo={sel.color}
+                colorTexto={sel.colorTexto}
+                size={44}
+                className="-rotate-6"
+              />
             )}
           </div>
           <button

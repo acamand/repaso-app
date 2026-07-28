@@ -1,5 +1,7 @@
 import type { Capitulo, DatosPais, Etapa, Ruta } from '@/types';
+import { descripcionSelloVisible } from '@/lib/selloIcono';
 import { Flag } from '@/components/Flag';
+import { SelloBadge } from '@/components/SelloBadge';
 
 /** Payload de navegación cuando hay que mostrar la llegada antes de la sesión. */
 export interface LlegadaInfo {
@@ -25,6 +27,8 @@ export function LlegadaPais({ etapa, capitulo, datosPais, onContinuar }: Props) 
     capitulo.completado_criterio.tipo === 'actividades_etapa_min'
       ? `Lo conseguirás al completar ${capitulo.completado_criterio.valor} actividades de esta etapa.`
       : 'Sello automático al llegar a la etapa.';
+
+  const descripcion = descripcionSelloVisible(capitulo.sello.descripcion);
 
   return (
     <div className="min-h-dvh">
@@ -69,19 +73,15 @@ export function LlegadaPais({ etapa, capitulo, datosPais, onContinuar }: Props) 
         <section>
           <h2 className="font-display text-xl mb-3">El sello</h2>
           <div className="card p-4 flex items-center gap-4">
-            <div
-              className="w-20 h-20 rounded-full flex items-center justify-center text-center shadow-md border-2 shrink-0"
-              style={{
-                backgroundColor: capitulo.sello.color_fondo,
-                color: capitulo.sello.color_texto,
-                borderColor: capitulo.sello.color_texto,
-              }}
-              title={capitulo.sello.descripcion}
-            >
-              <div className="font-display text-2xl leading-none">{codigo}</div>
-            </div>
+            <SelloBadge
+              codigo={codigo}
+              descripcion={capitulo.sello.descripcion}
+              colorFondo={capitulo.sello.color_fondo}
+              colorTexto={capitulo.sello.color_texto}
+              size={80}
+            />
             <div className="flex-1 text-sm leading-relaxed">
-              <div>{capitulo.sello.descripcion}</div>
+              {descripcion && <div>{descripcion}</div>}
               <div className="text-xs text-paper-700 mt-2">{criterioTexto}</div>
             </div>
           </div>
