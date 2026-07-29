@@ -214,6 +214,7 @@ export default function App() {
       <Home
         profile={profile}
         progress={progress}
+        etapaInfo={etapaInfo}
         onStartSession={(session, llegada) => {
           xpSesionRef.current = 0;
           if (llegada) {
@@ -238,6 +239,7 @@ export default function App() {
     content = (
       <Pasaporte
         progress={progress}
+        etapaInfo={etapaInfo}
         onBack={() => setView({ tag: 'home' })}
         onVerGuia={(etapaId) => setView({ tag: 'guia', etapaInicial: etapaId })}
       />
@@ -296,6 +298,8 @@ export default function App() {
         etapa={llegada.etapa}
         capitulo={llegada.capitulo}
         datosPais={llegada.ruta.datos_paises[llegada.etapa.pais] ?? null}
+        progress={progress}
+        etapaInfo={etapaInfo}
         onContinuar={() => {
           const perfilId = state.perfilActivo;
           if (perfilId) {

@@ -3,6 +3,7 @@ import type { AvatarConfig, PerPerfilProgress } from '@/types';
 import { Avatar } from '@/components/Avatar';
 import type { CategoriaPieza } from '@/lib/avatarPiezas';
 import { PIEZAS_AVATAR, estaDesbloqueada } from '@/lib/avatarPiezas';
+import { xpParaNivel } from '@/lib/niveles';
 
 interface Props {
   avatar: AvatarConfig;
@@ -63,6 +64,7 @@ export function AvatarEditor({ avatar, progress, onSave, onBack }: Props) {
                   const desbloqueada = estaDesbloqueada(desbloqueadas, categoria, pieza.valor);
                   const seleccionada = config[categoria] === pieza.valor;
                   const previewConfig = { ...config, [categoria]: pieza.valor };
+                  const faltanFp = Math.max(0, xpParaNivel(pieza.nivel) - progress.xpTotal);
                   return (
                     <button
                       key={pieza.valor}
@@ -81,7 +83,15 @@ export function AvatarEditor({ avatar, progress, onSave, onBack }: Props) {
                         )}
                       </div>
                       <span className="text-[0.65rem] text-center leading-tight text-paper-700">
-                        {desbloqueada ? pieza.nombre : `Nivel ${pieza.nivel}`}
+                        {desbloqueada ? (
+                          pieza.nombre
+                        ) : (
+                          <>
+                            Se desbloquea en el nivel {pieza.nivel}
+                            <br />
+                            <span className="text-copper">te faltan {faltanFp} FP</span>
+                          </>
+                        )}
                       </span>
                       {seleccionada && desbloqueada && (
                         <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-slate text-white text-[0.65rem] flex items-center justify-center">

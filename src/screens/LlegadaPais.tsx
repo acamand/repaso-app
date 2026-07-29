@@ -1,5 +1,7 @@
-import type { Capitulo, DatosPais, Etapa, Ruta } from '@/types';
+import type { Capitulo, DatosPais, Etapa, PerPerfilProgress, Ruta } from '@/types';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
+import { progresoSello } from '@/lib/sellos';
+import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { SelloBadge } from '@/components/SelloBadge';
 
@@ -14,17 +16,22 @@ interface Props {
   etapa: Etapa;
   capitulo: Capitulo;
   datosPais: DatosPais | null;
+  progress: PerPerfilProgress;
+  etapaInfo: EtapaInfo | null;
   onContinuar: () => void;
 }
 
-export function LlegadaPais({ etapa, capitulo, datosPais, onContinuar }: Props) {
+export function LlegadaPais({ etapa, capitulo, datosPais, progress, etapaInfo, onContinuar }: Props) {
   const codigo = datosPais?.codigo ?? '??';
   const subtitulo = [datosPais?.capital, datosPais?.idioma, datosPais?.moneda]
     .filter((s) => s && s !== '—')
     .join(' · ');
 
-  const criterioTexto =
-    capitulo.completado_criterio.tipo === 'actividades_etapa_min'
+  const progreso = etapaInfo ? progresoSello(etapa.id, progress.actividadesCompletadas, etapaInfo) : null;
+
+  const criterioTexto = progreso
+    ? `Completa ${progreso.objetivo} actividades de esta etapa para conseguirlo (llevas ${progreso.completadas} de ${progreso.objetivo}).`
+    : capitulo.completado_criterio.tipo === 'actividades_etapa_min'
       ? `Lo conseguirás al completar ${capitulo.completado_criterio.valor} actividades de esta etapa.`
       : 'Sello automático al llegar a la etapa.';
 
@@ -83,6 +90,14 @@ export function LlegadaPais({ etapa, capitulo, datosPais, onContinuar }: Props) 
             <div className="flex-1 text-sm leading-relaxed">
               {descripcion && <div>{descripcion}</div>}
               <div className="text-xs text-paper-700 mt-2">{criterioTexto}</div>
+              {progreso && (
+                <div className="h-1.5 bg-parchment2 rounded-full overflow-hidden mt-1.5">
+                  <div
+                    className="h-full bg-gradient-to-r from-slate to-mustard transition-all"
+                    style={{ width: `${Math.max(4, (progreso.completadas / progreso.objetivo) * 100)}%` }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </section>
