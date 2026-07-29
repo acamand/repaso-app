@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, DailySession, PerPerfilProgress, Profile, Ruta } from '@/types';
 import { buildDailySession, alcanzadoLimiteDiario } from '@/lib/session';
 import { getEtapa, loadCapitulo, loadRuta } from '@/lib/ruta';
-import { progresoSello } from '@/lib/sellos';
+import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { Avatar } from '@/components/Avatar';
 import { XPBar } from '@/components/XPBar';
@@ -82,6 +82,7 @@ export function Home({
     !selloConseguido && etapaInfo
       ? progresoSello(etapaActualId, progress.actividadesCompletadas, etapaInfo)
       : null;
+  const esSelloSiempre = capituloActual?.completado_criterio.tipo === 'siempre';
 
   const handleStart = () => {
     if (!session) return;
@@ -223,12 +224,21 @@ export function Home({
                 >
                   {ruta.fases.map((fase) => (
                     <optgroup key={fase.id} label={fase.nombre}>
-                      {fase.etapas.map((etapa) => (
-                        <option key={etapa.id} value={etapa.id}>
-                          {etapa.pais}
-                          {etapa.opcional ? ' (opcional)' : ''}
-                        </option>
-                      ))}
+                      {fase.etapas.map((etapa) => {
+                        const sellada = !!progress.viaje.sellos[etapa.id];
+                        const marcador =
+                          etapa.opcional && !sellada
+                            ? ' — opcional, sello pendiente'
+                            : etapa.opcional
+                              ? ' (opcional)'
+                              : '';
+                        return (
+                          <option key={etapa.id} value={etapa.id}>
+                            {etapa.pais}
+                            {marcador}
+                          </option>
+                        );
+                      })}
                     </optgroup>
                   ))}
                 </select>
@@ -239,6 +249,11 @@ export function Home({
             )}
             {selloConseguido && (
               <p className="text-xs text-sage mt-3">🏅 Sello de {etapaActual.pais} conseguido.</p>
+            )}
+            {!selloConseguido && esSelloSiempre && (
+              <p className="text-xs text-copper mt-3">
+                {mensajeSelloSiempre(etapaActual.pais)}
+              </p>
             )}
             {progreso && (
               <div className="mt-3">

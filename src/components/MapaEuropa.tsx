@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta } from '@/types';
 import { getDatosPais, getEtapa, listaEtapasEnOrden } from '@/lib/ruta';
-import { progresoSello } from '@/lib/sellos';
+import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
@@ -96,6 +96,10 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId
     sel && !sel.visitado && etapaInfo && sel.etapaRepresentativa
       ? progresoSello(sel.etapaRepresentativa, progress.actividadesCompletadas, etapaInfo)
       : null;
+  const selEsSiempre =
+    sel && !sel.visitado && !selProgreso && sel.etapaRepresentativa
+      ? capitulos[sel.etapaRepresentativa]?.completado_criterio.tipo === 'siempre'
+      : false;
 
   return (
     <div>
@@ -216,6 +220,10 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId
                 <div className="text-xs text-paper-700">
                   Te faltan <strong className="text-ink">{selProgreso.objetivo - selProgreso.completadas}</strong>{' '}
                   actividades para el sello ({selProgreso.completadas}/{selProgreso.objetivo})
+                </div>
+              ) : selEsSiempre ? (
+                <div className="text-xs text-copper leading-snug">
+                  {mensajeSelloSiempre(sel.pais)}
                 </div>
               ) : (
                 <div className="text-xs text-paper-500">Aún no visitado</div>
