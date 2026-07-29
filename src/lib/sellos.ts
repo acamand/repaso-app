@@ -66,6 +66,18 @@ export function progresoSello(
 }
 
 /**
+ * Mensaje para etapas con criterio `siempre`: el sello no depende de
+ * completar actividades, solo de seleccionar esa etapa como actual y ver su
+ * pantalla de llegada. Sin este aviso, esas etapas se quedaban "mudas" en
+ * las pantallas de progreso (nada que contar, pero tampoco ninguna
+ * explicación), lo que podía hacer que un alumno avanzado se las saltara
+ * sin darse cuenta al ir cambiando de etapa en el desplegable.
+ */
+export function mensajeSelloSiempre(pais: string): string {
+  return `Este sello se consigue solo con visitar el país: selecciona ${pais} como tu etapa actual en el inicio y entra en su pantalla de bienvenida. ¡No hace falta hacer actividades para conseguirlo!`;
+}
+
+/**
  * Otorga sello a las etapas cuyo criterio `actividades_etapa_min` se cumple.
  * Los criterios `siempre` los gestiona `marcarCapituloVisto` al ver la llegada.
  * Devuelve el viaje original sin tocar si no hay sellos nuevos.

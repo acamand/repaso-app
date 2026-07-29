@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
-import { progresoSello } from '@/lib/sellos';
+import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo, ProgresoSello } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
@@ -159,6 +159,11 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: 
           <div className="text-[0.7rem] text-paper-700 mt-1">
             Te faltan <strong className="text-ink">{progreso.objetivo - progreso.completadas}</strong> actividades
             ({progreso.completadas}/{progreso.objetivo})
+          </div>
+        )}
+        {!sello && !progreso && capitulo?.completado_criterio.tipo === 'siempre' && (
+          <div className="text-[0.7rem] text-copper mt-1 leading-snug">
+            {mensajeSelloSiempre(etapa.pais)}
           </div>
         )}
         {etapa.opcional && (
