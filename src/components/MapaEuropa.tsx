@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta } from '@/types';
 import { getDatosPais, getEtapa, listaEtapasEnOrden } from '@/lib/ruta';
+import { progresoSello } from '@/lib/sellos';
+import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
 import { SelloBadge } from '@/components/SelloBadge';
@@ -10,6 +12,7 @@ interface Props {
   ruta: Ruta;
   capitulos: Record<string, Capitulo | null>;
   progress: PerPerfilProgress;
+  etapaInfo: EtapaInfo | null;
   etapaActualId: string;
   onVerGuia: (etapaId: string) => void;
 }
@@ -56,7 +59,7 @@ function resumenPais(
   return { pais, etapas, visitado, color, colorTexto, descripcionSello, estrellas, etapaRepresentativa: etapas[0]?.id ?? '' };
 }
 
-export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia }: Props) {
+export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId, onVerGuia }: Props) {
   const [selPais, setSelPais] = useState<string | null>(null);
 
   const paisActual = getEtapa(ruta, etapaActualId)?.pais ?? null;
@@ -89,6 +92,10 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia
   const sel = selPais ? resumenPais(selPais, ruta, capitulos, progress) : null;
   const selDatos = selPais ? getDatosPais(ruta, selPais) : null;
   const centroActual = paisActual ? CENTRO[paisActual] : null;
+  const selProgreso =
+    sel && !sel.visitado && etapaInfo && sel.etapaRepresentativa
+      ? progresoSello(sel.etapaRepresentativa, progress.actividadesCompletadas, etapaInfo)
+      : null;
 
   return (
     <div>
@@ -205,6 +212,11 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaActualId, onVerGuia
               <div className="font-display text-lg leading-tight">{sel.pais}</div>
               {sel.visitado ? (
                 <Estrellas conseguidas={sel.estrellas} size={14} className="mt-1" />
+              ) : selProgreso ? (
+                <div className="text-xs text-paper-700">
+                  Te faltan <strong className="text-ink">{selProgreso.objetivo - selProgreso.completadas}</strong>{' '}
+                  actividades para el sello ({selProgreso.completadas}/{selProgreso.objetivo})
+                </div>
               ) : (
                 <div className="text-xs text-paper-500">Aún no visitado</div>
               )}

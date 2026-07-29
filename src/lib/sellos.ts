@@ -37,6 +37,34 @@ export async function loadEtapaInfo(): Promise<EtapaInfo> {
   return { activityIds, criterios };
 }
 
+export interface ProgresoSello {
+  /** Actividades de la etapa ya intentadas (acierto o fallo), tope en `objetivo`. */
+  completadas: number;
+  /** `completado_criterio.valor` de esa etapa. */
+  objetivo: number;
+}
+
+/**
+ * Progreso del alumno hacia el sello de una etapa. `null` si el criterio no
+ * es por número de actividades (p.ej. `siempre`, en cuyo caso el sello se
+ * otorga al ver la llegada y no hay nada que mostrar como progreso) o si no
+ * hay datos de esa etapa todavía. Usa el mismo criterio de recuento
+ * (cualquier actividad intentada, acierto o fallo) que `evaluarSellos`, para
+ * que lo que se muestra en pantalla coincida siempre con cuándo se otorga
+ * realmente el sello.
+ */
+export function progresoSello(
+  etapaId: string,
+  actividadesCompletadas: Record<string, CompletedActivity>,
+  etapaInfo: EtapaInfo,
+): ProgresoSello | null {
+  const criterio = etapaInfo.criterios[etapaId];
+  if (!criterio || criterio.tipo !== 'actividades_etapa_min') return null;
+  const ids = etapaInfo.activityIds[etapaId] ?? [];
+  const completadas = ids.reduce((acc, id) => acc + (actividadesCompletadas[id] ? 1 : 0), 0);
+  return { completadas: Math.min(completadas, criterio.valor), objetivo: criterio.valor };
+}
+
 /**
  * Otorga sello a las etapas cuyo criterio `actividades_etapa_min` se cumple.
  * Los criterios `siempre` los gestiona `marcarCapituloVisto` al ver la llegada.

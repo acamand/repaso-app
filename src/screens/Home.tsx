@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, DailySession, PerPerfilProgress, Profile, Ruta } from '@/types';
 import { buildDailySession, alcanzadoLimiteDiario } from '@/lib/session';
 import { getEtapa, loadCapitulo, loadRuta } from '@/lib/ruta';
+import { progresoSello } from '@/lib/sellos';
+import type { EtapaInfo } from '@/lib/sellos';
 import { Avatar } from '@/components/Avatar';
 import { XPBar } from '@/components/XPBar';
 import { SessionTimer } from '@/components/SessionTimer';
@@ -11,6 +13,7 @@ import type { LlegadaInfo } from '@/screens/LlegadaPais';
 interface Props {
   profile: Profile;
   progress: PerPerfilProgress;
+  etapaInfo: EtapaInfo | null;
   onStartSession: (session: DailySession, llegada?: LlegadaInfo) => void;
   onChangeEtapaActual: (etapaId: string) => void;
   onSwitchProfile: () => void;
@@ -25,6 +28,7 @@ interface Props {
 export function Home({
   profile,
   progress,
+  etapaInfo,
   onStartSession,
   onChangeEtapaActual,
   onSwitchProfile,
@@ -73,6 +77,11 @@ export function Home({
   const etapaActual = ruta ? getEtapa(ruta, etapaActualId) : null;
   const datosPais = ruta && etapaActual ? ruta.datos_paises[etapaActual.pais] : null;
   const capituloVisto = progress.viaje.capitulosVistos.includes(etapaActualId);
+  const selloConseguido = !!progress.viaje.sellos[etapaActualId];
+  const progreso =
+    !selloConseguido && etapaInfo
+      ? progresoSello(etapaActualId, progress.actividadesCompletadas, etapaInfo)
+      : null;
 
   const handleStart = () => {
     if (!session) return;
@@ -227,6 +236,24 @@ export function Home({
             </div>
             {etapaActual.tema && (
               <p className="text-xs text-paper-700 mt-3 italic">{etapaActual.tema}</p>
+            )}
+            {selloConseguido && (
+              <p className="text-xs text-sage mt-3">🏅 Sello de {etapaActual.pais} conseguido.</p>
+            )}
+            {progreso && (
+              <div className="mt-3">
+                <p className="text-xs text-paper-700">
+                  Completa <strong className="text-ink">{progreso.objetivo} actividades</strong> de{' '}
+                  {etapaActual.pais} para conseguir tu sello (llevas{' '}
+                  <strong className="text-ink">{progreso.completadas} de {progreso.objetivo}</strong>).
+                </p>
+                <div className="h-1.5 bg-parchment2 rounded-full overflow-hidden mt-1.5">
+                  <div
+                    className="h-full bg-gradient-to-r from-slate to-mustard transition-all"
+                    style={{ width: `${Math.max(4, (progreso.completadas / progreso.objetivo) * 100)}%` }}
+                  />
+                </div>
+              </div>
             )}
           </section>
         )}

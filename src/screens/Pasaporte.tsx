@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
+import { progresoSello } from '@/lib/sellos';
+import type { EtapaInfo, ProgresoSello } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
 import { MapaEuropa } from '@/components/MapaEuropa';
@@ -9,11 +11,12 @@ import { SelloBadge } from '@/components/SelloBadge';
 
 interface Props {
   progress: PerPerfilProgress;
+  etapaInfo: EtapaInfo | null;
   onBack: () => void;
   onVerGuia: (etapaId: string) => void;
 }
 
-export function Pasaporte({ progress, onBack, onVerGuia }: Props) {
+export function Pasaporte({ progress, etapaInfo, onBack, onVerGuia }: Props) {
   const [ruta, setRuta] = useState<Ruta | null>(null);
   const [capitulos, setCapitulos] = useState<Record<string, Capitulo | null>>({});
   const [cargando, setCargando] = useState(true);
@@ -76,6 +79,7 @@ export function Pasaporte({ progress, onBack, onVerGuia }: Props) {
             ruta={ruta}
             capitulos={capitulos}
             progress={progress}
+            etapaInfo={etapaInfo}
             etapaActualId={progress.viaje.etapaActualId}
             onVerGuia={onVerGuia}
           />
@@ -102,6 +106,11 @@ export function Pasaporte({ progress, onBack, onVerGuia }: Props) {
                   capitulo={capitulos[etapa.id] ?? null}
                   sello={progress.viaje.sellos[etapa.id] ?? null}
                   estrellas={progress.viaje.estrellas[etapa.id] ?? 0}
+                  progreso={
+                    !progress.viaje.sellos[etapa.id] && etapaInfo
+                      ? progresoSello(etapa.id, progress.actividadesCompletadas, etapaInfo)
+                      : null
+                  }
                 />
               ))}
             </div>
@@ -118,9 +127,10 @@ interface PaginaProps {
   capitulo: Capitulo | null;
   sello: Sello | null;
   estrellas: number;
+  progreso: ProgresoSello | null;
 }
 
-function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas }: PaginaProps) {
+function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: PaginaProps) {
   const datos = getDatosPais(ruta, etapa.pais);
   const descripcion = capitulo ? descripcionSelloVisible(capitulo.sello.descripcion) : null;
   return (
@@ -144,6 +154,12 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas }: PaginaProp
         )}
         {sello && descripcion && (
           <div className="text-[0.7rem] text-paper-700 mt-1 leading-snug">{descripcion}</div>
+        )}
+        {!sello && progreso && (
+          <div className="text-[0.7rem] text-paper-700 mt-1">
+            Te faltan <strong className="text-ink">{progreso.objetivo - progreso.completadas}</strong> actividades
+            ({progreso.completadas}/{progreso.objetivo})
+          </div>
         )}
         {etapa.opcional && (
           <div className="text-[0.65rem] uppercase tracking-wider text-paper-500 mt-0.5">
