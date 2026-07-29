@@ -1,14 +1,14 @@
 {
   "etapa_id": "finlandia-vuelta",
   "pais": "Finlandia",
-  "intro": "PENDIENTE: escribir la intro de la bajada por Finlandia, tras dejar atrás Cabo Norte y antes del ferry hacia Estonia.",
+  "intro": "¡Moi otra vez! Dejáis atrás Cabo Norte y el sol de medianoche para bajar hacia el sur: casi 900 km desde Laponia hasta Helsinki, la capital. El paisaje cambia por completo, de los bosques árticos y los renos a una ciudad de diseño moderno, cafeterías con estampados de flores gigantes y el mar Báltico. Desde Helsinki cogeréis el ferry hacia Tallin, la capital de Estonia.",
   "datos_curiosos": [],
   "frases_idioma": [],
   "curiosidades_diarias": [],
   "sello": {
-    "descripcion": "PENDIENTE",
+    "descripcion": "Ferry zarpando del puerto de Helsinki hacia Tallin, con la ciudad de fondo.",
     "color_fondo": "#003580",
     "color_texto": "#FFFFFF"
   },
-  "completado_criterio": { "tipo": "siempre" }
+  "completado_criterio": { "tipo": "actividades_etapa_min", "valor": 2 }
 }
