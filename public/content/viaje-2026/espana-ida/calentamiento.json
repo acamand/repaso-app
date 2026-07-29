@@ -7,7 +7,7 @@
     "materia": "matematicas",
     "saber_basico": "calculo-mental",
     "dificultad": 1,
-    "xp": 8,
+    "xp": 10,
     "tiempo_estimado_s": 30,
     "enunciado": "Hoy tenéis que conducir 480 km y vais a hacer dos paradas iguales. ¿Cuántos kilómetros entre parada y parada?",
     "respuesta": 160,
