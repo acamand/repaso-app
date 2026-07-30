@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Capitulo, Etapa, PerPerfilProgress, Ruta } from '@/types';
+import type { Capitulo, Etapa, Nivel, PerPerfilProgress, Ruta } from '@/types';
 import { getDatosPais, getEtapa, listaEtapasEnOrden } from '@/lib/ruta';
 import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
@@ -10,6 +10,7 @@ import { CENTRO, EUROPA_VIEWBOX, FORMAS } from '@/components/europaGeo';
 
 interface Props {
   ruta: Ruta;
+  nivel: Nivel;
   capitulos: Record<string, Capitulo | null>;
   progress: PerPerfilProgress;
   etapaInfo: EtapaInfo | null;
@@ -59,7 +60,7 @@ function resumenPais(
   return { pais, etapas, visitado, color, colorTexto, descripcionSello, estrellas, etapaRepresentativa: etapas[0]?.id ?? '' };
 }
 
-export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId, onVerGuia }: Props) {
+export function MapaEuropa({ ruta, nivel, capitulos, progress, etapaInfo, etapaActualId, onVerGuia }: Props) {
   const [selPais, setSelPais] = useState<string | null>(null);
 
   const paisActual = getEtapa(ruta, etapaActualId)?.pais ?? null;
@@ -94,7 +95,7 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId
   const centroActual = paisActual ? CENTRO[paisActual] : null;
   const selProgreso =
     sel && !sel.visitado && etapaInfo && sel.etapaRepresentativa
-      ? progresoSello(sel.etapaRepresentativa, progress.actividadesCompletadas, etapaInfo)
+      ? progresoSello(sel.etapaRepresentativa, nivel, progress.actividadesCompletadas, etapaInfo)
       : null;
   const selEsSiempre =
     sel && !sel.visitado && !selProgreso && sel.etapaRepresentativa
@@ -219,7 +220,8 @@ export function MapaEuropa({ ruta, capitulos, progress, etapaInfo, etapaActualId
               ) : selProgreso ? (
                 <div className="text-xs text-paper-700">
                   Te faltan <strong className="text-ink">{selProgreso.objetivo - selProgreso.completadas}</strong>{' '}
-                  actividades para el sello ({selProgreso.completadas}/{selProgreso.objetivo})
+                  actividades para el sello ({selProgreso.completadas}/{selProgreso.objetivo}
+                  {selProgreso.total > selProgreso.objetivo ? ` de ${selProgreso.total} disponibles` : ''})
                 </div>
               ) : selEsSiempre ? (
                 <div className="text-xs text-copper leading-snug">

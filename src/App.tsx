@@ -76,7 +76,7 @@ export default function App() {
   useEffect(() => {
     loadEtapaInfo()
       .then(setEtapaInfo)
-      .catch(() => setEtapaInfo({ activityIds: {}, criterios: {} }));
+      .catch(() => setEtapaInfo({ activityIds: {}, criterios: {}, totalPorNivel: {} }));
   }, []);
 
   // Recalcula sellos/estrellas del perfil activo en cuanto `etapaInfo` esté
@@ -238,6 +238,7 @@ export default function App() {
   } else if (view.tag === 'pasaporte') {
     content = (
       <Pasaporte
+        nivel={profile.nivel}
         progress={progress}
         etapaInfo={etapaInfo}
         onBack={() => setView({ tag: 'home' })}
@@ -298,6 +299,7 @@ export default function App() {
         etapa={llegada.etapa}
         capitulo={llegada.capitulo}
         datosPais={llegada.ruta.datos_paises[llegada.etapa.pais] ?? null}
+        nivel={profile.nivel}
         progress={progress}
         etapaInfo={etapaInfo}
         onContinuar={() => {
@@ -333,6 +335,9 @@ export default function App() {
       <SessionRunner
         key={view.session.actividades.map((a) => a.id).join(',')}
         session={view.session}
+        progress={progress}
+        etapaInfo={etapaInfo}
+        nivel={profile.nivel}
         onActivityDone={handleActivityDone}
         onFinish={() => setView({ tag: 'curiosidad', xpGanado: xpSesionRef.current })}
       />

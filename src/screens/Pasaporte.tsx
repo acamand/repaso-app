@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Capitulo, Etapa, PerPerfilProgress, Ruta, Sello } from '@/types';
+import type { Capitulo, Etapa, Nivel, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
 import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
@@ -10,13 +10,14 @@ import { MapaEuropa } from '@/components/MapaEuropa';
 import { SelloBadge } from '@/components/SelloBadge';
 
 interface Props {
+  nivel: Nivel;
   progress: PerPerfilProgress;
   etapaInfo: EtapaInfo | null;
   onBack: () => void;
   onVerGuia: (etapaId: string) => void;
 }
 
-export function Pasaporte({ progress, etapaInfo, onBack, onVerGuia }: Props) {
+export function Pasaporte({ nivel, progress, etapaInfo, onBack, onVerGuia }: Props) {
   const [ruta, setRuta] = useState<Ruta | null>(null);
   const [capitulos, setCapitulos] = useState<Record<string, Capitulo | null>>({});
   const [cargando, setCargando] = useState(true);
@@ -77,6 +78,7 @@ export function Pasaporte({ progress, etapaInfo, onBack, onVerGuia }: Props) {
         {ruta && (
           <MapaEuropa
             ruta={ruta}
+            nivel={nivel}
             capitulos={capitulos}
             progress={progress}
             etapaInfo={etapaInfo}
@@ -108,7 +110,7 @@ export function Pasaporte({ progress, etapaInfo, onBack, onVerGuia }: Props) {
                   estrellas={progress.viaje.estrellas[etapa.id] ?? 0}
                   progreso={
                     !progress.viaje.sellos[etapa.id] && etapaInfo
-                      ? progresoSello(etapa.id, progress.actividadesCompletadas, etapaInfo)
+                      ? progresoSello(etapa.id, nivel, progress.actividadesCompletadas, etapaInfo)
                       : null
                   }
                 />
@@ -158,7 +160,8 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: 
         {!sello && progreso && (
           <div className="text-[0.7rem] text-paper-700 mt-1">
             Te faltan <strong className="text-ink">{progreso.objetivo - progreso.completadas}</strong> actividades
-            ({progreso.completadas}/{progreso.objetivo})
+            ({progreso.completadas}/{progreso.objetivo}
+            {progreso.total > progreso.objetivo ? ` de ${progreso.total} disponibles` : ''})
           </div>
         )}
         {!sello && !progreso && capitulo?.completado_criterio.tipo === 'siempre' && (

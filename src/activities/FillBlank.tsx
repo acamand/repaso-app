@@ -19,6 +19,7 @@ function normalizaFlexible(s: string): string {
 export function FillBlank({
   activity,
   onComplete,
+  onChecked,
 }: ActivityRendererProps<FillBlankActivity>) {
   const partes = activity.texto.split(/(\{\d+\})/g);
   const [respuestas, setRespuestas] = useState<string[]>(() =>
@@ -30,6 +31,7 @@ export function FillBlank({
   const comprobar = () => {
     setIntentos((i) => i + 1);
     setEstado('comprobado');
+    onChecked?.();
   };
 
   const aciertos = activity.respuestas.map((aceptadas, i) => {

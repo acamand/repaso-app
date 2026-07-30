@@ -80,7 +80,7 @@ export function Home({
   const selloConseguido = !!progress.viaje.sellos[etapaActualId];
   const progreso =
     !selloConseguido && etapaInfo
-      ? progresoSello(etapaActualId, progress.actividadesCompletadas, etapaInfo)
+      ? progresoSello(etapaActualId, profile.nivel, progress.actividadesCompletadas, etapaInfo)
       : null;
   const esSelloSiempre = capituloActual?.completado_criterio.tipo === 'siempre';
 
@@ -261,6 +261,9 @@ export function Home({
                   Completa <strong className="text-ink">{progreso.objetivo} actividades</strong> de{' '}
                   {etapaActual.pais} para conseguir tu sello (llevas{' '}
                   <strong className="text-ink">{progreso.completadas} de {progreso.objetivo}</strong>).
+                  {progreso.total > progreso.objetivo && (
+                    <> Este país tiene <strong className="text-ink">{progreso.total} actividades especiales</strong> en total, así que puedes elegir cuáles hacer.</>
+                  )}
                 </p>
                 <div className="h-1.5 bg-parchment2 rounded-full overflow-hidden mt-1.5">
                   <div

@@ -1,4 +1,4 @@
-import type { Capitulo, DatosPais, Etapa, PerPerfilProgress, Ruta } from '@/types';
+import type { Capitulo, DatosPais, Etapa, Nivel, PerPerfilProgress, Ruta } from '@/types';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
 import { progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
@@ -16,21 +16,24 @@ interface Props {
   etapa: Etapa;
   capitulo: Capitulo;
   datosPais: DatosPais | null;
+  nivel: Nivel;
   progress: PerPerfilProgress;
   etapaInfo: EtapaInfo | null;
   onContinuar: () => void;
 }
 
-export function LlegadaPais({ etapa, capitulo, datosPais, progress, etapaInfo, onContinuar }: Props) {
+export function LlegadaPais({ etapa, capitulo, datosPais, nivel, progress, etapaInfo, onContinuar }: Props) {
   const codigo = datosPais?.codigo ?? '??';
   const subtitulo = [datosPais?.capital, datosPais?.idioma, datosPais?.moneda]
     .filter((s) => s && s !== '—')
     .join(' · ');
 
-  const progreso = etapaInfo ? progresoSello(etapa.id, progress.actividadesCompletadas, etapaInfo) : null;
+  const progreso = etapaInfo
+    ? progresoSello(etapa.id, nivel, progress.actividadesCompletadas, etapaInfo)
+    : null;
 
   const criterioTexto = progreso
-    ? `Completa ${progreso.objetivo} actividades de esta etapa para conseguirlo (llevas ${progreso.completadas} de ${progreso.objetivo}).`
+    ? `Completa ${progreso.objetivo} actividades de esta etapa para conseguirlo (llevas ${progreso.completadas} de ${progreso.objetivo}${progreso.total > progreso.objetivo ? ` de ${progreso.total} disponibles` : ''}).`
     : capitulo.completado_criterio.tipo === 'actividades_etapa_min'
       ? `Lo conseguirás al completar ${capitulo.completado_criterio.valor} actividades de esta etapa.`
       : 'Sello automático al llegar a la etapa.';

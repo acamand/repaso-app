@@ -1,6 +1,7 @@
 import type {
   Capitulo,
   CompletedActivity,
+  Nivel,
   Sello,
   ViajeProgress,
 } from '@/types';
@@ -9,10 +10,12 @@ import { listaEtapasEnOrden, loadCapitulo, loadEtapaActivities, loadRuta } from 
 const FECHA_HOY = () => new Date().toISOString().slice(0, 10);
 
 export interface EtapaInfo {
-  /** etapaId -> ids de las actividades de esa etapa */
+  /** etapaId -> ids de las actividades de esa etapa (de ambos niveles) */
   activityIds: Record<string, string[]>;
   /** etapaId -> criterio de completado del capítulo de la etapa */
   criterios: Record<string, Capitulo['completado_criterio']>;
+  /** etapaId -> cuántas actividades temáticas existen para esa etapa, por nivel. */
+  totalPorNivel: Record<string, Record<Nivel, number>>;
 }
 
 /**
@@ -21,7 +24,7 @@ export interface EtapaInfo {
  */
 export async function loadEtapaInfo(): Promise<EtapaInfo> {
   const ruta = await loadRuta();
-  if (!ruta) return { activityIds: {}, criterios: {} };
+  if (!ruta) return { activityIds: {}, criterios: {}, totalPorNivel: {} };
   const etapas = listaEtapasEnOrden(ruta);
   const [actividades, capitulos] = await Promise.all([
     Promise.all(etapas.map((e) => loadEtapaActivities(e.id))),
@@ -29,12 +32,16 @@ export async function loadEtapaInfo(): Promise<EtapaInfo> {
   ]);
   const activityIds: Record<string, string[]> = {};
   const criterios: Record<string, Capitulo['completado_criterio']> = {};
+  const totalPorNivel: Record<string, Record<Nivel, number>> = {};
   etapas.forEach((e, i) => {
     activityIds[e.id] = actividades[i].map((a) => a.id);
     const cap = capitulos[i];
     if (cap) criterios[e.id] = cap.completado_criterio;
+    const porNivel: Record<Nivel, number> = { '5-primaria': 0, '1-eso': 0 };
+    for (const a of actividades[i]) porNivel[a.nivel] += 1;
+    totalPorNivel[e.id] = porNivel;
   });
-  return { activityIds, criterios };
+  return { activityIds, criterios, totalPorNivel };
 }
 
 export interface ProgresoSello {
@@ -42,6 +49,8 @@ export interface ProgresoSello {
   completadas: number;
   /** `completado_criterio.valor` de esa etapa. */
   objetivo: number;
+  /** Actividades temáticas totales que existen para esa etapa y nivel (puede ser mayor que `objetivo`). */
+  total: number;
 }
 
 /**
@@ -51,10 +60,13 @@ export interface ProgresoSello {
  * hay datos de esa etapa todavía. Usa el mismo criterio de recuento
  * (cualquier actividad intentada, acierto o fallo) que `evaluarSellos`, para
  * que lo que se muestra en pantalla coincida siempre con cuándo se otorga
- * realmente el sello.
+ * realmente el sello. `total` da el panorama completo (cuántas actividades
+ * especiales tiene el país), no solo el objetivo mínimo, para que el alumno
+ * entienda el terreno completo y no solo un número parcial.
  */
 export function progresoSello(
   etapaId: string,
+  nivel: Nivel,
   actividadesCompletadas: Record<string, CompletedActivity>,
   etapaInfo: EtapaInfo,
 ): ProgresoSello | null {
@@ -62,7 +74,8 @@ export function progresoSello(
   if (!criterio || criterio.tipo !== 'actividades_etapa_min') return null;
   const ids = etapaInfo.activityIds[etapaId] ?? [];
   const completadas = ids.reduce((acc, id) => acc + (actividadesCompletadas[id] ? 1 : 0), 0);
-  return { completadas: Math.min(completadas, criterio.valor), objetivo: criterio.valor };
+  const total = etapaInfo.totalPorNivel[etapaId]?.[nivel] ?? ids.length;
+  return { completadas: Math.min(completadas, criterio.valor), objetivo: criterio.valor, total };
 }
 
 /**

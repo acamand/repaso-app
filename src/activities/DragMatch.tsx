@@ -12,6 +12,7 @@ import type { ActivityRendererProps } from './types';
 export function DragMatch({
   activity,
   onComplete,
+  onChecked,
 }: ActivityRendererProps<DragMatchActivity>) {
   // asignaciones[i] = índice de la categoría donde está el elemento i (o null).
   const [asign, setAsign] = useState<(number | null)[]>(() => activity.elementos.map(() => null));
@@ -150,7 +151,10 @@ export function DragMatch({
 
       {estado === 'inicio' && (
         <button
-          onClick={() => setEstado('comprobado')}
+          onClick={() => {
+            setEstado('comprobado');
+            onChecked?.();
+          }}
           disabled={!todosColocados}
           className="btn-primary mt-5"
         >
