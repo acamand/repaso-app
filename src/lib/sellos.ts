@@ -161,6 +161,25 @@ export function calcularEstrellas(
 }
 
 /**
+ * % de aciertos (0-100) entre las actividades temáticas de una etapa que el
+ * alumno ya ha intentado. `null` si todavía no ha intentado ninguna (p.ej.
+ * etapas de criterio `siempre` sin actividades propias). Mismo cálculo que
+ * usa `calcularEstrellas` para decidir 2★/3★, así que sirve para explicarle
+ * al alumno a qué distancia está de la siguiente estrella.
+ */
+export function porcentajeAciertosEtapa(
+  etapaId: string,
+  actividadesCompletadas: Record<string, CompletedActivity>,
+  etapaInfo: EtapaInfo,
+): number | null {
+  const ids = etapaInfo.activityIds[etapaId] ?? [];
+  const intentadas = ids.filter((id) => actividadesCompletadas[id]);
+  if (intentadas.length === 0) return null;
+  const aciertos = intentadas.filter((id) => actividadesCompletadas[id].acierto === true).length;
+  return Math.round((aciertos / intentadas.length) * 100);
+}
+
+/**
  * Marca un capítulo como visto. Si el criterio es `siempre`, otorga el sello
  * en el acto (útil para etapas-travesía sin actividades, como ferries).
  */

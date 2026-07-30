@@ -47,6 +47,9 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
           reflexivas. Se desbloquean al subir de nivel. Cada una se puede hacer <strong>una sola vez</strong>:
           una vez superada, queda guardada como recuerdo y no se repite.
         </p>
+        <p className="text-xs text-copper">
+          🏆 Dan mucho más FP que las actividades normales — ¡merece la pena llegar a ellos!
+        </p>
 
         {retos === null && <p className="text-paper-700 text-center py-8">Cargando retos…</p>}
 
@@ -71,6 +74,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
                     </div>
                     <div className="flex items-center gap-2 mt-2 flex-wrap">
                       <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
+                      <span className="chip-xp">+{reto.xp} FP</span>
                       <span className="text-[11px] text-paper-700 font-mono">
                         Se desbloquea en el nivel {nivelReq} — {nombreDeNivel(nivelReq)}
                       </span>

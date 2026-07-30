@@ -1,6 +1,12 @@
 import type { Activity, PerPerfilProgress } from '@/types';
 import { NIVELES, estadoNivel, progresoHaciaHito } from '@/lib/niveles';
 
+/** "+40 FP" o, si varios retos del mismo nivel dan cantidades distintas, "+40-55 FP". */
+function textoFpRetos(retos: Activity[]): string {
+  const xps = [...new Set(retos.map((r) => r.xp))].sort((a, b) => a - b);
+  return xps.length === 1 ? `+${xps[0]} FP` : `+${xps[0]}-${xps[xps.length - 1]} FP`;
+}
+
 interface Props {
   progress: PerPerfilProgress;
   /** Retos especiales disponibles para el nivel del perfil, para saber cuáles desbloquea cada hito. */
@@ -110,9 +116,15 @@ export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: P
                         {esReto && '🏆 '}
                         {n.desbloquea}
                       </div>
+                      {esReto && retosDeEsteNivel.length > 0 && (
+                        <div className="text-[0.65rem] text-paper-500 mt-0.5">
+                          {textoFpRetos(retosDeEsteNivel)}
+                        </div>
+                      )}
                       {tieneRetoBonus && (
                         <div className="text-xs text-copper mt-0.5">
                           🏆 + reto especial del camino
+                          {retosDeEsteNivel.length > 0 && ` (${textoFpRetos(retosDeEsteNivel)})`}
                         </div>
                       )}
                     </div>
@@ -161,14 +173,15 @@ export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: P
             <li className="flex gap-3">
               <span className="text-mustard text-lg leading-none shrink-0">◆</span>
               <span>
-                <strong>Respuesta correcta</strong> = los FP completos de la actividad.
+                <strong>Respuesta correcta</strong> = los FP completos de la actividad, que vuelve
+                a los 3 días para repasar (a propósito, no es un fallo).
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-paper-500 text-lg leading-none shrink-0">◇</span>
               <span>
-                <strong>Respuesta incorrecta</strong> = 0 FP, pero podrás repetirla otro día.
-                Fallar no resta.
+                <strong>Respuesta incorrecta</strong> = 0 FP, pero puedes reintentarla ya en tu
+                próxima sesión. Fallar no resta.
               </span>
             </li>
             <li className="flex gap-3">
@@ -184,6 +197,32 @@ export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: P
                 Cada <strong>nivel</strong> necesita más FP que el anterior: cuanto más subes,
                 más aventura desbloqueas.
               </span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-copper text-lg leading-none shrink-0">🏆</span>
+              <span>
+                Los <strong>Retos del Camino</strong> dan mucho más FP que las actividades
+                normales — ¡merece la pena llegar a ellos!
+              </span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Cómo funcionan las estrellas del Pasaporte */}
+        <section className="card p-5">
+          <h2 className="font-display text-xl mb-3">Estrellas del Pasaporte</h2>
+          <ul className="space-y-2 text-sm">
+            <li className="flex gap-3">
+              <span className="text-lg leading-none shrink-0">⭐</span>
+              <span>Consigues el sello del país.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-lg leading-none shrink-0">⭐⭐</span>
+              <span>70%+ de aciertos en sus actividades.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="text-lg leading-none shrink-0">⭐⭐⭐</span>
+              <span>90%+ de aciertos en sus actividades.</span>
             </li>
           </ul>
         </section>
