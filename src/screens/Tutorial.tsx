@@ -33,7 +33,8 @@ const PANTALLAS: Pantalla[] = [
         <ul className="space-y-2 text-left list-none">
           <li className="flex gap-2"><span aria-hidden>🗓️</span><span>Cada día la app te propone una sesión de actividades (unos 25 minutos, nunca más de 1 hora).</span></li>
           <li className="flex gap-2"><span aria-hidden>📱</span><span>Hay actividades <strong>en pantalla</strong> (las resuelves aquí) y actividades <strong>de cuaderno 📓</strong> (las copias y resuelves en tu cuaderno).</span></li>
-          <li className="flex gap-2"><span aria-hidden>⭐</span><span>Si aciertas, ganas <strong>Furgo Points (FP)</strong>. Si fallas, 0 puntos, pero la actividad volverá otro día para que lo intentes de nuevo.</span></li>
+          <li className="flex gap-2"><span aria-hidden>⭐</span><span>Si aciertas, ganas <strong>Furgo Points (FP)</strong> y esa actividad vuelve en unos días para repasar. Si fallas, 0 puntos, pero puedes reintentarla ya mismo.</span></li>
+          <li className="flex gap-2"><span aria-hidden>🔥</span><span>Entra y completa al menos 1 actividad cada día para mantener tu racha. Si te saltas un día entero, vuelve a empezar.</span></li>
         </ul>
       </>
     ),
@@ -57,8 +58,8 @@ const PANTALLAS: Pantalla[] = [
       <p>
         ¡Y no te olvides del <strong>Pasaporte</strong>! Cada vez que lleguéis a un país nuevo,
         selecciónalo en la app. Verás datos curiosos, frases en el idioma local y, cuando completes
-        suficientes actividades, ¡se sellará tu pasaporte! Intenta conseguir las <strong>3 estrellas</strong>{' '}
-        en cada país. ¿Preparado/a? ¡Vamos allá!
+        suficientes actividades, ¡se sellará tu pasaporte! Consigue <strong>2★</strong> acertando el
+        70% de sus actividades y <strong>3★</strong> con el 90%. ¿Preparado/a? ¡Vamos allá!
       </p>
     ),
   },

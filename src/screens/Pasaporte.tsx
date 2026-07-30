@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Capitulo, Etapa, Nivel, PerPerfilProgress, Ruta, Sello } from '@/types';
 import { getDatosPais, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { descripcionSelloVisible } from '@/lib/selloIcono';
-import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
+import { mensajeSelloSiempre, porcentajeAciertosEtapa, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo, ProgresoSello } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
@@ -43,8 +43,13 @@ export function Pasaporte({ nivel, progress, etapaInfo, onBack, onVerGuia }: Pro
     return () => { cancelado = true; };
   }, []);
 
-  const sellosCount = Object.keys(progress.viaje.sellos).length;
-  const etapasTotal = ruta?.fases.reduce((acc, f) => acc + f.etapas.length, 0) ?? 0;
+  // El contador de cabecera solo cuenta las etapas obligatorias: un pasaporte
+  // "completo" no debería exigir las opcionales (Bélgica vuelta, Países Bajos
+  // vuelta), o el contador nunca llegaría a estar lleno sin ellas.
+  const etapasObligatorias = ruta?.fases.flatMap((f) => f.etapas.filter((e) => !e.opcional)) ?? [];
+  const etapasOpcionales = ruta?.fases.flatMap((f) => f.etapas.filter((e) => e.opcional)) ?? [];
+  const sellosObligatorios = etapasObligatorias.filter((e) => progress.viaje.sellos[e.id]).length;
+  const sellosOpcionales = etapasOpcionales.filter((e) => progress.viaje.sellos[e.id]).length;
 
   return (
     <div className="min-h-dvh">
@@ -61,10 +66,15 @@ export function Pasaporte({ nivel, progress, etapaInfo, onBack, onVerGuia }: Pro
           </div>
           <div className="text-right shrink-0">
             <div className="font-display text-xl text-slate leading-none">
-              {sellosCount}
-              <span className="text-paper-500 text-sm"> / {etapasTotal}</span>
+              {sellosObligatorios}
+              <span className="text-paper-500 text-sm"> / {etapasObligatorias.length}</span>
             </div>
             <div className="text-[0.65rem] text-paper-700 uppercase tracking-wider">sellos</div>
+            {etapasOpcionales.length > 0 && (
+              <div className="text-[0.6rem] text-paper-500 mt-0.5">
+                +{sellosOpcionales}/{etapasOpcionales.length} opcionales
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -88,8 +98,13 @@ export function Pasaporte({ nivel, progress, etapaInfo, onBack, onVerGuia }: Pro
         )}
 
         {ruta && (
-          <div className="text-xs uppercase tracking-[0.2em] text-paper-500 text-center pt-2">
-            Sellos del pasaporte
+          <div className="text-center pt-2">
+            <div className="text-xs uppercase tracking-[0.2em] text-paper-500">
+              Sellos del pasaporte
+            </div>
+            <div className="text-[0.65rem] text-paper-500 mt-1">
+              ⭐ 70%+ de aciertos = 2★ · 90%+ = 3★
+            </div>
           </div>
         )}
 
@@ -108,6 +123,11 @@ export function Pasaporte({ nivel, progress, etapaInfo, onBack, onVerGuia }: Pro
                   capitulo={capitulos[etapa.id] ?? null}
                   sello={progress.viaje.sellos[etapa.id] ?? null}
                   estrellas={progress.viaje.estrellas[etapa.id] ?? 0}
+                  porcentajeAciertos={
+                    etapaInfo
+                      ? porcentajeAciertosEtapa(etapa.id, progress.actividadesCompletadas, etapaInfo)
+                      : null
+                  }
                   progreso={
                     !progress.viaje.sellos[etapa.id] && etapaInfo
                       ? progresoSello(etapa.id, nivel, progress.actividadesCompletadas, etapaInfo)
@@ -129,12 +149,14 @@ interface PaginaProps {
   capitulo: Capitulo | null;
   sello: Sello | null;
   estrellas: number;
+  porcentajeAciertos: number | null;
   progreso: ProgresoSello | null;
 }
 
-function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: PaginaProps) {
+function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, porcentajeAciertos, progreso }: PaginaProps) {
   const datos = getDatosPais(ruta, etapa.pais);
   const descripcion = capitulo ? descripcionSelloVisible(capitulo.sello.descripcion) : null;
+  const siguienteObjetivo = estrellas < 2 ? 70 : estrellas < 3 ? 90 : null;
   return (
     <div className={`card p-4 flex items-center gap-4 ${etapa.opcional ? 'opacity-60' : ''}`}>
       <Flag
@@ -154,6 +176,11 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: 
             <Estrellas conseguidas={estrellas} size={15} />
           </div>
         )}
+        {sello && porcentajeAciertos !== null && siguienteObjetivo !== null && (
+          <div className="text-[0.65rem] text-paper-500 mt-0.5">
+            {porcentajeAciertos}% de aciertos · {siguienteObjetivo}% = {'⭐'.repeat(estrellas + 1)}
+          </div>
+        )}
         {sello && descripcion && (
           <div className="text-[0.7rem] text-paper-700 mt-1 leading-snug">{descripcion}</div>
         )}
@@ -170,7 +197,10 @@ function PaginaPasaporte({ etapa, ruta, capitulo, sello, estrellas, progreso }: 
           </div>
         )}
         {etapa.opcional && (
-          <div className="text-[0.65rem] uppercase tracking-wider text-paper-500 mt-0.5">
+          <div
+            className="text-[0.65rem] uppercase tracking-wider text-paper-500 mt-0.5 underline decoration-dotted decoration-paper-500/60 cursor-help w-fit"
+            title="Esta etapa es opcional: no hace falta completarla para terminar vuestro pasaporte del viaje."
+          >
             opcional
           </div>
         )}

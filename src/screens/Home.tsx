@@ -158,6 +158,9 @@ export function Home({
           {progress.rachaDias > 0 && (
             <p className="text-sm mb-4">
               🔥 Llevas <strong>{progress.rachaDias}</strong> {progress.rachaDias === 1 ? 'día' : 'días'} seguidos.
+              <span className="block text-xs text-paper-500 mt-0.5 font-normal">
+                Completa 1 actividad al día para mantenerla. Si te saltas un día entero, vuelve a empezar.
+              </span>
             </p>
           )}
 
@@ -233,7 +236,15 @@ export function Home({
                               ? ' (opcional)'
                               : '';
                         return (
-                          <option key={etapa.id} value={etapa.id}>
+                          <option
+                            key={etapa.id}
+                            value={etapa.id}
+                            title={
+                              etapa.opcional
+                                ? 'Etapa opcional: no hace falta completarla para terminar el pasaporte.'
+                                : undefined
+                            }
+                          >
                             {etapa.pais}
                             {marcador}
                           </option>
@@ -246,6 +257,11 @@ export function Home({
             </div>
             {etapaActual.tema && (
               <p className="text-xs text-paper-700 mt-3 italic">{etapaActual.tema}</p>
+            )}
+            {etapaActual.opcional && (
+              <p className="text-[0.65rem] text-paper-500 mt-1">
+                Etapa opcional: no hace falta completarla para terminar vuestro pasaporte.
+              </p>
             )}
             {selloConseguido && (
               <p className="text-xs text-sage mt-3">🏅 Sello de {etapaActual.pais} conseguido.</p>

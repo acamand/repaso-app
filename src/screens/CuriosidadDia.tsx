@@ -103,6 +103,11 @@ export function CuriosidadDia({ progress, xpGanado, onCuriosidadesVistas, onVolv
               </div>
               <h2 className="font-display text-2xl leading-tight mb-3">{curiosidad.titulo}</h2>
               <p className="text-sm leading-relaxed text-paper-700">{curiosidad.texto}</p>
+              {capitulo?.pais && (
+                <p className="text-[0.65rem] text-paper-500 mt-4">
+                  Tiene que ver con {capitulo.pais}, donde estáis ahora. ¡Cambiará si os movéis a otra etapa!
+                </p>
+              )}
             </section>
           )}
 

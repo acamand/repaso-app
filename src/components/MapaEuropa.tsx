@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Capitulo, Etapa, Nivel, PerPerfilProgress, Ruta } from '@/types';
 import { getDatosPais, getEtapa, listaEtapasEnOrden } from '@/lib/ruta';
-import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
+import { mensajeSelloSiempre, porcentajeAciertosEtapa, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
@@ -101,6 +101,11 @@ export function MapaEuropa({ ruta, nivel, capitulos, progress, etapaInfo, etapaA
     sel && !sel.visitado && !selProgreso && sel.etapaRepresentativa
       ? capitulos[sel.etapaRepresentativa]?.completado_criterio.tipo === 'siempre'
       : false;
+  const selPorcentaje =
+    sel && sel.visitado && sel.estrellas < 3 && etapaInfo && sel.etapaRepresentativa
+      ? porcentajeAciertosEtapa(sel.etapaRepresentativa, progress.actividadesCompletadas, etapaInfo)
+      : null;
+  const selSiguienteObjetivo = sel && sel.estrellas < 2 ? 70 : sel && sel.estrellas < 3 ? 90 : null;
 
   return (
     <div>
@@ -216,7 +221,14 @@ export function MapaEuropa({ ruta, nivel, capitulos, progress, etapaInfo, etapaA
             <div className="flex-1 min-w-0">
               <div className="font-display text-lg leading-tight">{sel.pais}</div>
               {sel.visitado ? (
-                <Estrellas conseguidas={sel.estrellas} size={14} className="mt-1" />
+                <>
+                  <Estrellas conseguidas={sel.estrellas} size={14} className="mt-1" />
+                  {selPorcentaje !== null && selSiguienteObjetivo !== null && (
+                    <div className="text-[0.65rem] text-paper-500 mt-0.5">
+                      {selPorcentaje}% de aciertos · {selSiguienteObjetivo}% = {'⭐'.repeat(sel.estrellas + 1)}
+                    </div>
+                  )}
+                </>
               ) : selProgreso ? (
                 <div className="text-xs text-paper-700">
                   Te faltan <strong className="text-ink">{selProgreso.objetivo - selProgreso.completadas}</strong>{' '}
