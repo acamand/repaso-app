@@ -7,10 +7,16 @@ import type { ActivityRendererProps } from './types';
 export function CuadernoProblema({
   activity,
   onComplete,
+  onChecked,
 }: ActivityRendererProps<CuadernoProblemaActivity>) {
   const [pistasReveladas, setPistasReveladas] = useState(0);
   const [verSolucion, setVerSolucion] = useState(false);
   const [autoEval, setAutoEval] = useState<'bien' | 'casi' | null>(null);
+
+  const elegirAutoEval = (v: 'bien' | 'casi') => {
+    setAutoEval(v);
+    onChecked?.();
+  };
 
   return (
     <div className="card p-6">
@@ -64,13 +70,13 @@ export function CuadernoProblema({
             <p className="text-sm text-paper-700 mb-2">¿Cómo te ha ido?</p>
             <div className="flex gap-2">
               <button
-                onClick={() => setAutoEval('bien')}
+                onClick={() => elegirAutoEval('bien')}
                 className={`btn-secondary ${autoEval === 'bien' ? 'border-sage bg-sage/10 text-sage' : ''}`}
               >
                 Lo he resuelto bien
               </button>
               <button
-                onClick={() => setAutoEval('casi')}
+                onClick={() => elegirAutoEval('casi')}
                 className={`btn-secondary ${autoEval === 'casi' ? 'border-mustard bg-mustard/10' : ''}`}
               >
                 Necesito repasarlo

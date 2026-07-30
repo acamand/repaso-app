@@ -7,6 +7,7 @@ import type { ActivityRendererProps } from './types';
 export function MultipleChoice({
   activity,
   onComplete,
+  onChecked,
 }: ActivityRendererProps<MultipleChoiceActivity>) {
   const [seleccion, setSeleccion] = useState<number | null>(null);
   const [estado, setEstado] = useState<'inicio' | 'comprobado'>('inicio');
@@ -16,6 +17,7 @@ export function MultipleChoice({
     if (seleccion === null) return;
     setIntentos((i) => i + 1);
     setEstado('comprobado');
+    onChecked?.();
   };
 
   const continuar = () => {

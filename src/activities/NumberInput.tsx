@@ -8,6 +8,7 @@ import type { ActivityRendererProps } from './types';
 export function NumberInput({
   activity,
   onComplete,
+  onChecked,
 }: ActivityRendererProps<NumberInputActivity>) {
   const [valor, setValor] = useState('');
   const [estado, setEstado] = useState<'inicio' | 'comprobado'>('inicio');
@@ -21,6 +22,7 @@ export function NumberInput({
     if (isNaN(parsed)) return;
     setIntentos((i) => i + 1);
     setEstado('comprobado');
+    onChecked?.();
   };
 
   return (

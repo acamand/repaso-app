@@ -1,8 +1,8 @@
-import type { Activity, DailySession, Nivel, PerPerfilProgress } from '@/types';
+import type { Activity, Capitulo, DailySession, Nivel, PerPerfilProgress } from '@/types';
 import { loadAllActivities } from './content';
 import { nivelDeXP } from './progress';
 import { retoDesbloqueado } from './retos';
-import { loadEtapaActivitiesByNivel } from './ruta';
+import { loadCapitulo, loadEtapaActivitiesByNivel } from './ruta';
 
 const LIMITE_DIARIO_S = 60 * 60;
 const OBJETIVO_NORMAL_S = 25 * 60;
@@ -10,16 +10,28 @@ const COOLDOWN_DIAS = 3;
 const SESION_OBJETIVO = 5;
 /** Cuántas actividades de la etapa actual intentar meter por sesión (tras el calentamiento). */
 const SLOTS_ETAPA = 2;
+/**
+ * Si al alumno le faltan pocas actividades temáticas para el sello de la
+ * etapa actual (umbral), se prioriza incluirlas en la sesión por encima de
+ * las curriculares generales: sin esto, el mezclador aleatorio podía tardar
+ * muchas sesiones en sacar justo esas 2-3 actividades que faltaban, dando la
+ * sensación de que el sello nunca se acerca. `SLOTS_ETAPA_PRIORIDAD` deja
+ * margen (2 de los 5 huecos de la sesión) para mantener algo de variedad de
+ * materias incluso cuando se prioriza.
+ */
+const UMBRAL_PRIORIDAD_SELLO = 3;
+const SLOTS_ETAPA_PRIORIDAD = 3;
 
 export async function buildDailySession(
   nivel: Nivel,
   progress: PerPerfilProgress,
 ): Promise<DailySession> {
   const etapaActualId = progress.viaje.etapaActualId;
-  const [mates, lengua, viajeEtapa] = await Promise.all([
+  const [mates, lengua, viajeEtapa, capituloActual] = await Promise.all([
     loadAllActivities(nivel, 'matematicas').catch(() => []),
     loadAllActivities(nivel, 'lengua').catch(() => []),
     loadEtapaActivitiesByNivel(etapaActualId, nivel).catch(() => []),
+    loadCapitulo(etapaActualId).catch(() => null as Capitulo | null),
   ]);
 
   const todas = [...mates, ...lengua, ...viajeEtapa];
@@ -83,11 +95,34 @@ export async function buildDailySession(
     presupuesto -= calentamiento.tiempo_estimado_s;
   }
 
-  // 2. Hasta SLOTS_ETAPA actividades de la etapa actual, justo después.
+  // Cuántas actividades temáticas de la etapa actual faltan todavía para el
+  // sello (cuenta cualquier intento, acierto o fallo, igual que
+  // `evaluarSellos`/`progresoSello`). `null` si el criterio no es por número
+  // de actividades o si el sello ya está conseguido: en ese caso no hay nada
+  // que priorizar.
+  const criterioEtapa = capituloActual?.completado_criterio ?? null;
+  const selloEtapaConseguido = !!progress.viaje.sellos[etapaActualId];
+  const restantesParaSello =
+    criterioEtapa?.tipo === 'actividades_etapa_min' && !selloEtapaConseguido
+      ? Math.max(
+          0,
+          criterioEtapa.valor -
+            viajeEtapa.filter((a) => progress.actividadesCompletadas[a.id]).length,
+        )
+      : null;
+  const priorizarEtapa =
+    restantesParaSello !== null &&
+    restantesParaSello > 0 &&
+    restantesParaSello <= UMBRAL_PRIORIDAD_SELLO;
+  const slotsEtapaObjetivo = priorizarEtapa
+    ? Math.min(restantesParaSello, SLOTS_ETAPA_PRIORIDAD)
+    : SLOTS_ETAPA;
+
+  // 2. Hasta `slotsEtapaObjetivo` actividades de la etapa actual, justo después.
   const etapaIds = new Set(viajeEtapa.map((a) => a.id));
   let viajeSlots = 0;
   for (const a of sample) {
-    if (viajeSlots >= SLOTS_ETAPA) break;
+    if (viajeSlots >= slotsEtapaObjetivo) break;
     if (seleccion.includes(a)) continue;
     if (!etapaIds.has(a.id)) continue;
     if (a.tiempo_estimado_s > presupuesto) continue;
