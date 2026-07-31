@@ -3,6 +3,7 @@ import { descripcionSelloVisible } from '@/lib/selloIcono';
 import { progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
+import { IlustracionPais } from '@/components/IlustracionPais';
 import { SelloBadge } from '@/components/SelloBadge';
 
 /** Payload de navegación cuando hay que mostrar la llegada antes de la sesión. */
@@ -53,6 +54,10 @@ export function LlegadaPais({ etapa, capitulo, datosPais, nivel, progress, etapa
       </section>
 
       <main className="max-w-2xl mx-auto p-4 space-y-6">
+        <div className="flex justify-center">
+          <IlustracionPais pais={etapa.pais} size={140} />
+        </div>
+
         <p className="text-base leading-relaxed">{capitulo.intro}</p>
 
         <section>
