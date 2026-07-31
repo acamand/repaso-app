@@ -5,6 +5,7 @@ import { mensajeSelloSiempre, porcentajeAciertosEtapa, progresoSello } from '@/l
 import type { EtapaInfo } from '@/lib/sellos';
 import { Flag } from '@/components/Flag';
 import { Estrellas } from '@/components/Estrellas';
+import { IlustracionPais } from '@/components/IlustracionPais';
 import { SelloBadge } from '@/components/SelloBadge';
 import { CENTRO, EUROPA_VIEWBOX, FORMAS } from '@/components/europaGeo';
 
@@ -213,7 +214,10 @@ export function MapaEuropa({ ruta, nivel, capitulos, progress, etapaInfo, etapaA
       {/* Panel del país seleccionado */}
       {sel && (
         <div className="card p-4 mt-3">
-          <div className="flex items-center gap-3">
+          <div className="flex justify-center">
+            <IlustracionPais pais={sel.pais} size={64} />
+          </div>
+          <div className="flex items-center gap-3 mt-2">
             <Flag
               codigo={selDatos?.codigo ?? '??'}
               className="w-12 h-8 rounded-sm shadow-sm shrink-0 border border-paper-300/40"
