@@ -31,7 +31,7 @@ const PANTALLAS: Pantalla[] = [
       <>
         <p className="mb-3">¡Hola! Yo soy <strong>Marta</strong> y también viajo como tú. Te cuento cómo funciona esto:</p>
         <ul className="space-y-2 text-left list-none">
-          <li className="flex gap-2"><span aria-hidden>🗓️</span><span>Cada día la app te propone una sesión de actividades (unos 25 minutos, nunca más de 1 hora).</span></li>
+          <li className="flex gap-2"><span aria-hidden>🗓️</span><span>Cada día la app te propone una sesión de actividades (unos 25 minutos, nunca más de 2 horas).</span></li>
           <li className="flex gap-2"><span aria-hidden>📱</span><span>Hay actividades <strong>en pantalla</strong> (las resuelves aquí) y actividades <strong>de cuaderno 📓</strong> (las copias y resuelves en tu cuaderno).</span></li>
           <li className="flex gap-2"><span aria-hidden>⭐</span><span>Si aciertas, ganas <strong>Furgo Points (FP)</strong> y esa actividad vuelve en unos días para repasar. Si fallas, 0 puntos, pero puedes reintentarla ya mismo.</span></li>
           <li className="flex gap-2"><span aria-hidden>🔥</span><span>Entra y completa al menos 1 actividad cada día para mantener tu racha. Si te saltas un día entero, vuelve a empezar.</span></li>

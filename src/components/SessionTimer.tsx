@@ -1,11 +1,10 @@
 interface Props {
   segundosInvertidos: number;
-  limiteS?: number;
+  /** Límite diario en segundos (ver `LIMITE_DIARIO_S` en session.ts, única fuente de verdad). */
+  limiteS: number;
 }
 
-const LIMITE_DEFECTO = 60 * 60;
-
-export function SessionTimer({ segundosInvertidos, limiteS = LIMITE_DEFECTO }: Props) {
+export function SessionTimer({ segundosInvertidos, limiteS }: Props) {
   const pct = Math.min(100, (segundosInvertidos / limiteS) * 100);
   const minutos = Math.floor(segundosInvertidos / 60);
   const restantes = Math.max(0, Math.ceil((limiteS - segundosInvertidos) / 60));

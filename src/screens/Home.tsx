@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Capitulo, DailySession, PerPerfilProgress, Profile, Ruta } from '@/types';
-import { buildDailySession, alcanzadoLimiteDiario } from '@/lib/session';
+import { LIMITE_DIARIO_S, buildDailySession, alcanzadoLimiteDiario } from '@/lib/session';
 import { getEtapa, loadCapitulo, loadRuta } from '@/lib/ruta';
 import { mensajeSelloSiempre, progresoSello } from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
@@ -152,7 +152,7 @@ export function Home({
         <section className="card p-6">
           <div className="flex items-baseline justify-between mb-4">
             <h2 className="font-display text-2xl">Hoy</h2>
-            <SessionTimer segundosInvertidos={progress.tiempoHoyS} />
+            <SessionTimer segundosInvertidos={progress.tiempoHoyS} limiteS={LIMITE_DIARIO_S} />
           </div>
 
           {progress.rachaDias > 0 && (
@@ -201,7 +201,7 @@ export function Home({
             <div className="p-4 bg-mustard/15 border border-mustard/40 rounded-soft">
               <p className="font-medium mb-1">Por hoy ya está bien 👏</p>
               <p className="text-sm text-paper-700">
-                Has alcanzado tu hora diaria. Mañana toca seguir explorando.
+                Has alcanzado tu tiempo diario. Mañana toca seguir explorando.
               </p>
             </div>
           )}
