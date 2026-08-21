@@ -44,6 +44,7 @@ import { AvatarEditor } from '@/screens/AvatarEditor';
 import { Ajustes } from '@/screens/Ajustes';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
+import { Diploma } from '@/screens/Diploma';
 import { LevelUpModal } from '@/components/LevelUpModal';
 import { CelebracionFinalModal } from '@/components/CelebracionFinalModal';
 import type { ActivityResult } from '@/activities/types';
@@ -60,7 +61,8 @@ type View =
   | { tag: 'avatar' }
   | { tag: 'ajustes' }
   | { tag: 'curiosidad'; xpGanado: number }
-  | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession };
+  | { tag: 'llegada'; llegada: LlegadaInfo; session: DailySession }
+  | { tag: 'diploma' };
 
 function hoyISO(): string {
   return new Date().toISOString().slice(0, 10);
@@ -81,6 +83,9 @@ export default function App() {
   const [celebracionFinal, setCelebracionFinal] = useState(false);
   // XP acumulado en la sesión en curso (ref para leerlo en el momento de terminar).
   const xpSesionRef = useRef(0);
+  // Si la sesión en curso incluyó (y superó) el Gran Reto Final, al terminar
+  // se va directo al Diploma en vez de a la Curiosidad del día.
+  const diplomaListoRef = useRef(false);
 
   useEffect(() => saveProgress(state), [state]);
 
@@ -196,6 +201,9 @@ export default function App() {
     }
     // XP acumulado de la sesión, para la Curiosidad del día al terminar.
     xpSesionRef.current += gained;
+    if (activity.desbloqueo_pasaporte_completo && result.acierto) {
+      diplomaListoRef.current = true;
+    }
 
     setState((s) => {
       const next = recordActivity(s, activity, result.acierto, result.intentos, tiempoS);
@@ -215,6 +223,7 @@ export default function App() {
   };
 
   const empezarReto = (reto: Activity) => {
+    diplomaListoRef.current = false;
     setView({
       tag: 'session',
       session: { fecha: hoyISO(), actividades: [reto], duracionEstimadaS: reto.tiempo_estimado_s },
@@ -255,6 +264,7 @@ export default function App() {
         etapaInfo={etapaInfo}
         onStartSession={(session, llegada) => {
           xpSesionRef.current = 0;
+          diplomaListoRef.current = false;
           if (llegada) {
             setView({ tag: 'llegada', llegada, session });
           } else {
@@ -299,6 +309,7 @@ export default function App() {
         onBack={() => setView({ tag: 'home' })}
         onIrReto={() => setView({ tag: 'retos' })}
         onShowAvatar={() => setView({ tag: 'avatar' })}
+        onShowDiploma={() => setView({ tag: 'diploma' })}
       />
     );
   } else if (view.tag === 'retos') {
@@ -359,6 +370,15 @@ export default function App() {
         }}
       />
     );
+  } else if (view.tag === 'diploma') {
+    content = (
+      <Diploma
+        profile={profile}
+        progress={progress}
+        ruta={ruta}
+        onBack={() => setView({ tag: 'home' })}
+      />
+    );
   } else if (view.tag === 'curiosidad') {
     content = (
       <CuriosidadDia
@@ -377,7 +397,14 @@ export default function App() {
         etapaInfo={etapaInfo}
         nivel={profile.nivel}
         onActivityDone={handleActivityDone}
-        onFinish={() => setView({ tag: 'curiosidad', xpGanado: xpSesionRef.current })}
+        onFinish={() => {
+          if (diplomaListoRef.current) {
+            diplomaListoRef.current = false;
+            setView({ tag: 'diploma' });
+          } else {
+            setView({ tag: 'curiosidad', xpGanado: xpSesionRef.current });
+          }
+        }}
       />
     );
   }

@@ -14,11 +14,14 @@ interface Props {
   onBack: () => void;
   onIrReto: () => void;
   onShowAvatar: () => void;
+  onShowDiploma: () => void;
 }
 
-export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: Props) {
+export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar, onShowDiploma }: Props) {
   const xp = progress.xpTotal;
   const { nivel, nombre, hito, xpHastaHito, progresoHito } = estadoNivel(xp);
+  const retoFinal = retos.find((r) => r.desbloqueo_pasaporte_completo);
+  const diplomaConseguido = !!retoFinal && progress.actividadesCompletadas[retoFinal.id]?.acierto === true;
 
   return (
     <div className="min-h-dvh">
@@ -76,6 +79,21 @@ export function MisLogros({ progress, retos, onBack, onIrReto, onShowAvatar }: P
             )}
           </p>
         </section>
+
+        {diplomaConseguido && (
+          <section className="card p-5 text-center border-mustard/60">
+            <div className="text-3xl mb-1" aria-hidden>
+              🎓
+            </div>
+            <h2 className="font-display text-xl">¡Diploma de Gran Explorador/a conseguido!</h2>
+            <p className="text-sm text-paper-700 mt-1">
+              Completaste el Gran Reto Final. Puedes verlo y descargarlo cuando quieras.
+            </p>
+            <button onClick={onShowDiploma} className="btn-primary w-full mt-3">
+              Ver mi diploma 🎓
+            </button>
+          </section>
+        )}
 
         {/* Escalera de niveles */}
         <section>

@@ -77,3 +77,17 @@ export function getEtapa(ruta: Ruta, etapaId: string): Etapa | null {
 export function getDatosPais(ruta: Ruta, pais: string): DatosPais | null {
   return ruta.datos_paises[pais] ?? null;
 }
+
+/**
+ * Número de países distintos que atraviesa la ruta (excluye las travesías en
+ * ferry, cuyo "país" es "Mar Báltico", y no cuenta dos veces un país con
+ * etapa de ida y vuelta). Usado en el Diploma final.
+ */
+export function paisesDistintosRuta(ruta: Ruta): number {
+  const nombres = new Set(
+    listaEtapasEnOrden(ruta)
+      .filter((e) => e.tipo !== 'travesia')
+      .map((e) => e.pais),
+  );
+  return nombres.size;
+}
