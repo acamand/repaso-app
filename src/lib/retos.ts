@@ -11,8 +11,18 @@ export function nivelDesbloqueoReto(reto: Activity): number {
   return reto.nivel_desbloqueo ?? 1;
 }
 
-/** ¿Este reto ya está disponible al nivel actual del alumno? */
-export function retoDesbloqueado(reto: Activity, nivelActual: number): boolean {
+/**
+ * ¿Este reto ya está disponible? El reto final del viaje
+ * (`desbloqueo_pasaporte_completo`) ignora el nivel por completo y se rige
+ * solo por si el pasaporte está completo; el resto sigue la regla habitual
+ * de nivel mínimo.
+ */
+export function retoDesbloqueado(
+  reto: Activity,
+  nivelActual: number,
+  pasaporteCompleto: boolean,
+): boolean {
+  if (reto.desbloqueo_pasaporte_completo) return pasaporteCompleto;
   return nivelDesbloqueoReto(reto) <= nivelActual;
 }
 

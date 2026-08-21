@@ -114,6 +114,7 @@ function defaultViajeProgress(): ViajeProgress {
     sellos: {},
     estrellas: {},
     curiosidadesVistas: [],
+    retoFinalCelebrado: false,
   };
 }
 
@@ -179,6 +180,7 @@ function hydrateViaje(raw: unknown): ViajeProgress {
     curiosidadesVistas: Array.isArray(raw.curiosidadesVistas)
       ? stringArray(raw.curiosidadesVistas)
       : base.curiosidadesVistas,
+    retoFinalCelebrado: raw.retoFinalCelebrado === true,
   };
 }
 

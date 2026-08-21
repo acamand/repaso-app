@@ -150,5 +150,21 @@
       "El límite es importante: colaborar no significa estar de acuerdo con todo ni renunciar a tus valores."
     ],
     "solucion": "Autoevaluación:\n☐ ¿He explicado la metáfora del cuerpo?\n☐ ¿He aplicado el paralelismo a mi familia de forma creativa?\n☐ ¿Ejemplo de actualidad sobre 'enfadarse por ser diferente'?\n☐ ¿Reflexión final con matices sobre el límite de colaborar?\n☐ ¿3+ conectores argumentativos?"
+  },
+  {
+    "id": "1eso-reto-final",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "1-eso",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 60,
+    "tiempo_estimado_s": 900,
+    "esReto": true,
+    "desbloqueo_pasaporte_completo": true,
+    "enunciado": "🏆 GRAN RETO DEL REGRESO A CASA\n\nPENDIENTE: contenido narrativo de cierre del viaje (Marco y Marta despidiéndose). Se desbloquea al completar todos los sellos obligatorios del pasaporte.",
+    "pistas": [],
+    "solucion": "PENDIENTE"
   }
 ]

@@ -150,5 +150,21 @@
       "El lema puede ser divertido: '¡Cuatro ruedas, un equipo!'"
     ],
     "solucion": "Autoevaluación:\n☐ ¿Lista de tareas con quién las hace?\n☐ ¿He identificado una tarea que podría asumir más?\n☐ ¿Comparación con el ejemplo del cuerpo (10 líneas)?\n☐ ¿Lema familiar inventado?"
+  },
+  {
+    "id": "5pri-reto-final",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 60,
+    "tiempo_estimado_s": 900,
+    "esReto": true,
+    "desbloqueo_pasaporte_completo": true,
+    "enunciado": "🏆 GRAN RETO DEL REGRESO A CASA\n\nPENDIENTE: contenido narrativo de cierre del viaje (Marco y Marta despidiéndose). Se desbloquea al completar todos los sellos obligatorios del pasaporte.",
+    "pistas": [],
+    "solucion": "PENDIENTE"
   }
 ]

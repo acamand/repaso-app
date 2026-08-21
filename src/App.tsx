@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Activity, DailySession, ProgressState } from '@/types';
+import type { Activity, DailySession, ProgressState, Ruta } from '@/types';
 import {
   addProfile,
   getActiveProgress,
@@ -21,7 +21,15 @@ import { piezasNuevasEntreNiveles } from '@/lib/avatarPiezas';
 import type { PiezaAvatar } from '@/lib/avatarPiezas';
 import { retosNuevosEntreNiveles } from '@/lib/retos';
 import { loadRetos } from '@/lib/content';
-import { calcularEstrellas, evaluarSellos, loadEtapaInfo, marcarCapituloVisto } from '@/lib/sellos';
+import { loadRuta } from '@/lib/ruta';
+import {
+  calcularEstrellas,
+  evaluarSellos,
+  loadEtapaInfo,
+  marcarCapituloVisto,
+  marcarRetoFinalCelebrado,
+  pasaporteCompleto,
+} from '@/lib/sellos';
 import type { EtapaInfo } from '@/lib/sellos';
 import { ProfileSelect } from '@/screens/ProfileSelect';
 import { Home } from '@/screens/Home';
@@ -37,6 +45,7 @@ import { Ajustes } from '@/screens/Ajustes';
 import { LlegadaPais } from '@/screens/LlegadaPais';
 import type { LlegadaInfo } from '@/screens/LlegadaPais';
 import { LevelUpModal } from '@/components/LevelUpModal';
+import { CelebracionFinalModal } from '@/components/CelebracionFinalModal';
 import type { ActivityResult } from '@/activities/types';
 
 type View =
@@ -64,10 +73,12 @@ export default function App() {
     return { tag: s.perfilActivo ? 'home' : 'select' };
   });
   const [etapaInfo, setEtapaInfo] = useState<EtapaInfo | null>(null);
+  const [ruta, setRuta] = useState<Ruta | null>(null);
   const [retos, setRetos] = useState<Activity[]>([]);
   const [subioNivel, setSubioNivel] = useState<NivelDef | null>(null);
   const [piezaNueva, setPiezaNueva] = useState<PiezaAvatar | null>(null);
   const [retoNuevo, setRetoNuevo] = useState<Activity | null>(null);
+  const [celebracionFinal, setCelebracionFinal] = useState(false);
   // XP acumulado en la sesión en curso (ref para leerlo en el momento de terminar).
   const xpSesionRef = useRef(0);
 
@@ -78,6 +89,33 @@ export default function App() {
       .then(setEtapaInfo)
       .catch(() => setEtapaInfo({ activityIds: {}, criterios: {}, totalPorNivel: {} }));
   }, []);
+
+  useEffect(() => {
+    loadRuta().then(setRuta).catch(() => setRuta(null));
+  }, []);
+
+  // Detecta el momento en que el pasaporte pasa a estar completo (todos los
+  // sellos obligatorios conseguidos) y dispara la celebración especial una
+  // única vez, guardando la marca en el progreso para no repetirla en
+  // sesiones futuras. Se re-evalúa en cada cambio de `state` porque un sello
+  // puede otorgarse desde varios sitios (completar actividades, ver la
+  // llegada de una etapa `siempre`), no solo desde un único punto.
+  useEffect(() => {
+    if (!ruta || !state.perfilActivo) return;
+    const perfilId = state.perfilActivo;
+    const perfil = state.porPerfil[perfilId];
+    if (!perfil || perfil.viaje.retoFinalCelebrado) return;
+    if (!pasaporteCompleto(ruta, perfil.viaje)) return;
+    setCelebracionFinal(true);
+    setState((s) => {
+      const p = s.porPerfil[perfilId];
+      if (!p || p.viaje.retoFinalCelebrado) return s;
+      return {
+        ...s,
+        porPerfil: { ...s.porPerfil, [perfilId]: { ...p, viaje: marcarRetoFinalCelebrado(p.viaje) } },
+      };
+    });
+  }, [ruta, state]);
 
   // Recalcula sellos/estrellas del perfil activo en cuanto `etapaInfo` esté
   // disponible (o al cambiar de perfil). Cubre dos casos que `handleActivityDone`
@@ -347,35 +385,48 @@ export default function App() {
   return (
     <>
       {content}
-      {subioNivel && profile && (
-        <LevelUpModal
-          hito={subioNivel}
-          avatarActual={profile.avatar}
-          piezaNueva={piezaNueva}
-          retoNuevo={retoNuevo}
+      {celebracionFinal ? (
+        <CelebracionFinalModal
+          retoFinal={retos.find((r) => r.desbloqueo_pasaporte_completo) ?? null}
           onIrReto={() => {
-            const reto = retoNuevo;
-            setSubioNivel(null);
-            setPiezaNueva(null);
-            setRetoNuevo(null);
-            if (reto) {
-              empezarReto(reto);
-            } else {
-              setView({ tag: 'retos' });
-            }
+            const reto = retos.find((r) => r.desbloqueo_pasaporte_completo);
+            setCelebracionFinal(false);
+            if (reto) empezarReto(reto);
           }}
-          onPersonalizar={() => {
-            setSubioNivel(null);
-            setPiezaNueva(null);
-            setRetoNuevo(null);
-            setView({ tag: 'avatar' });
-          }}
-          onCerrar={() => {
-            setSubioNivel(null);
-            setPiezaNueva(null);
-            setRetoNuevo(null);
-          }}
+          onCerrar={() => setCelebracionFinal(false)}
         />
+      ) : (
+        subioNivel &&
+        profile && (
+          <LevelUpModal
+            hito={subioNivel}
+            avatarActual={profile.avatar}
+            piezaNueva={piezaNueva}
+            retoNuevo={retoNuevo}
+            onIrReto={() => {
+              const reto = retoNuevo;
+              setSubioNivel(null);
+              setPiezaNueva(null);
+              setRetoNuevo(null);
+              if (reto) {
+                empezarReto(reto);
+              } else {
+                setView({ tag: 'retos' });
+              }
+            }}
+            onPersonalizar={() => {
+              setSubioNivel(null);
+              setPiezaNueva(null);
+              setRetoNuevo(null);
+              setView({ tag: 'avatar' });
+            }}
+            onCerrar={() => {
+              setSubioNivel(null);
+              setPiezaNueva(null);
+              setRetoNuevo(null);
+            }}
+          />
+        )
       )}
     </>
   );
