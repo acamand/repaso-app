@@ -152,19 +152,22 @@
     "solucion": "Autoevaluación:\n☐ ¿He explicado la metáfora del cuerpo?\n☐ ¿He aplicado el paralelismo a mi familia de forma creativa?\n☐ ¿Ejemplo de actualidad sobre 'enfadarse por ser diferente'?\n☐ ¿Reflexión final con matices sobre el límite de colaborar?\n☐ ¿3+ conectores argumentativos?"
   },
   {
-    "id": "1eso-reto-final",
+    "id": "reto-final-regreso-1eso",
     "type": "cuaderno_problema",
     "formato": "cuaderno",
     "nivel": "1-eso",
     "materia": "lengua",
-    "saber_basico": "expresion-escrita-narrativa",
-    "dificultad": 2,
-    "xp": 60,
-    "tiempo_estimado_s": 900,
+    "saber_basico": "expresion-escrita-argumentativa",
+    "dificultad": 3,
+    "xp": 80,
+    "tiempo_estimado_s": 1500,
     "esReto": true,
     "desbloqueo_pasaporte_completo": true,
-    "enunciado": "🏆 GRAN RETO DEL REGRESO A CASA\n\nPENDIENTE: contenido narrativo de cierre del viaje (Marco y Marta despidiéndose). Se desbloquea al completar todos los sellos obligatorios del pasaporte.",
-    "pistas": [],
-    "solucion": "PENDIENTE"
+    "enunciado": "🏆🎉 GRAN RETO FINAL — El Regreso a Casa\n\n📜 Última página del cuaderno de Marco y Marta (escrita a cuatro manos)\n\n«Habéis completado el pasaporte entero. Más de 10.000 km, doce países, cuarenta y cinco días, decenas de retos superados con enseñanzas de Epicteto, Marco Aurelio y Séneca —este último, nacido en vuestra misma Córdoba hace 2.000 años—.\n\nMarco escribe: 'Los estoicos decían que la virtud está en el camino, no solo en la meta. Habéis demostrado paciencia, curiosidad y esfuerzo constante durante 45 días. Eso no se olvida.'\n\nMarta añade: 'Y ahora, después de tanto camino, el círculo se cierra donde más importa: en casa, con los vuestros.'\n\nEste es el último reto del camino.»\n\nTu misión final:\n\n1. Repasa mentalmente todo el viaje y elige los 5 momentos que consideres más significativos (no necesariamente los más 'divertidos', sino los que más os han marcado o enseñado algo). Para cada uno, escribe 3-4 líneas explicando qué pasó y por qué importa.\n\n2. Seguro que al volver, la gente os pregunta qué tal el viaje. Escribe un texto (12-15 líneas) que combine narración y reflexión: contad el viaje como si fuera una pequeña crónica para compartir con quien no ha estado, pero incluyendo también qué ha cambiado en vosotros durante estos 45 días.\n\n3. De todas las 'Lecciones del Camino' que habéis trabajado (dicotomía de control, gratitud, aprender del error, la flecha de Epicteto, el obstáculo como camino, la vista desde arriba, memento mori, premeditatio malorum, la igualdad humana, prepararse para la gente difícil, colaborar como las partes de un cuerpo...), elige la que más os haya marcado. Escribe un texto argumentativo (12-15 líneas) explicando por qué esa lección en concreto os parece la más útil para vuestra vida a partir de ahora, con ejemplos concretos de cómo la aplicaréis en el curso que empieza en septiembre.\n\n4. Última reflexión libre (10-12 líneas): ¿qué diferencia hay entre el 'vosotros' que salió de Córdoba hace 45 días y el 'vosotros' que vuelve ahora? Sed sinceros y concretos, no genéricos.\n\nUsa en total al menos 4 conectores distintos (de cualquier tipo) a lo largo de todo el reto.",
+    "pistas": [
+      "No hace falta que los 5 momentos sean 'positivos' — a veces lo que más enseña es lo que costó o salió mal.",
+      "Para el punto 3, elige de verdad la lección que os haya calado más hondo, no la que suene mejor."
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿5 momentos significativos con explicación de 3-4 líneas cada uno?\n☐ ¿Crónica de regreso con reflexión personal (12-15 líneas)?\n☐ ¿Texto argumentativo sobre la lección estoica elegida, con ejemplos de aplicación futura (12-15 líneas)?\n☐ ¿Reflexión final honesta sobre el cambio personal (10-12 líneas)?\n☐ ¿4+ conectores usados en total?"
   }
 ]
