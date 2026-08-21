@@ -2,7 +2,8 @@ import type { Activity, Capitulo, DailySession, Nivel, PerPerfilProgress } from 
 import { loadAllActivities } from './content';
 import { nivelDeXP } from './progress';
 import { retoDesbloqueado } from './retos';
-import { loadCapitulo, loadEtapaActivitiesByNivel } from './ruta';
+import { pasaporteCompleto } from './sellos';
+import { loadCapitulo, loadEtapaActivitiesByNivel, loadRuta } from './ruta';
 
 const LIMITE_DIARIO_S = 60 * 60;
 const OBJETIVO_NORMAL_S = 25 * 60;
@@ -27,12 +28,14 @@ export async function buildDailySession(
   progress: PerPerfilProgress,
 ): Promise<DailySession> {
   const etapaActualId = progress.viaje.etapaActualId;
-  const [mates, lengua, viajeEtapa, capituloActual] = await Promise.all([
+  const [mates, lengua, viajeEtapa, capituloActual, ruta] = await Promise.all([
     loadAllActivities(nivel, 'matematicas').catch(() => []),
     loadAllActivities(nivel, 'lengua').catch(() => []),
     loadEtapaActivitiesByNivel(etapaActualId, nivel).catch(() => []),
     loadCapitulo(etapaActualId).catch(() => null as Capitulo | null),
+    loadRuta().catch(() => null),
   ]);
+  const pasaporteYaCompleto = ruta ? pasaporteCompleto(ruta, progress.viaje) : false;
 
   const todas = [...mates, ...lengua, ...viajeEtapa];
 
@@ -53,7 +56,7 @@ export async function buildDailySession(
   const sinRetosSuperados = todas.filter((a) => {
     const reg = progress.actividadesCompletadas[a.id];
     if (a.esReto && reg?.acierto === true) return false;
-    if (a.esReto && !retoDesbloqueado(a, nivelActual)) return false;
+    if (a.esReto && !retoDesbloqueado(a, nivelActual, pasaporteYaCompleto)) return false;
     return true;
   });
 

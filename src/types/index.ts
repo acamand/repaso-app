@@ -35,6 +35,13 @@ export interface ActivityBase {
    * fuerce su repetición por cualquier vía.
    */
   esReto?: boolean;
+  /**
+   * Reto final del viaje: en vez de desbloquearse por nivel (`nivel_desbloqueo`,
+   * que en este caso no se usa), se desbloquea al completar todos los sellos
+   * de las etapas OBLIGATORIAS del pasaporte (ver `pasaporteCompleto` en
+   * sellos.ts). Como mucho un reto debería llevar este flag.
+   */
+  desbloqueo_pasaporte_completo?: boolean;
 }
 
 export interface MultipleChoiceActivity extends ActivityBase {
@@ -204,6 +211,8 @@ export interface ViajeProgress {
   estrellas: Record<string, number>;
   /** Claves de curiosidades diarias ya mostradas (formato `etapaId::titulo`). */
   curiosidadesVistas: string[];
+  /** Si ya se mostró la celebración especial del pasaporte completo (para no repetirla). */
+  retoFinalCelebrado: boolean;
 }
 
 // ---------- Perfil y progreso ----------

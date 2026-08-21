@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import type { Activity, Nivel, PerPerfilProgress } from '@/types';
+import type { Activity, Nivel, PerPerfilProgress, Ruta } from '@/types';
 import { loadRetos } from '@/lib/content';
 import { nivelDeXP } from '@/lib/progress';
 import { nombreDeNivel } from '@/lib/niveles';
 import { nivelDesbloqueoReto, retoDesbloqueado, tituloReto } from '@/lib/retos';
+import { loadRuta } from '@/lib/ruta';
+import { pasaporteCompleto } from '@/lib/sellos';
 
 interface Props {
   nivel: Nivel;
@@ -19,11 +21,26 @@ const materiaLabel: Record<string, string> = {
 
 export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
   const [retos, setRetos] = useState<Activity[] | null>(null);
+  const [ruta, setRuta] = useState<Ruta | null>(null);
   const nivelActual = nivelDeXP(progress.xpTotal).nivel;
+  const completo = ruta ? pasaporteCompleto(ruta, progress.viaje) : false;
+
+  useEffect(() => {
+    loadRuta().then(setRuta).catch(() => setRuta(null));
+  }, []);
 
   useEffect(() => {
     loadRetos(nivel)
-      .then((rs) => setRetos([...rs].sort((a, b) => nivelDesbloqueoReto(a) - nivelDesbloqueoReto(b))))
+      .then((rs) =>
+        setRetos(
+          [...rs].sort((a, b) => {
+            // El reto final (ligado al pasaporte, no al nivel) siempre va el último.
+            if (a.desbloqueo_pasaporte_completo && !b.desbloqueo_pasaporte_completo) return 1;
+            if (!a.desbloqueo_pasaporte_completo && b.desbloqueo_pasaporte_completo) return -1;
+            return nivelDesbloqueoReto(a) - nivelDesbloqueoReto(b);
+          }),
+        ),
+      )
       .catch(() => setRetos([]));
   }, [nivel]);
 
@@ -61,22 +78,25 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
 
         {retos?.map((reto) => {
           const nivelReq = nivelDesbloqueoReto(reto);
-          const desbloqueado = retoDesbloqueado(reto, nivelActual);
+          const desbloqueado = retoDesbloqueado(reto, nivelActual, completo);
+          const esFinal = !!reto.desbloqueo_pasaporte_completo;
 
           if (!desbloqueado) {
             return (
-              <div key={reto.id} className="card p-4 opacity-60">
+              <div key={reto.id} className={`card p-4 opacity-60 ${esFinal ? 'border-mustard/50' : ''}`}>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl shrink-0" aria-hidden>🔒</span>
+                  <span className="text-2xl shrink-0" aria-hidden>{esFinal ? '✨' : '🔒'}</span>
                   <div className="flex-1 min-w-0">
                     <div className="font-display text-base leading-snug text-paper-700">
-                      Reto especial bloqueado
+                      {esFinal ? 'Gran Reto del Regreso a Casa' : 'Reto especial bloqueado'}
                     </div>
                     <div className="flex items-center gap-2 mt-2 flex-wrap">
                       <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>
                       <span className="chip-xp">+{reto.xp} FP</span>
                       <span className="text-[11px] text-paper-700 font-mono">
-                        Se desbloquea en el nivel {nivelReq} — {nombreDeNivel(nivelReq)}
+                        {esFinal
+                          ? 'Se desbloquea al completar todos los sellos obligatorios del pasaporte'
+                          : `Se desbloquea en el nivel ${nivelReq} — ${nombreDeNivel(nivelReq)}`}
                       </span>
                     </div>
                   </div>
@@ -113,11 +133,16 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
             <button
               key={reto.id}
               onClick={() => onDoReto(reto)}
-              className="card p-4 w-full text-left hover:ring-2 hover:ring-copper/40 transition"
+              className={`card p-4 w-full text-left hover:ring-2 hover:ring-copper/40 transition ${esFinal ? 'border-mustard/60' : ''}`}
             >
               <div className="flex items-start gap-3">
-                <span className="text-2xl shrink-0" aria-hidden>🏆</span>
+                <span className="text-2xl shrink-0" aria-hidden>{esFinal ? '🎉🏆' : '🏆'}</span>
                 <div className="flex-1 min-w-0">
+                  {esFinal && (
+                    <div className="text-[0.6rem] uppercase tracking-wider text-copper mb-0.5">
+                      Gran Reto del Regreso a Casa
+                    </div>
+                  )}
                   <div className="font-display text-base leading-snug">{tituloReto(reto)}</div>
                   <div className="flex items-center gap-2 mt-2 flex-wrap">
                     <span className="chip-cuaderno">📓 {materiaLabel[reto.materia] ?? reto.materia}</span>

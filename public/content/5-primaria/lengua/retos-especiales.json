@@ -150,5 +150,24 @@
       "El lema puede ser divertido: '¡Cuatro ruedas, un equipo!'"
     ],
     "solucion": "Autoevaluación:\n☐ ¿Lista de tareas con quién las hace?\n☐ ¿He identificado una tarea que podría asumir más?\n☐ ¿Comparación con el ejemplo del cuerpo (10 líneas)?\n☐ ¿Lema familiar inventado?"
+  },
+  {
+    "id": "reto-final-regreso-5pri",
+    "type": "cuaderno_problema",
+    "formato": "cuaderno",
+    "nivel": "5-primaria",
+    "materia": "lengua",
+    "saber_basico": "expresion-escrita-narrativa",
+    "dificultad": 2,
+    "xp": 80,
+    "tiempo_estimado_s": 1200,
+    "esReto": true,
+    "desbloqueo_pasaporte_completo": true,
+    "enunciado": "🏆🎉 GRAN RETO FINAL — El Regreso a Casa\n\n📜 Última página del cuaderno de Marco y Marta (escrita a cuatro manos)\n\n«¡Lo habéis conseguido! Habéis completado vuestro pasaporte entero: Córdoba, Francia, Bélgica, Países Bajos, Alemania, un barco hasta Suecia, Finlandia, Cabo Norte, la vuelta por Finlandia, otro barco hasta Estonia, Letonia, Lituania, Polonia, Alemania otra vez, y de vuelta a casa. Más de 10.000 km. Doce países. Cuarenta y cinco días.\n\nMarco (el viajero veterano) dice: 'He conocido a muchos viajeros en mi vida, pero pocos han completado un viaje así, y menos aún han seguido aprendiendo cada día mientras lo hacían.'\n\nMarta (la joven exploradora) añade: 'Y lo mejor de todo es que lo habéis hecho juntos, como familia. Vais a tener mil historias que contar durante mucho tiempo.'\n\nEste es vuestro último reto del camino. Después de este, el cuaderno se cierra... por ahora.»\n\nTu misión final:\n\n1. Elige los 5 MOMENTOS más importantes de todo el viaje (uno por cada 'bloque': salida, subida por Europa, el gran norte/Cabo Norte, la bajada por los países bálticos, la vuelta a casa). Para cada uno, escribe 2-3 líneas contando qué pasó y por qué lo elegiste.\n\n2. Cuando volváis a ver a gente que no ha estado con vosotros en el viaje, seguro que os preguntan '¿qué tal?'. Prepara una breve 'charla de bienvenida' (8-10 líneas) para contar el viaje como si fuera un resumen para alguien que no sabe nada: qué visteis, qué aprendisteis, qué os sorprendió más. Hazlo emocionante, como si fuerais un explorador contando su hazaña.\n\n3. Inventa una pregunta 'trivial' sobre vuestro viaje para hacérsela a alguien de tu familia o amigos cuando lo veas (ej: '¿A qué país fuimos en barco?' o '¿Cómo se dice gracias en finés?'). Escribe la pregunta Y la respuesta correcta.\n\n4. Escribe una última reflexión (8-10 líneas): ¿cómo os sentís al terminar este viaje? ¿Qué os lleváis, más allá de los kilómetros? ¿Qué le diríais a otro niño o niña que esté a punto de empezar un viaje parecido?\n\n5. Dibuja (o describe con palabras si no puedes dibujar) el sello imaginario que pondríais en vuestro pasaporte para representar 'el regreso a casa', combinando algo de Córdoba con algo de todo lo que habéis vivido.",
+    "pistas": [
+      "Para los 5 momentos, no hace falta que sean los 'más divertidos', pueden ser los más memorables por cualquier razón: sorpresa, dificultad superada, belleza, risa...",
+      "La charla de bienvenida puede tener un punto de exageración divertida, ¡sois los héroes de vuestra propia aventura!"
+    ],
+    "solucion": "Autoevaluación:\n☐ ¿5 momentos elegidos con su explicación?\n☐ ¿Charla de bienvenida de 8-10 líneas, emocionante?\n☐ ¿Pregunta trivial con respuesta correcta?\n☐ ¿Reflexión final sincera de 8-10 líneas?\n☐ ¿Sello imaginario del regreso a casa descrito o dibujado?"
   }
 ]

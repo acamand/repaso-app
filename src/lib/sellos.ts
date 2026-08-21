@@ -2,6 +2,7 @@ import type {
   Capitulo,
   CompletedActivity,
   Nivel,
+  Ruta,
   Sello,
   ViajeProgress,
 } from '@/types';
@@ -199,4 +200,21 @@ export function marcarCapituloVisto(
     };
   }
   return next;
+}
+
+/**
+ * ¿Están conseguidos los sellos de TODAS las etapas obligatorias de la ruta?
+ * Las etapas marcadas `opcional` (p.ej. Bélgica vuelta, Países Bajos vuelta)
+ * no cuentan, igual que en el contador de cabecera del Pasaporte: un
+ * pasaporte "completo" no debería exigirlas.
+ */
+export function pasaporteCompleto(ruta: Ruta, viaje: ViajeProgress): boolean {
+  const obligatorias = listaEtapasEnOrden(ruta).filter((e) => !e.opcional);
+  return obligatorias.length > 0 && obligatorias.every((e) => !!viaje.sellos[e.id]);
+}
+
+/** Marca que ya se ha mostrado la celebración especial del pasaporte completo. */
+export function marcarRetoFinalCelebrado(viaje: ViajeProgress): ViajeProgress {
+  if (viaje.retoFinalCelebrado) return viaje;
+  return { ...viaje, retoFinalCelebrado: true };
 }
