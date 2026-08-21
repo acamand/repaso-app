@@ -1,7 +1,7 @@
 import type { Activity, Capitulo, DailySession, Nivel, PerPerfilProgress } from '@/types';
 import { loadAllActivities } from './content';
 import { nivelDeXP } from './progress';
-import { retoDesbloqueado } from './retos';
+import { retoDesbloqueado, todosLosRetosCompletados } from './retos';
 import { pasaporteCompleto } from './sellos';
 import { loadCapitulo, loadEtapaActivitiesByNivel, loadRuta } from './ruta';
 
@@ -61,10 +61,11 @@ export async function buildDailySession(
   //    filtro, pero es solo una vía secundaria; la sesión diaria es la
   //    principal).
   const nivelActual = nivelDeXP(progress.xpTotal).nivel;
+  const retosCompletadosTodos = todosLosRetosCompletados(todas, progress.actividadesCompletadas);
   const sinRetosSuperados = todas.filter((a) => {
     const reg = progress.actividadesCompletadas[a.id];
     if (a.esReto && reg?.acierto === true) return false;
-    if (a.esReto && !retoDesbloqueado(a, nivelActual, pasaporteYaCompleto)) return false;
+    if (a.esReto && !retoDesbloqueado(a, nivelActual, pasaporteYaCompleto, retosCompletadosTodos)) return false;
     return true;
   });
 
