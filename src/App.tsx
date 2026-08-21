@@ -19,7 +19,7 @@ import { hitosNuevos } from '@/lib/niveles';
 import type { NivelDef } from '@/lib/niveles';
 import { piezasNuevasEntreNiveles } from '@/lib/avatarPiezas';
 import type { PiezaAvatar } from '@/lib/avatarPiezas';
-import { retosNuevosEntreNiveles } from '@/lib/retos';
+import { retosNuevosEntreNiveles, todosLosRetosCompletados } from '@/lib/retos';
 import { loadRetos } from '@/lib/content';
 import { loadRuta } from '@/lib/ruta';
 import {
@@ -99,18 +99,20 @@ export default function App() {
     loadRuta().then(setRuta).catch(() => setRuta(null));
   }, []);
 
-  // Detecta el momento en que el pasaporte pasa a estar completo (todos los
-  // sellos obligatorios conseguidos) y dispara la celebración especial una
-  // única vez, guardando la marca en el progreso para no repetirla en
-  // sesiones futuras. Se re-evalúa en cada cambio de `state` porque un sello
-  // puede otorgarse desde varios sitios (completar actividades, ver la
-  // llegada de una etapa `siempre`), no solo desde un único punto.
+  // Detecta el momento en que se cumplen A LA VEZ las dos condiciones del
+  // Gran Reto Final — pasaporte completo (todos los sellos obligatorios) Y
+  // todos los demás Retos del Camino superados — y dispara la celebración
+  // especial una única vez, guardando la marca en el progreso para no
+  // repetirla en sesiones futuras. Se re-evalúa en cada cambio de `state` (o
+  // de `retos`, aún cargando de forma asíncrona) porque un sello o un reto
+  // pueden completarse desde varios sitios, no solo desde un único punto.
   useEffect(() => {
     if (!ruta || !state.perfilActivo) return;
     const perfilId = state.perfilActivo;
     const perfil = state.porPerfil[perfilId];
     if (!perfil || perfil.viaje.retoFinalCelebrado) return;
     if (!pasaporteCompleto(ruta, perfil.viaje)) return;
+    if (!todosLosRetosCompletados(retos, perfil.actividadesCompletadas)) return;
     setCelebracionFinal(true);
     setState((s) => {
       const p = s.porPerfil[perfilId];
@@ -120,7 +122,7 @@ export default function App() {
         porPerfil: { ...s.porPerfil, [perfilId]: { ...p, viaje: marcarRetoFinalCelebrado(p.viaje) } },
       };
     });
-  }, [ruta, state]);
+  }, [ruta, retos, state]);
 
   // Recalcula sellos/estrellas del perfil activo en cuanto `etapaInfo` esté
   // disponible (o al cambiar de perfil). Cubre dos casos que `handleActivityDone`

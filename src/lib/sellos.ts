@@ -213,7 +213,7 @@ export function pasaporteCompleto(ruta: Ruta, viaje: ViajeProgress): boolean {
   return obligatorias.length > 0 && obligatorias.every((e) => !!viaje.sellos[e.id]);
 }
 
-/** Marca que ya se ha mostrado la celebración especial del pasaporte completo. */
+/** Marca que ya se ha mostrado la celebración especial del Gran Reto Final. */
 export function marcarRetoFinalCelebrado(viaje: ViajeProgress): ViajeProgress {
   if (viaje.retoFinalCelebrado) return viaje;
   return { ...viaje, retoFinalCelebrado: true };
