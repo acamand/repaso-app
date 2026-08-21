@@ -5,7 +5,15 @@ import { retoDesbloqueado } from './retos';
 import { pasaporteCompleto } from './sellos';
 import { loadCapitulo, loadEtapaActivitiesByNivel, loadRuta } from './ruta';
 
-const LIMITE_DIARIO_S = 60 * 60;
+// Ampliado de 60 a 120 min en julio de 2026 para el cierre del viaje: con
+// solo 60 min/día (~2 sesiones) no daba tiempo material a ganar el FP
+// necesario para los últimos niveles en los ~3 días que quedaban, aunque se
+// suavizara la curva de FP (ver UMBRAL_NIVEL en progress.ts). Con 120 min
+// caben cómodamente las 3-5 sesiones diarias que hacen falta. Exportada
+// porque `SessionTimer` también la necesita para pintar la barra: antes
+// tenía su propio 60 min por defecto duplicado, que se habría quedado
+// desincronizado de este límite real.
+export const LIMITE_DIARIO_S = 120 * 60;
 const OBJETIVO_NORMAL_S = 25 * 60;
 const COOLDOWN_DIAS = 3;
 const SESION_OBJETIVO = 5;
@@ -78,7 +86,7 @@ export async function buildDailySession(
   const sample = shuffle(pool, seed);
 
   // Cada sesión se dimensiona a OBJETIVO_NORMAL_S (25 min), pero sin superar
-  // lo que quede hasta el límite diario duro (60 min). OJO: no restar aquí
+  // lo que quede hasta el límite diario duro (LIMITE_DIARIO_S). OJO: no restar aquí
   // directamente `progress.tiempoHoyS` a OBJETIVO_NORMAL_S — tiempoHoyS es un
   // acumulado de TODO el día (tiempo real de reloj, no la suma de
   // tiempo_estimado_s), así que tras una sola sesión ya puede superar los 25

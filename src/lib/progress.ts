@@ -433,13 +433,40 @@ export function recordActivity(
   return { ...state, porPerfil: { ...state.porPerfil, [perfilId]: nuevoProgreso } };
 }
 
+/**
+ * FP acumulado necesario para cada nivel (índice 0 = nivel 1). Del 1 al 6 es
+ * la curva original (100 * (n-1) * n / 2); del 7 al 15 se comprimió en julio
+ * de 2026 para el cierre del viaje (quedaban ~3 días y, con la curva
+ * original, llegar a los niveles 9-15 era prácticamente imposible en ese
+ * tiempo). Los niveles ya alcanzados por entonces (1-6) no se tocan a
+ * propósito, así que un alumno que ya estuviera en, p.ej., nivel 7 u 8 no
+ * pierde ni gana FP retroactivamente: solo cambia lo que le quedaba por
+ * delante. Único punto de verdad para `xpParaNivel` (niveles.ts) y
+ * `nivelDeXP`: si hace falta reajustar la curva otra vez, se toca solo aquí.
+ */
+const UMBRAL_NIVEL: number[] = [
+  0, 100, 300, 600, 1000, 1500, // niveles 1-6 (sin cambios)
+  1600, 1720, 1860, 2020, 2200, 2400, 2620, 2860, 3120, // niveles 7-15 (comprimidos)
+];
+
+/** FP total necesario para alcanzar el nivel numérico `n`. */
+export function xpParaNivel(n: number): number {
+  const idx = Math.max(0, n - 1);
+  if (idx < UMBRAL_NIVEL.length) return UMBRAL_NIVEL[idx];
+  // Defensivo por si algún día se añaden niveles más allá del 15: repite el
+  // último incremento en vez de romper (nunca debería llegar a usarse, ya
+  // que NIVELES no pasa de 15).
+  const ultimo = UMBRAL_NIVEL[UMBRAL_NIVEL.length - 1];
+  const incremento = ultimo - UMBRAL_NIVEL[UMBRAL_NIVEL.length - 2];
+  return ultimo + (idx - (UMBRAL_NIVEL.length - 1)) * incremento;
+}
+
 /** Calcula el nivel (1, 2, 3, …) a partir del XP total. */
 export function nivelDeXP(xp: number): { nivel: number; siguienteEn: number; progreso: number } {
-  // Curva suave: nivel n requiere 100 * n * (n+1) / 2 XP
   let n = 1;
-  while ((100 * n * (n + 1)) / 2 <= xp) n++;
-  const previo = (100 * (n - 1) * n) / 2;
-  const siguiente = (100 * n * (n + 1)) / 2;
+  while (xpParaNivel(n + 1) <= xp) n++;
+  const previo = xpParaNivel(n);
+  const siguiente = xpParaNivel(n + 1);
   return {
     nivel: n,
     siguienteEn: siguiente - xp,

@@ -1,4 +1,6 @@
-import { nivelDeXP } from './progress';
+import { nivelDeXP, xpParaNivel } from './progress';
+
+export { xpParaNivel };
 
 export type RecompensaTipo =
   | 'inicio'
@@ -42,11 +44,6 @@ export const NIVELES: NivelDef[] = [
   { nivel: 14, nombre: 'Explorador experto', desbloquea: 'Nuevo reto especial del camino', tipo: 'reto' },
   { nivel: 15, nombre: 'Maestro viajero', desbloquea: 'Título especial en tu perfil', tipo: 'titulo' },
 ];
-
-/** XP total necesario para alcanzar el nivel numérico `n` (coincide con nivelDeXP). */
-export function xpParaNivel(n: number): number {
-  return (100 * (n - 1) * n) / 2;
-}
 
 /** Hito temático vigente para un nivel numérico: el hito más alto cuyo nivel <= n. */
 export function hitoDeNivel(n: number): NivelDef {
