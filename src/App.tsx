@@ -20,7 +20,7 @@ import { hitosNuevos } from '@/lib/niveles';
 import type { NivelDef } from '@/lib/niveles';
 import { piezasNuevasEntreNiveles } from '@/lib/avatarPiezas';
 import type { PiezaAvatar } from '@/lib/avatarPiezas';
-import { retosNuevosEntreNiveles, todosLosRetosCompletados } from '@/lib/retos';
+import { retosNuevosEntreNiveles } from '@/lib/retos';
 import { loadRetos } from '@/lib/content';
 import { loadRuta } from '@/lib/ruta';
 import {
@@ -100,20 +100,19 @@ export default function App() {
     loadRuta().then(setRuta).catch(() => setRuta(null));
   }, []);
 
-  // Detecta el momento en que se cumplen A LA VEZ las dos condiciones del
-  // Gran Reto Final — pasaporte completo (todos los sellos obligatorios) Y
-  // todos los demás Retos del Camino superados — y dispara la celebración
-  // especial una única vez, guardando la marca en el progreso para no
-  // repetirla en sesiones futuras. Se re-evalúa en cada cambio de `state` (o
-  // de `retos`, aún cargando de forma asíncrona) porque un sello o un reto
-  // pueden completarse desde varios sitios, no solo desde un único punto.
+  // Detecta el momento en que el pasaporte queda completo (todos los sellos
+  // obligatorios) y dispara la celebración especial una única vez,
+  // guardando la marca en el progreso para no repetirla en sesiones
+  // futuras. No exige además haber superado los demás Retos del Camino: el
+  // Gran Reto Final se deja abierto en cuanto el pasaporte está completo,
+  // para que siempre haya un cierre alcanzable aunque no dé tiempo a
+  // completar todos los retos antes de acabar el viaje.
   useEffect(() => {
     if (!ruta || !state.perfilActivo) return;
     const perfilId = state.perfilActivo;
     const perfil = state.porPerfil[perfilId];
     if (!perfil || perfil.viaje.retoFinalCelebrado) return;
     if (!pasaporteCompleto(ruta, perfil.viaje)) return;
-    if (!todosLosRetosCompletados(retos, perfil.actividadesCompletadas)) return;
     setCelebracionFinal(true);
     setState((s) => {
       const p = s.porPerfil[perfilId];
@@ -123,7 +122,7 @@ export default function App() {
         porPerfil: { ...s.porPerfil, [perfilId]: { ...p, viaje: marcarRetoFinalCelebrado(p.viaje) } },
       };
     });
-  }, [ruta, retos, state]);
+  }, [ruta, state]);
 
   // Recalcula las piezas de avatar desbloqueadas del perfil activo al
   // cargarlo (no solo al ganar FP nuevo): si las reglas de nivel cambian

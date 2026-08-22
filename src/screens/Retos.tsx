@@ -3,7 +3,7 @@ import type { Activity, Nivel, PerPerfilProgress, Ruta } from '@/types';
 import { loadRetos } from '@/lib/content';
 import { nivelDeXP } from '@/lib/progress';
 import { nombreDeNivel } from '@/lib/niveles';
-import { nivelDesbloqueoReto, retoDesbloqueado, todosLosRetosCompletados, tituloReto } from '@/lib/retos';
+import { nivelDesbloqueoReto, retoDesbloqueado, tituloReto } from '@/lib/retos';
 import { loadRuta } from '@/lib/ruta';
 import { pasaporteCompleto } from '@/lib/sellos';
 
@@ -24,7 +24,6 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
   const [ruta, setRuta] = useState<Ruta | null>(null);
   const nivelActual = nivelDeXP(progress.xpTotal).nivel;
   const completo = ruta ? pasaporteCompleto(ruta, progress.viaje) : false;
-  const retosTerminados = todosLosRetosCompletados(retos ?? [], progress.actividadesCompletadas);
 
   useEffect(() => {
     loadRuta().then(setRuta).catch(() => setRuta(null));
@@ -35,7 +34,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
       .then((rs) =>
         setRetos(
           [...rs].sort((a, b) => {
-            // El reto final (ligado a completar todos los demás retos + el pasaporte, no al nivel) siempre va el último.
+            // El reto final (ligado al pasaporte completo, no al nivel) siempre va el último.
             if (a.desbloqueo_pasaporte_completo && !b.desbloqueo_pasaporte_completo) return 1;
             if (!a.desbloqueo_pasaporte_completo && b.desbloqueo_pasaporte_completo) return -1;
             return nivelDesbloqueoReto(a) - nivelDesbloqueoReto(b);
@@ -79,7 +78,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
 
         {retos?.map((reto) => {
           const nivelReq = nivelDesbloqueoReto(reto);
-          const desbloqueado = retoDesbloqueado(reto, nivelActual, completo, retosTerminados);
+          const desbloqueado = retoDesbloqueado(reto, nivelActual, completo);
           const esFinal = !!reto.desbloqueo_pasaporte_completo;
 
           if (!desbloqueado) {
@@ -96,7 +95,7 @@ export function Retos({ nivel, progress, onBack, onDoReto }: Props) {
                       <span className="chip-xp">+{reto.xp} FP</span>
                       <span className="text-[11px] text-paper-700 font-mono">
                         {esFinal
-                          ? 'Se desbloquea al completar todos los Retos del Camino y el pasaporte entero'
+                          ? 'Se desbloquea al completar el pasaporte entero (todos los sellos obligatorios)'
                           : `Se desbloquea en el nivel ${nivelReq} — ${nombreDeNivel(nivelReq)}`}
                       </span>
                     </div>
