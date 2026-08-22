@@ -5,6 +5,8 @@ import { paisesDistintosRuta } from '@/lib/ruta';
 import { DiplomaContenido } from '@/components/DiplomaContenido';
 import type { DatosDiploma } from '@/components/DiplomaContenido';
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 interface Props {
   profile: Profile;
   progress: PerPerfilProgress;
@@ -17,7 +19,7 @@ function fechaBonita(): string {
 }
 
 /** Nombre de archivo seguro: sin acentos ni espacios, para que descargue bien en cualquier sistema. */
-function nombreArchivo(nombre: string): string {
+function nombreArchivo(nombre: string, extension: string): string {
   const normalizado = nombre
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -25,13 +27,29 @@ function nombreArchivo(nombre: string): string {
     .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
-  return `diploma-gran-explorador-${normalizado || 'viajero'}.pdf`;
+  return `diploma-gran-explorador-${normalizado || 'viajero'}.${extension}`;
+}
+
+/**
+ * Diplomas ilustrados a mano para Marco y Marta (agosto 2026): si el nombre
+ * del perfil coincide, se usan estas im\u00e1genes en vez del dise\u00f1o generado
+ * din\u00e1micamente. Cualquier otro nombre (u otro perfil futuro) cae al dise\u00f1o
+ * din\u00e1mico de `DiplomaContenido` como respaldo.
+ */
+const IMAGEN_POR_NOMBRE: Record<string, string> = {
+  marco: `${BASE}/diplomas/diploma-marco.png`,
+  marta: `${BASE}/diplomas/diploma-marta.png`,
+};
+
+function imagenDiplomaPara(nombre: string): string | null {
+  return IMAGEN_POR_NOMBRE[nombre.trim().toLowerCase()] ?? null;
 }
 
 export function Diploma({ profile, progress, ruta, onBack }: Props) {
   const contenidoRef = useRef<HTMLDivElement>(null);
   const [generando, setGenerando] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const imagenSrc = imagenDiplomaPara(profile.nombre);
 
   const datos: DatosDiploma = {
     nombre: profile.nombre,
@@ -75,7 +93,7 @@ export function Diploma({ profile, progress, ruta, onBack }: Props) {
       const w = canvas.width * ratio;
       const h = canvas.height * ratio;
       doc.addImage(imgData, 'PNG', (pageW - w) / 2, (pageH - h) / 2, w, h);
-      doc.save(nombreArchivo(profile.nombre));
+      doc.save(nombreArchivo(profile.nombre, 'pdf'));
     } catch (e) {
       setError('No se pudo generar el PDF. Inténtalo de nuevo.');
       console.error('Error generando el diploma en PDF:', e);
@@ -99,13 +117,27 @@ export function Diploma({ profile, progress, ruta, onBack }: Props) {
       </header>
 
       <main className="max-w-3xl mx-auto p-4 space-y-4">
-        <DiplomaContenido ref={contenidoRef} datos={datos} />
+        {imagenSrc ? (
+          <img
+            src={imagenSrc}
+            alt={`Diploma de Gran Explorador/a de ${profile.nombre}`}
+            className="w-full rounded-lg shadow-lg border border-paper-300/60"
+          />
+        ) : (
+          <DiplomaContenido ref={contenidoRef} datos={datos} />
+        )}
 
         {error && <p className="text-brick text-sm text-center">{error}</p>}
 
-        <button onClick={descargarPDF} disabled={generando} className="btn-primary w-full">
-          {generando ? 'Generando PDF…' : 'Descargar diploma en PDF 📄'}
-        </button>
+        {imagenSrc ? (
+          <a href={imagenSrc} download={nombreArchivo(profile.nombre, 'png')} className="btn-primary w-full block text-center">
+            Descargar diploma 📄
+          </a>
+        ) : (
+          <button onClick={descargarPDF} disabled={generando} className="btn-primary w-full">
+            {generando ? 'Generando PDF…' : 'Descargar diploma en PDF 📄'}
+          </button>
+        )}
       </main>
     </div>
   );
