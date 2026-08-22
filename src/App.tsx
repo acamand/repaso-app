@@ -5,6 +5,7 @@ import {
   getActiveProgress,
   loadProgress,
   nivelDeXP,
+  recalcularPiezasAvatar,
   recordActivity,
   restoreFromBackup,
   rolloverDay,
@@ -123,6 +124,23 @@ export default function App() {
       };
     });
   }, [ruta, retos, state]);
+
+  // Recalcula las piezas de avatar desbloqueadas del perfil activo al
+  // cargarlo (no solo al ganar FP nuevo): si las reglas de nivel cambian
+  // (p.ej. la compresión de la curva de FP de julio de 2026), un perfil sin
+  // actividad nueva se queda con esa lista calculada bajo las reglas viejas.
+  useEffect(() => {
+    if (!state.perfilActivo) return;
+    setState((s) => {
+      const perfilId = s.perfilActivo;
+      if (!perfilId) return s;
+      const perfil = s.porPerfil[perfilId];
+      if (!perfil) return s;
+      const recalculado = recalcularPiezasAvatar(perfil);
+      if (recalculado === perfil) return s;
+      return { ...s, porPerfil: { ...s.porPerfil, [perfilId]: recalculado } };
+    });
+  }, [state.perfilActivo]);
 
   // Recalcula sellos/estrellas del perfil activo en cuanto `etapaInfo` esté
   // disponible (o al cambiar de perfil). Cubre dos casos que `handleActivityDone`

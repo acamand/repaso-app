@@ -473,3 +473,22 @@ export function nivelDeXP(xp: number): { nivel: number; siguienteEn: number; pro
     progreso: (xp - previo) / (siguiente - previo),
   };
 }
+
+/**
+ * Recalcula qué piezas de avatar están desbloqueadas según el XP actual del
+ * perfil. `recordActivity` ya recalcula esto cada vez que se gana FP nuevo,
+ * pero eso no basta si las REGLAS de nivel cambian (p.ej. al comprimir la
+ * curva de FP en julio de 2026): un perfil que no gane FP nuevo se queda con
+ * `piezasAvatarDesbloqueadas` calculado con las reglas viejas — "0 FP
+ * faltantes" en pantalla pero la pieza sigue bloqueada, porque esa lista es
+ * una caché aparte, no se recalcula sola solo con leerla. Se llama al
+ * cargar el perfil (igual que `evaluarSellos`/`calcularEstrellas` para el
+ * viaje), así el desajuste se corrige solo sin que el alumno pierda nada.
+ * Devuelve el perfil sin tocar si ya está al día.
+ */
+export function recalcularPiezasAvatar(perfil: PerPerfilProgress): PerPerfilProgress {
+  const correctas = idsPiezasDesbloqueadas(nivelDeXP(perfil.xpTotal).nivel);
+  const actuales = perfil.piezasAvatarDesbloqueadas;
+  const igual = correctas.length === actuales.length && correctas.every((id) => actuales.includes(id));
+  return igual ? perfil : { ...perfil, piezasAvatarDesbloqueadas: correctas };
+}
