@@ -37,12 +37,11 @@ export interface ActivityBase {
   esReto?: boolean;
   /**
    * Reto final del viaje: en vez de desbloquearse por nivel (`nivel_desbloqueo`,
-   * que en este caso no se usa), se desbloquea cuando se cumplen A LA VEZ dos
-   * condiciones: todos los sellos de las etapas OBLIGATORIAS del pasaporte
-   * (ver `pasaporteCompleto` en sellos.ts) Y todos los demás Retos del
-   * Camino superados (ver `todosLosRetosCompletados` en retos.ts) — es la
-   * culminación de ambos caminos, no uno paralelo. Como mucho un reto
-   * debería llevar este flag.
+   * que en este caso no se usa), se desbloquea en cuanto todos los sellos de
+   * las etapas OBLIGATORIAS del pasaporte están conseguidos (ver
+   * `pasaporteCompleto` en sellos.ts), sin exigir además haber superado los
+   * demás Retos del Camino — así queda siempre alcanzable aunque no dé
+   * tiempo a completarlos todos. Como mucho un reto debería llevar este flag.
    */
   desbloqueo_pasaporte_completo?: boolean;
 }

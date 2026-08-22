@@ -9,11 +9,11 @@ interface Props {
 }
 
 /**
- * Celebración especial al cumplirse a la vez las dos condiciones del Gran
- * Reto Final: pasaporte completo (todos los sellos obligatorios) Y todos
- * los demás Retos del Camino superados — más solemne/festiva que
- * `LevelUpModal` (subir de nivel es frecuente; esto pasa una sola vez, al
- * cierre del viaje).
+ * Celebración especial al completarse el pasaporte (todos los sellos
+ * obligatorios) — más solemne/festiva que `LevelUpModal` (subir de nivel es
+ * frecuente; esto pasa una sola vez, al cierre del viaje). Anuncia que el
+ * Gran Reto Final ya está disponible, independientemente de si quedan
+ * otros Retos del Camino por hacer.
  */
 export function CelebracionFinalModal({ retoFinal, onIrReto, onCerrar }: Props) {
   return (
@@ -27,11 +27,11 @@ export function CelebracionFinalModal({ retoFinal, onIrReto, onCerrar }: Props) 
           <div className="text-5xl mb-2 xp-pop" aria-hidden>
             🎉🏆✨
           </div>
-          <div className="text-xs uppercase tracking-[0.25em] text-copper">Aventura completa</div>
+          <div className="text-xs uppercase tracking-[0.25em] text-copper">Pasaporte completo</div>
           <h2 className="font-display text-3xl mt-1">¡Lo habéis conseguido!</h2>
           <p className="text-sm text-paper-700 mt-3 leading-relaxed">
-            Habéis sellado cada etapa obligatoria del viaje y superado todos los Retos del Camino.
-            Marco y Marta tienen una última sorpresa para cerrar la aventura juntos.
+            Habéis sellado cada etapa obligatoria del viaje. Marco y Marta tienen una última
+            sorpresa para cerrar la aventura juntos.
           </p>
 
           {retoFinal && (
