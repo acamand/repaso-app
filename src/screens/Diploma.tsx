@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import type { PerPerfilProgress, Profile, Ruta } from '@/types';
+import type { Nivel, PerPerfilProgress, Profile, Ruta } from '@/types';
 import { estadoNivel } from '@/lib/niveles';
 import { paisesDistintosRuta } from '@/lib/ruta';
 import { DiplomaContenido } from '@/components/DiplomaContenido';
@@ -31,25 +31,26 @@ function nombreArchivo(nombre: string, extension: string): string {
 }
 
 /**
- * Diplomas ilustrados a mano para Marco y Marta (agosto 2026): si el nombre
- * del perfil coincide, se usan estas im\u00e1genes en vez del dise\u00f1o generado
- * din\u00e1micamente. Cualquier otro nombre (u otro perfil futuro) cae al dise\u00f1o
- * din\u00e1mico de `DiplomaContenido` como respaldo.
+ * Diplomas ilustrados a mano para Marco (5\u00ba Primaria) y Marta (1\u00ba ESO),
+ * agosto 2026. Se eligen por NIVEL, no por el nombre del perfil: el nombre
+ * es texto libre que el alumno escribe al crear su perfil (puede no
+ * coincidir exactamente, tener may\u00fasculas distintas, un apodo\u2026), mientras
+ * que el nivel es un valor fijo elegido una sola vez y no falla.
  */
-const IMAGEN_POR_NOMBRE: Record<string, string> = {
-  marco: `${BASE}/diplomas/diploma-marco.png`,
-  marta: `${BASE}/diplomas/diploma-marta.png`,
+const IMAGEN_POR_NIVEL: Record<Nivel, string> = {
+  '5-primaria': `${BASE}/diplomas/diploma-marco.png`,
+  '1-eso': `${BASE}/diplomas/diploma-marta.png`,
 };
 
-function imagenDiplomaPara(nombre: string): string | null {
-  return IMAGEN_POR_NOMBRE[nombre.trim().toLowerCase()] ?? null;
+function imagenDiplomaPara(nivel: Nivel): string {
+  return IMAGEN_POR_NIVEL[nivel];
 }
 
 export function Diploma({ profile, progress, ruta, onBack }: Props) {
   const contenidoRef = useRef<HTMLDivElement>(null);
   const [generando, setGenerando] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const imagenSrc = imagenDiplomaPara(profile.nombre);
+  const imagenSrc = imagenDiplomaPara(profile.nivel);
 
   const datos: DatosDiploma = {
     nombre: profile.nombre,
